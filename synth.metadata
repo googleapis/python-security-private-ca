@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/python-security-private-ca.git",
-        "sha": "4d217ac6c49cc982509f20b416ab534bb3bdca45"
+        "sha": "c6749bc2785f3eb652123d4dcad227ee761cbfb0"
       }
     },
     {
