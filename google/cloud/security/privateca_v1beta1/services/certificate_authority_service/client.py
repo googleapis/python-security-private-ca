@@ -128,22 +128,6 @@ class CertificateAuthorityServiceClient(
     )
 
     @classmethod
-    def from_service_account_info(cls, info: dict, *args, **kwargs):
-        """Creates an instance of this client using the provided credentials info.
-
-        Args:
-            info (dict): The service account private key info.
-            args: Additional arguments to pass to the constructor.
-            kwargs: Additional arguments to pass to the constructor.
-
-        Returns:
-            CertificateAuthorityServiceClient: The constructed client.
-        """
-        credentials = service_account.Credentials.from_service_account_info(info)
-        kwargs["credentials"] = credentials
-        return cls(*args, **kwargs)
-
-    @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
         """Creates an instance of this client using the provided credentials
         file.
@@ -155,7 +139,7 @@ class CertificateAuthorityServiceClient(
             kwargs: Additional arguments to pass to the constructor.
 
         Returns:
-            CertificateAuthorityServiceClient: The constructed client.
+            {@api.name}: The constructed client.
         """
         credentials = service_account.Credentials.from_service_account_file(filename)
         kwargs["credentials"] = credentials
@@ -328,10 +312,10 @@ class CertificateAuthorityServiceClient(
                 credentials identify the application to the service; if none
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
-            transport (Union[str, CertificateAuthorityServiceTransport]): The
+            transport (Union[str, ~.CertificateAuthorityServiceTransport]): The
                 transport to use. If set to None, a transport is chosen
                 automatically.
-            client_options (google.api_core.client_options.ClientOptions): Custom options for the
+            client_options (client_options_lib.ClientOptions): Custom options for the
                 client. It won't take effect if a ``transport`` instance is provided.
                 (1) The ``api_endpoint`` property can be used to override the
                 default endpoint provided by the client. GOOGLE_API_USE_MTLS_ENDPOINT
@@ -446,29 +430,27 @@ class CertificateAuthorityServiceClient(
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.CreateCertificateRequest):
+            request (:class:`~.service.CreateCertificateRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.CreateCertificate][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.CreateCertificate].
-            parent (str):
+            parent (:class:`str`):
                 Required. The resource name of the location and
                 [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
                 associated with the
                 [Certificate][google.cloud.security.privateca.v1beta1.Certificate],
                 in the format
                 ``projects/*/locations/*/certificateAuthorities/*``.
-
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            certificate (google.cloud.security.privateca_v1beta1.types.Certificate):
+            certificate (:class:`~.resources.Certificate`):
                 Required. A
                 [Certificate][google.cloud.security.privateca.v1beta1.Certificate]
                 with initial field values.
-
                 This corresponds to the ``certificate`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            certificate_id (str):
+            certificate_id (:class:`str`):
                 Optional. It must be unique within a location and match
                 the regular expression ``[a-zA-Z0-9_-]{1,63}``. This
                 field is required when using a
@@ -476,7 +458,6 @@ class CertificateAuthorityServiceClient(
                 in the Enterprise
                 [CertificateAuthority.Tier][google.cloud.security.privateca.v1beta1.CertificateAuthority.Tier],
                 but is optional and its value is ignored otherwise.
-
                 This corresponds to the ``certificate_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -488,9 +469,11 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.security.privateca_v1beta1.types.Certificate:
-                A [Certificate][google.cloud.security.privateca.v1beta1.Certificate] corresponds to a signed X.509 certificate issued by a
-                   [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
+            ~.resources.Certificate:
+                A
+                [Certificate][google.cloud.security.privateca.v1beta1.Certificate]
+                corresponds to a signed X.509 certificate issued by a
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
 
         """
         # Create or coerce a protobuf request object.
@@ -549,16 +532,15 @@ class CertificateAuthorityServiceClient(
         [Certificate][google.cloud.security.privateca.v1beta1.Certificate].
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.GetCertificateRequest):
+            request (:class:`~.service.GetCertificateRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.GetCertificate][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.GetCertificate].
-            name (str):
+            name (:class:`str`):
                 Required. The
                 [name][google.cloud.security.privateca.v1beta1.Certificate.name]
                 of the
                 [Certificate][google.cloud.security.privateca.v1beta1.Certificate]
                 to get.
-
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -570,9 +552,11 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.security.privateca_v1beta1.types.Certificate:
-                A [Certificate][google.cloud.security.privateca.v1beta1.Certificate] corresponds to a signed X.509 certificate issued by a
-                   [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
+            ~.resources.Certificate:
+                A
+                [Certificate][google.cloud.security.privateca.v1beta1.Certificate]
+                corresponds to a signed X.509 certificate issued by a
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
 
         """
         # Create or coerce a protobuf request object.
@@ -627,16 +611,15 @@ class CertificateAuthorityServiceClient(
         [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.ListCertificatesRequest):
+            request (:class:`~.service.ListCertificatesRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.ListCertificates][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.ListCertificates].
-            parent (str):
+            parent (:class:`str`):
                 Required. The resource name of the location associated
                 with the
                 [Certificates][google.cloud.security.privateca.v1beta1.Certificate],
                 in the format
                 ``projects/*/locations/*/certificateauthorities/*``.
-
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -648,7 +631,7 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.security.privateca_v1beta1.services.certificate_authority_service.pagers.ListCertificatesPager:
+            ~.pagers.ListCertificatesPager:
                 Response message for
                 [CertificateAuthorityService.ListCertificates][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.ListCertificates].
 
@@ -714,15 +697,14 @@ class CertificateAuthorityServiceClient(
         [Certificate][google.cloud.security.privateca.v1beta1.Certificate].
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.RevokeCertificateRequest):
+            request (:class:`~.service.RevokeCertificateRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.RevokeCertificate][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.RevokeCertificate].
-            name (str):
+            name (:class:`str`):
                 Required. The resource name for this
                 [Certificate][google.cloud.security.privateca.v1beta1.Certificate]
                 in the format
                 ``projects/*/locations/*/certificateAuthorities/*/certificates/*``.
-
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -734,9 +716,11 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.security.privateca_v1beta1.types.Certificate:
-                A [Certificate][google.cloud.security.privateca.v1beta1.Certificate] corresponds to a signed X.509 certificate issued by a
-                   [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
+            ~.resources.Certificate:
+                A
+                [Certificate][google.cloud.security.privateca.v1beta1.Certificate]
+                corresponds to a signed X.509 certificate issued by a
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
 
         """
         # Create or coerce a protobuf request object.
@@ -795,21 +779,19 @@ class CertificateAuthorityServiceClient(
         field.
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.UpdateCertificateRequest):
+            request (:class:`~.service.UpdateCertificateRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.UpdateCertificate][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.UpdateCertificate].
-            certificate (google.cloud.security.privateca_v1beta1.types.Certificate):
+            certificate (:class:`~.resources.Certificate`):
                 Required.
                 [Certificate][google.cloud.security.privateca.v1beta1.Certificate]
                 with updated values.
-
                 This corresponds to the ``certificate`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            update_mask (google.protobuf.field_mask_pb2.FieldMask):
+            update_mask (:class:`~.field_mask.FieldMask`):
                 Required. A list of fields to be
                 updated in this request.
-
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -821,9 +803,11 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.security.privateca_v1beta1.types.Certificate:
-                A [Certificate][google.cloud.security.privateca.v1beta1.Certificate] corresponds to a signed X.509 certificate issued by a
-                   [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
+            ~.resources.Certificate:
+                A
+                [Certificate][google.cloud.security.privateca.v1beta1.Certificate]
+                corresponds to a signed X.509 certificate issued by a
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
 
         """
         # Create or coerce a protobuf request object.
@@ -890,15 +874,14 @@ class CertificateAuthorityServiceClient(
         this method can complete the activation process.
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.ActivateCertificateAuthorityRequest):
+            request (:class:`~.service.ActivateCertificateAuthorityRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.ActivateCertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.ActivateCertificateAuthority].
-            name (str):
+            name (:class:`str`):
                 Required. The resource name for this
                 [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
                 in the format
                 ``projects/*/locations/*/certificateAuthorities/*``.
-
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -910,14 +893,16 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.api_core.operation.Operation:
+            ~.operation.Operation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be :class:`google.cloud.security.privateca_v1beta1.types.CertificateAuthority` A [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority] represents an individual Certificate Authority.
-                   A
-                   [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
-                   can be used to create
-                   [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
+                The result type for the operation will be
+                :class:``~.resources.CertificateAuthority``: A
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
+                represents an individual Certificate Authority. A
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
+                can be used to create
+                [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
 
         """
         # Create or coerce a protobuf request object.
@@ -985,30 +970,27 @@ class CertificateAuthorityServiceClient(
         in a given Project and Location.
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.CreateCertificateAuthorityRequest):
+            request (:class:`~.service.CreateCertificateAuthorityRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.CreateCertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.CreateCertificateAuthority].
-            parent (str):
+            parent (:class:`str`):
                 Required. The resource name of the location associated
                 with the
                 [CertificateAuthorities][google.cloud.security.privateca.v1beta1.CertificateAuthority],
                 in the format ``projects/*/locations/*``.
-
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            certificate_authority (google.cloud.security.privateca_v1beta1.types.CertificateAuthority):
+            certificate_authority (:class:`~.resources.CertificateAuthority`):
                 Required. A
                 [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
                 with initial field values.
-
                 This corresponds to the ``certificate_authority`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            certificate_authority_id (str):
+            certificate_authority_id (:class:`str`):
                 Required. It must be unique within a location and match
                 the regular expression ``[a-zA-Z0-9_-]{1,63}``
-
                 This corresponds to the ``certificate_authority_id`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -1020,14 +1002,16 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.api_core.operation.Operation:
+            ~.operation.Operation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be :class:`google.cloud.security.privateca_v1beta1.types.CertificateAuthority` A [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority] represents an individual Certificate Authority.
-                   A
-                   [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
-                   can be used to create
-                   [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
+                The result type for the operation will be
+                :class:``~.resources.CertificateAuthority``: A
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
+                represents an individual Certificate Authority. A
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
+                can be used to create
+                [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
 
         """
         # Create or coerce a protobuf request object.
@@ -1098,15 +1082,14 @@ class CertificateAuthorityServiceClient(
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.DisableCertificateAuthorityRequest):
+            request (:class:`~.service.DisableCertificateAuthorityRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.DisableCertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.DisableCertificateAuthority].
-            name (str):
+            name (:class:`str`):
                 Required. The resource name for this
                 [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
                 in the format
                 ``projects/*/locations/*/certificateAuthorities/*``.
-
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -1118,14 +1101,16 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.api_core.operation.Operation:
+            ~.operation.Operation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be :class:`google.cloud.security.privateca_v1beta1.types.CertificateAuthority` A [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority] represents an individual Certificate Authority.
-                   A
-                   [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
-                   can be used to create
-                   [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
+                The result type for the operation will be
+                :class:``~.resources.CertificateAuthority``: A
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
+                represents an individual Certificate Authority. A
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
+                can be used to create
+                [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
 
         """
         # Create or coerce a protobuf request object.
@@ -1190,15 +1175,14 @@ class CertificateAuthorityServiceClient(
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.EnableCertificateAuthorityRequest):
+            request (:class:`~.service.EnableCertificateAuthorityRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.EnableCertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.EnableCertificateAuthority].
-            name (str):
+            name (:class:`str`):
                 Required. The resource name for this
                 [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
                 in the format
                 ``projects/*/locations/*/certificateAuthorities/*``.
-
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -1210,14 +1194,16 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.api_core.operation.Operation:
+            ~.operation.Operation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be :class:`google.cloud.security.privateca_v1beta1.types.CertificateAuthority` A [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority] represents an individual Certificate Authority.
-                   A
-                   [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
-                   can be used to create
-                   [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
+                The result type for the operation will be
+                :class:``~.resources.CertificateAuthority``: A
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
+                represents an individual Certificate Authority. A
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
+                can be used to create
+                [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
 
         """
         # Create or coerce a protobuf request object.
@@ -1291,15 +1277,14 @@ class CertificateAuthorityServiceClient(
         [ActivateCertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.ActivateCertificateAuthority].
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.FetchCertificateAuthorityCsrRequest):
+            request (:class:`~.service.FetchCertificateAuthorityCsrRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.FetchCertificateAuthorityCsr][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.FetchCertificateAuthorityCsr].
-            name (str):
+            name (:class:`str`):
                 Required. The resource name for this
                 [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
                 in the format
                 ``projects/*/locations/*/certificateAuthorities/*``.
-
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -1311,9 +1296,9 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.security.privateca_v1beta1.types.FetchCertificateAuthorityCsrResponse:
+            ~.service.FetchCertificateAuthorityCsrResponse:
                 Response message for
-                   [CertificateAuthorityService.FetchCertificateAuthorityCsr][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.FetchCertificateAuthorityCsr].
+                [CertificateAuthorityService.FetchCertificateAuthorityCsr][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.FetchCertificateAuthorityCsr].
 
         """
         # Create or coerce a protobuf request object.
@@ -1370,16 +1355,15 @@ class CertificateAuthorityServiceClient(
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.GetCertificateAuthorityRequest):
+            request (:class:`~.service.GetCertificateAuthorityRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.GetCertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.GetCertificateAuthority].
-            name (str):
+            name (:class:`str`):
                 Required. The
                 [name][google.cloud.security.privateca.v1beta1.CertificateAuthority.name]
                 of the
                 [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
                 to get.
-
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -1391,12 +1375,13 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.security.privateca_v1beta1.types.CertificateAuthority:
-                A [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority] represents an individual Certificate Authority.
-                   A
-                   [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
-                   can be used to create
-                   [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
+            ~.resources.CertificateAuthority:
+                A
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
+                represents an individual Certificate Authority. A
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
+                can be used to create
+                [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
 
         """
         # Create or coerce a protobuf request object.
@@ -1453,15 +1438,14 @@ class CertificateAuthorityServiceClient(
         [CertificateAuthorities][google.cloud.security.privateca.v1beta1.CertificateAuthority].
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.ListCertificateAuthoritiesRequest):
+            request (:class:`~.service.ListCertificateAuthoritiesRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.ListCertificateAuthorities][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.ListCertificateAuthorities].
-            parent (str):
+            parent (:class:`str`):
                 Required. The resource name of the location associated
                 with the
                 [CertificateAuthorities][google.cloud.security.privateca.v1beta1.CertificateAuthority],
                 in the format ``projects/*/locations/*``.
-
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -1473,9 +1457,9 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.security.privateca_v1beta1.services.certificate_authority_service.pagers.ListCertificateAuthoritiesPager:
+            ~.pagers.ListCertificateAuthoritiesPager:
                 Response message for
-                   [CertificateAuthorityService.ListCertificateAuthorities][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.ListCertificateAuthorities].
+                [CertificateAuthorityService.ListCertificateAuthorities][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.ListCertificateAuthorities].
 
                 Iterating over this object will yield results and
                 resolve additional pages automatically.
@@ -1542,15 +1526,14 @@ class CertificateAuthorityServiceClient(
         that is scheduled for deletion.
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.RestoreCertificateAuthorityRequest):
+            request (:class:`~.service.RestoreCertificateAuthorityRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.RestoreCertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.RestoreCertificateAuthority].
-            name (str):
+            name (:class:`str`):
                 Required. The resource name for this
                 [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
                 in the format
                 ``projects/*/locations/*/certificateAuthorities/*``.
-
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -1562,14 +1545,16 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.api_core.operation.Operation:
+            ~.operation.Operation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be :class:`google.cloud.security.privateca_v1beta1.types.CertificateAuthority` A [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority] represents an individual Certificate Authority.
-                   A
-                   [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
-                   can be used to create
-                   [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
+                The result type for the operation will be
+                :class:``~.resources.CertificateAuthority``: A
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
+                represents an individual Certificate Authority. A
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
+                can be used to create
+                [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
 
         """
         # Create or coerce a protobuf request object.
@@ -1635,15 +1620,14 @@ class CertificateAuthorityServiceClient(
         for deletion.
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.ScheduleDeleteCertificateAuthorityRequest):
+            request (:class:`~.service.ScheduleDeleteCertificateAuthorityRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.ScheduleDeleteCertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.ScheduleDeleteCertificateAuthority].
-            name (str):
+            name (:class:`str`):
                 Required. The resource name for this
                 [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
                 in the format
                 ``projects/*/locations/*/certificateAuthorities/*``.
-
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -1655,14 +1639,16 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.api_core.operation.Operation:
+            ~.operation.Operation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be :class:`google.cloud.security.privateca_v1beta1.types.CertificateAuthority` A [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority] represents an individual Certificate Authority.
-                   A
-                   [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
-                   can be used to create
-                   [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
+                The result type for the operation will be
+                :class:``~.resources.CertificateAuthority``: A
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
+                represents an individual Certificate Authority. A
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
+                can be used to create
+                [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
 
         """
         # Create or coerce a protobuf request object.
@@ -1728,21 +1714,19 @@ class CertificateAuthorityServiceClient(
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.UpdateCertificateAuthorityRequest):
+            request (:class:`~.service.UpdateCertificateAuthorityRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.UpdateCertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.UpdateCertificateAuthority].
-            certificate_authority (google.cloud.security.privateca_v1beta1.types.CertificateAuthority):
+            certificate_authority (:class:`~.resources.CertificateAuthority`):
                 Required.
                 [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
                 with updated values.
-
                 This corresponds to the ``certificate_authority`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            update_mask (google.protobuf.field_mask_pb2.FieldMask):
+            update_mask (:class:`~.field_mask.FieldMask`):
                 Required. A list of fields to be
                 updated in this request.
-
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -1754,14 +1738,16 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.api_core.operation.Operation:
+            ~.operation.Operation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be :class:`google.cloud.security.privateca_v1beta1.types.CertificateAuthority` A [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority] represents an individual Certificate Authority.
-                   A
-                   [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
-                   can be used to create
-                   [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
+                The result type for the operation will be
+                :class:``~.resources.CertificateAuthority``: A
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
+                represents an individual Certificate Authority. A
+                [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
+                can be used to create
+                [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
 
         """
         # Create or coerce a protobuf request object.
@@ -1830,16 +1816,15 @@ class CertificateAuthorityServiceClient(
         [CertificateRevocationList][google.cloud.security.privateca.v1beta1.CertificateRevocationList].
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.GetCertificateRevocationListRequest):
+            request (:class:`~.service.GetCertificateRevocationListRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.GetCertificateRevocationList][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.GetCertificateRevocationList].
-            name (str):
+            name (:class:`str`):
                 Required. The
                 [name][google.cloud.security.privateca.v1beta1.CertificateRevocationList.name]
                 of the
                 [CertificateRevocationList][google.cloud.security.privateca.v1beta1.CertificateRevocationList]
                 to get.
-
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -1851,11 +1836,12 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.security.privateca_v1beta1.types.CertificateRevocationList:
-                A [CertificateRevocationList][google.cloud.security.privateca.v1beta1.CertificateRevocationList] corresponds to a signed X.509 certificate
-                   Revocation List (CRL). A CRL contains the serial
-                   numbers of certificates that should no longer be
-                   trusted.
+            ~.resources.CertificateRevocationList:
+                A
+                [CertificateRevocationList][google.cloud.security.privateca.v1beta1.CertificateRevocationList]
+                corresponds to a signed X.509 certificate Revocation
+                List (CRL). A CRL contains the serial numbers of
+                certificates that should no longer be trusted.
 
         """
         # Create or coerce a protobuf request object.
@@ -1912,16 +1898,15 @@ class CertificateAuthorityServiceClient(
         [CertificateRevocationLists][google.cloud.security.privateca.v1beta1.CertificateRevocationList].
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.ListCertificateRevocationListsRequest):
+            request (:class:`~.service.ListCertificateRevocationListsRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.ListCertificateRevocationLists][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.ListCertificateRevocationLists].
-            parent (str):
+            parent (:class:`str`):
                 Required. The resource name of the location associated
                 with the
                 [CertificateRevocationLists][google.cloud.security.privateca.v1beta1.CertificateRevocationList],
                 in the format
                 ``projects/*/locations/*/certificateauthorities/*``.
-
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -1933,9 +1918,9 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.security.privateca_v1beta1.services.certificate_authority_service.pagers.ListCertificateRevocationListsPager:
+            ~.pagers.ListCertificateRevocationListsPager:
                 Response message for
-                   [CertificateAuthorityService.ListCertificateRevocationLists][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.ListCertificateRevocationLists].
+                [CertificateAuthorityService.ListCertificateRevocationLists][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.ListCertificateRevocationLists].
 
                 Iterating over this object will yield results and
                 resolve additional pages automatically.
@@ -2002,21 +1987,19 @@ class CertificateAuthorityServiceClient(
         [CertificateRevocationList][google.cloud.security.privateca.v1beta1.CertificateRevocationList].
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.UpdateCertificateRevocationListRequest):
+            request (:class:`~.service.UpdateCertificateRevocationListRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.UpdateCertificateRevocationList][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.UpdateCertificateRevocationList].
-            certificate_revocation_list (google.cloud.security.privateca_v1beta1.types.CertificateRevocationList):
+            certificate_revocation_list (:class:`~.resources.CertificateRevocationList`):
                 Required.
                 [CertificateRevocationList][google.cloud.security.privateca.v1beta1.CertificateRevocationList]
                 with updated values.
-
                 This corresponds to the ``certificate_revocation_list`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            update_mask (google.protobuf.field_mask_pb2.FieldMask):
+            update_mask (:class:`~.field_mask.FieldMask`):
                 Required. A list of fields to be
                 updated in this request.
-
                 This corresponds to the ``update_mask`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -2028,13 +2011,15 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.api_core.operation.Operation:
+            ~.operation.Operation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be :class:`google.cloud.security.privateca_v1beta1.types.CertificateRevocationList` A [CertificateRevocationList][google.cloud.security.privateca.v1beta1.CertificateRevocationList] corresponds to a signed X.509 certificate
-                   Revocation List (CRL). A CRL contains the serial
-                   numbers of certificates that should no longer be
-                   trusted.
+                The result type for the operation will be
+                :class:``~.resources.CertificateRevocationList``: A
+                [CertificateRevocationList][google.cloud.security.privateca.v1beta1.CertificateRevocationList]
+                corresponds to a signed X.509 certificate Revocation
+                List (CRL). A CRL contains the serial numbers of
+                certificates that should no longer be trusted.
 
         """
         # Create or coerce a protobuf request object.
@@ -2108,13 +2093,12 @@ class CertificateAuthorityServiceClient(
         [ReusableConfig][google.cloud.security.privateca.v1beta1.ReusableConfig].
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.GetReusableConfigRequest):
+            request (:class:`~.service.GetReusableConfigRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.GetReusableConfig][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.GetReusableConfig].
-            name (str):
+            name (:class:`str`):
                 Required. The [name][ReusableConfigs.name] of the
                 [ReusableConfigs][] to get.
-
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -2126,12 +2110,15 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.security.privateca_v1beta1.types.ReusableConfig:
-                A [ReusableConfig][google.cloud.security.privateca.v1beta1.ReusableConfig] refers to a managed [ReusableConfigValues][google.cloud.security.privateca.v1beta1.ReusableConfigValues]. Those, in
-                   turn, are used to describe certain fields of an X.509
-                   certificate, such as the key usage fields, fields
-                   specific to CA certificates, certificate policy
-                   extensions and custom extensions.
+            ~.resources.ReusableConfig:
+                A
+                [ReusableConfig][google.cloud.security.privateca.v1beta1.ReusableConfig]
+                refers to a managed
+                [ReusableConfigValues][google.cloud.security.privateca.v1beta1.ReusableConfigValues].
+                Those, in turn, are used to describe certain fields of
+                an X.509 certificate, such as the key usage fields,
+                fields specific to CA certificates, certificate policy
+                extensions and custom extensions.
 
         """
         # Create or coerce a protobuf request object.
@@ -2186,15 +2173,14 @@ class CertificateAuthorityServiceClient(
         [ReusableConfigs][google.cloud.security.privateca.v1beta1.ReusableConfig].
 
         Args:
-            request (google.cloud.security.privateca_v1beta1.types.ListReusableConfigsRequest):
+            request (:class:`~.service.ListReusableConfigsRequest`):
                 The request object. Request message for
                 [CertificateAuthorityService.ListReusableConfigs][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.ListReusableConfigs].
-            parent (str):
+            parent (:class:`str`):
                 Required. The resource name of the location associated
                 with the
                 [ReusableConfigs][google.cloud.security.privateca.v1beta1.ReusableConfig],
                 in the format ``projects/*/locations/*``.
-
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -2206,9 +2192,9 @@ class CertificateAuthorityServiceClient(
                 sent along with the request as metadata.
 
         Returns:
-            google.cloud.security.privateca_v1beta1.services.certificate_authority_service.pagers.ListReusableConfigsPager:
+            ~.pagers.ListReusableConfigsPager:
                 Response message for
-                   [CertificateAuthorityService.ListReusableConfigs][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.ListReusableConfigs].
+                [CertificateAuthorityService.ListReusableConfigs][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.ListReusableConfigs].
 
                 Iterating over this object will yield results and
                 resolve additional pages automatically.
