@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/python-security-private-ca.git",
-        "sha": "82eac92f857486aefbcfaffead2bb3c45985280d"
+        "sha": "5ecb50afe5d1d9e2daa859ff1a52a038c89d0dc5"
       }
     },
     {
@@ -132,6 +132,7 @@
     "scripts/readme-gen/templates/auth_api_key.tmpl.rst",
     "scripts/readme-gen/templates/install_deps.tmpl.rst",
     "scripts/readme-gen/templates/install_portaudio.tmpl.rst",
+    "security-privateca-v1beta1-py.tar.gz",
     "setup.cfg",
     "testing/.gitignore",
     "tests/unit/gapic/privateca_v1beta1/__init__.py",
