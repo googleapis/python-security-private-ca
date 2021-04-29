@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,15 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 import os
 import mock
+import packaging.version
 
 import grpc
 from grpc.experimental import aio
 import math
 import pytest
 from proto.marshal.rules.dates import DurationRule, TimestampRule
+
 
 from google import auth
 from google.api_core import client_options
@@ -47,6 +47,12 @@ from google.cloud.security.privateca_v1beta1.services.certificate_authority_serv
 from google.cloud.security.privateca_v1beta1.services.certificate_authority_service import (
     transports,
 )
+from google.cloud.security.privateca_v1beta1.services.certificate_authority_service.transports.base import (
+    _API_CORE_VERSION,
+)
+from google.cloud.security.privateca_v1beta1.services.certificate_authority_service.transports.base import (
+    _GOOGLE_AUTH_VERSION,
+)
 from google.cloud.security.privateca_v1beta1.types import resources
 from google.cloud.security.privateca_v1beta1.types import service
 from google.longrunning import operations_pb2
@@ -55,6 +61,29 @@ from google.protobuf import duration_pb2 as duration  # type: ignore
 from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 from google.protobuf import wrappers_pb2 as wrappers  # type: ignore
+
+
+# TODO(busunkim): Once google-api-core >= 1.26.0 is required:
+# - Delete all the api-core and auth "less than" test cases
+# - Delete these pytest markers (Make the "greater than or equal to" tests the default).
+requires_google_auth_lt_1_25_0 = pytest.mark.skipif(
+    packaging.version.parse(_GOOGLE_AUTH_VERSION) >= packaging.version.parse("1.25.0"),
+    reason="This test requires google-auth < 1.25.0",
+)
+requires_google_auth_gte_1_25_0 = pytest.mark.skipif(
+    packaging.version.parse(_GOOGLE_AUTH_VERSION) < packaging.version.parse("1.25.0"),
+    reason="This test requires google-auth >= 1.25.0",
+)
+
+requires_api_core_lt_1_26_0 = pytest.mark.skipif(
+    packaging.version.parse(_API_CORE_VERSION) >= packaging.version.parse("1.26.0"),
+    reason="This test requires google-api-core < 1.26.0",
+)
+
+requires_api_core_gte_1_26_0 = pytest.mark.skipif(
+    packaging.version.parse(_API_CORE_VERSION) < packaging.version.parse("1.26.0"),
+    reason="This test requires google-api-core >= 1.26.0",
+)
 
 
 def client_cert_source_callback():
@@ -512,23 +541,17 @@ def test_create_certificate(
             pem_certificate_chain=["pem_certificate_chain_value"],
             pem_csr="pem_csr_value",
         )
-
         response = client.create_certificate(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.CreateCertificateRequest()
 
     # Establish that the response is the type that we expect.
-
     assert isinstance(response, resources.Certificate)
-
     assert response.name == "name_value"
-
     assert response.pem_certificate == "pem_certificate_value"
-
     assert response.pem_certificate_chain == ["pem_certificate_chain_value"]
 
 
@@ -550,7 +573,6 @@ def test_create_certificate_empty_call():
         client.create_certificate()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.CreateCertificateRequest()
 
 
@@ -578,22 +600,17 @@ async def test_create_certificate_async(
                 pem_certificate_chain=["pem_certificate_chain_value"],
             )
         )
-
         response = await client.create_certificate(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.CreateCertificateRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, resources.Certificate)
-
     assert response.name == "name_value"
-
     assert response.pem_certificate == "pem_certificate_value"
-
     assert response.pem_certificate_chain == ["pem_certificate_chain_value"]
 
 
@@ -610,6 +627,7 @@ def test_create_certificate_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.CreateCertificateRequest()
+
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -617,7 +635,6 @@ def test_create_certificate_field_headers():
         type(client.transport.create_certificate), "__call__"
     ) as call:
         call.return_value = resources.Certificate()
-
         client.create_certificate(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -639,6 +656,7 @@ async def test_create_certificate_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.CreateCertificateRequest()
+
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -648,7 +666,6 @@ async def test_create_certificate_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             resources.Certificate()
         )
-
         await client.create_certificate(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -672,7 +689,6 @@ def test_create_certificate_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = resources.Certificate()
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.create_certificate(
@@ -685,11 +701,8 @@ def test_create_certificate_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].parent == "parent_value"
-
         assert args[0].certificate == resources.Certificate(name="name_value")
-
         assert args[0].certificate_id == "certificate_id_value"
 
 
@@ -737,11 +750,8 @@ async def test_create_certificate_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].parent == "parent_value"
-
         assert args[0].certificate == resources.Certificate(name="name_value")
-
         assert args[0].certificate_id == "certificate_id_value"
 
 
@@ -782,23 +792,17 @@ def test_get_certificate(
             pem_certificate_chain=["pem_certificate_chain_value"],
             pem_csr="pem_csr_value",
         )
-
         response = client.get_certificate(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.GetCertificateRequest()
 
     # Establish that the response is the type that we expect.
-
     assert isinstance(response, resources.Certificate)
-
     assert response.name == "name_value"
-
     assert response.pem_certificate == "pem_certificate_value"
-
     assert response.pem_certificate_chain == ["pem_certificate_chain_value"]
 
 
@@ -818,7 +822,6 @@ def test_get_certificate_empty_call():
         client.get_certificate()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.GetCertificateRequest()
 
 
@@ -844,22 +847,17 @@ async def test_get_certificate_async(
                 pem_certificate_chain=["pem_certificate_chain_value"],
             )
         )
-
         response = await client.get_certificate(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.GetCertificateRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, resources.Certificate)
-
     assert response.name == "name_value"
-
     assert response.pem_certificate == "pem_certificate_value"
-
     assert response.pem_certificate_chain == ["pem_certificate_chain_value"]
 
 
@@ -876,12 +874,12 @@ def test_get_certificate_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.GetCertificateRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(type(client.transport.get_certificate), "__call__") as call:
         call.return_value = resources.Certificate()
-
         client.get_certificate(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -903,6 +901,7 @@ async def test_get_certificate_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.GetCertificateRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -910,7 +909,6 @@ async def test_get_certificate_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             resources.Certificate()
         )
-
         await client.get_certificate(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -932,7 +930,6 @@ def test_get_certificate_flattened():
     with mock.patch.object(type(client.transport.get_certificate), "__call__") as call:
         # Designate an appropriate return value for the call.
         call.return_value = resources.Certificate()
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.get_certificate(name="name_value",)
@@ -941,7 +938,6 @@ def test_get_certificate_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -980,7 +976,6 @@ async def test_get_certificate_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -1017,21 +1012,16 @@ def test_list_certificates(
         call.return_value = service.ListCertificatesResponse(
             next_page_token="next_page_token_value", unreachable=["unreachable_value"],
         )
-
         response = client.list_certificates(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ListCertificatesRequest()
 
     # Establish that the response is the type that we expect.
-
     assert isinstance(response, pagers.ListCertificatesPager)
-
     assert response.next_page_token == "next_page_token_value"
-
     assert response.unreachable == ["unreachable_value"]
 
 
@@ -1053,7 +1043,6 @@ def test_list_certificates_empty_call():
         client.list_certificates()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ListCertificatesRequest()
 
 
@@ -1080,20 +1069,16 @@ async def test_list_certificates_async(
                 unreachable=["unreachable_value"],
             )
         )
-
         response = await client.list_certificates(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ListCertificatesRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, pagers.ListCertificatesAsyncPager)
-
     assert response.next_page_token == "next_page_token_value"
-
     assert response.unreachable == ["unreachable_value"]
 
 
@@ -1110,6 +1095,7 @@ def test_list_certificates_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.ListCertificatesRequest()
+
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1117,7 +1103,6 @@ def test_list_certificates_field_headers():
         type(client.transport.list_certificates), "__call__"
     ) as call:
         call.return_value = service.ListCertificatesResponse()
-
         client.list_certificates(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -1139,6 +1124,7 @@ async def test_list_certificates_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.ListCertificatesRequest()
+
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1148,7 +1134,6 @@ async def test_list_certificates_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             service.ListCertificatesResponse()
         )
-
         await client.list_certificates(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -1172,7 +1157,6 @@ def test_list_certificates_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = service.ListCertificatesResponse()
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.list_certificates(parent="parent_value",)
@@ -1181,7 +1165,6 @@ def test_list_certificates_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].parent == "parent_value"
 
 
@@ -1222,7 +1205,6 @@ async def test_list_certificates_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].parent == "parent_value"
 
 
@@ -1416,23 +1398,17 @@ def test_revoke_certificate(
             pem_certificate_chain=["pem_certificate_chain_value"],
             pem_csr="pem_csr_value",
         )
-
         response = client.revoke_certificate(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.RevokeCertificateRequest()
 
     # Establish that the response is the type that we expect.
-
     assert isinstance(response, resources.Certificate)
-
     assert response.name == "name_value"
-
     assert response.pem_certificate == "pem_certificate_value"
-
     assert response.pem_certificate_chain == ["pem_certificate_chain_value"]
 
 
@@ -1454,7 +1430,6 @@ def test_revoke_certificate_empty_call():
         client.revoke_certificate()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.RevokeCertificateRequest()
 
 
@@ -1482,22 +1457,17 @@ async def test_revoke_certificate_async(
                 pem_certificate_chain=["pem_certificate_chain_value"],
             )
         )
-
         response = await client.revoke_certificate(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.RevokeCertificateRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, resources.Certificate)
-
     assert response.name == "name_value"
-
     assert response.pem_certificate == "pem_certificate_value"
-
     assert response.pem_certificate_chain == ["pem_certificate_chain_value"]
 
 
@@ -1514,6 +1484,7 @@ def test_revoke_certificate_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.RevokeCertificateRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1521,7 +1492,6 @@ def test_revoke_certificate_field_headers():
         type(client.transport.revoke_certificate), "__call__"
     ) as call:
         call.return_value = resources.Certificate()
-
         client.revoke_certificate(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -1543,6 +1513,7 @@ async def test_revoke_certificate_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.RevokeCertificateRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1552,7 +1523,6 @@ async def test_revoke_certificate_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             resources.Certificate()
         )
-
         await client.revoke_certificate(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -1576,7 +1546,6 @@ def test_revoke_certificate_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = resources.Certificate()
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.revoke_certificate(name="name_value",)
@@ -1585,7 +1554,6 @@ def test_revoke_certificate_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -1626,7 +1594,6 @@ async def test_revoke_certificate_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -1666,23 +1633,17 @@ def test_update_certificate(
             pem_certificate_chain=["pem_certificate_chain_value"],
             pem_csr="pem_csr_value",
         )
-
         response = client.update_certificate(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.UpdateCertificateRequest()
 
     # Establish that the response is the type that we expect.
-
     assert isinstance(response, resources.Certificate)
-
     assert response.name == "name_value"
-
     assert response.pem_certificate == "pem_certificate_value"
-
     assert response.pem_certificate_chain == ["pem_certificate_chain_value"]
 
 
@@ -1704,7 +1665,6 @@ def test_update_certificate_empty_call():
         client.update_certificate()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.UpdateCertificateRequest()
 
 
@@ -1732,22 +1692,17 @@ async def test_update_certificate_async(
                 pem_certificate_chain=["pem_certificate_chain_value"],
             )
         )
-
         response = await client.update_certificate(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.UpdateCertificateRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, resources.Certificate)
-
     assert response.name == "name_value"
-
     assert response.pem_certificate == "pem_certificate_value"
-
     assert response.pem_certificate_chain == ["pem_certificate_chain_value"]
 
 
@@ -1764,6 +1719,7 @@ def test_update_certificate_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.UpdateCertificateRequest()
+
     request.certificate.name = "certificate.name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1771,7 +1727,6 @@ def test_update_certificate_field_headers():
         type(client.transport.update_certificate), "__call__"
     ) as call:
         call.return_value = resources.Certificate()
-
         client.update_certificate(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -1795,6 +1750,7 @@ async def test_update_certificate_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.UpdateCertificateRequest()
+
     request.certificate.name = "certificate.name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -1804,7 +1760,6 @@ async def test_update_certificate_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             resources.Certificate()
         )
-
         await client.update_certificate(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -1830,7 +1785,6 @@ def test_update_certificate_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = resources.Certificate()
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.update_certificate(
@@ -1842,9 +1796,7 @@ def test_update_certificate_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].certificate == resources.Certificate(name="name_value")
-
         assert args[0].update_mask == field_mask.FieldMask(paths=["paths_value"])
 
 
@@ -1890,9 +1842,7 @@ async def test_update_certificate_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].certificate == resources.Certificate(name="name_value")
-
         assert args[0].update_mask == field_mask.FieldMask(paths=["paths_value"])
 
 
@@ -1929,13 +1879,11 @@ def test_activate_certificate_authority(
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = operations_pb2.Operation(name="operations/spam")
-
         response = client.activate_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ActivateCertificateAuthorityRequest()
 
     # Establish that the response is the type that we expect.
@@ -1960,7 +1908,6 @@ def test_activate_certificate_authority_empty_call():
         client.activate_certificate_authority()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ActivateCertificateAuthorityRequest()
 
 
@@ -1985,13 +1932,11 @@ async def test_activate_certificate_authority_async(
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/spam")
         )
-
         response = await client.activate_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ActivateCertificateAuthorityRequest()
 
     # Establish that the response is the type that we expect.
@@ -2011,6 +1956,7 @@ def test_activate_certificate_authority_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.ActivateCertificateAuthorityRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -2018,7 +1964,6 @@ def test_activate_certificate_authority_field_headers():
         type(client.transport.activate_certificate_authority), "__call__"
     ) as call:
         call.return_value = operations_pb2.Operation(name="operations/op")
-
         client.activate_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -2040,6 +1985,7 @@ async def test_activate_certificate_authority_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.ActivateCertificateAuthorityRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -2049,7 +1995,6 @@ async def test_activate_certificate_authority_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/op")
         )
-
         await client.activate_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -2073,7 +2018,6 @@ def test_activate_certificate_authority_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = operations_pb2.Operation(name="operations/op")
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.activate_certificate_authority(name="name_value",)
@@ -2082,7 +2026,6 @@ def test_activate_certificate_authority_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -2123,7 +2066,6 @@ async def test_activate_certificate_authority_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -2158,13 +2100,11 @@ def test_create_certificate_authority(
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = operations_pb2.Operation(name="operations/spam")
-
         response = client.create_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.CreateCertificateAuthorityRequest()
 
     # Establish that the response is the type that we expect.
@@ -2189,7 +2129,6 @@ def test_create_certificate_authority_empty_call():
         client.create_certificate_authority()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.CreateCertificateAuthorityRequest()
 
 
@@ -2214,13 +2153,11 @@ async def test_create_certificate_authority_async(
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/spam")
         )
-
         response = await client.create_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.CreateCertificateAuthorityRequest()
 
     # Establish that the response is the type that we expect.
@@ -2240,6 +2177,7 @@ def test_create_certificate_authority_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.CreateCertificateAuthorityRequest()
+
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -2247,7 +2185,6 @@ def test_create_certificate_authority_field_headers():
         type(client.transport.create_certificate_authority), "__call__"
     ) as call:
         call.return_value = operations_pb2.Operation(name="operations/op")
-
         client.create_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -2269,6 +2206,7 @@ async def test_create_certificate_authority_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.CreateCertificateAuthorityRequest()
+
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -2278,7 +2216,6 @@ async def test_create_certificate_authority_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/op")
         )
-
         await client.create_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -2302,7 +2239,6 @@ def test_create_certificate_authority_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = operations_pb2.Operation(name="operations/op")
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.create_certificate_authority(
@@ -2315,13 +2251,10 @@ def test_create_certificate_authority_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].parent == "parent_value"
-
         assert args[0].certificate_authority == resources.CertificateAuthority(
             name="name_value"
         )
-
         assert args[0].certificate_authority_id == "certificate_authority_id_value"
 
 
@@ -2369,13 +2302,10 @@ async def test_create_certificate_authority_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].parent == "parent_value"
-
         assert args[0].certificate_authority == resources.CertificateAuthority(
             name="name_value"
         )
-
         assert args[0].certificate_authority_id == "certificate_authority_id_value"
 
 
@@ -2413,13 +2343,11 @@ def test_disable_certificate_authority(
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = operations_pb2.Operation(name="operations/spam")
-
         response = client.disable_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.DisableCertificateAuthorityRequest()
 
     # Establish that the response is the type that we expect.
@@ -2444,7 +2372,6 @@ def test_disable_certificate_authority_empty_call():
         client.disable_certificate_authority()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.DisableCertificateAuthorityRequest()
 
 
@@ -2469,13 +2396,11 @@ async def test_disable_certificate_authority_async(
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/spam")
         )
-
         response = await client.disable_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.DisableCertificateAuthorityRequest()
 
     # Establish that the response is the type that we expect.
@@ -2495,6 +2420,7 @@ def test_disable_certificate_authority_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.DisableCertificateAuthorityRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -2502,7 +2428,6 @@ def test_disable_certificate_authority_field_headers():
         type(client.transport.disable_certificate_authority), "__call__"
     ) as call:
         call.return_value = operations_pb2.Operation(name="operations/op")
-
         client.disable_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -2524,6 +2449,7 @@ async def test_disable_certificate_authority_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.DisableCertificateAuthorityRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -2533,7 +2459,6 @@ async def test_disable_certificate_authority_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/op")
         )
-
         await client.disable_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -2557,7 +2482,6 @@ def test_disable_certificate_authority_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = operations_pb2.Operation(name="operations/op")
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.disable_certificate_authority(name="name_value",)
@@ -2566,7 +2490,6 @@ def test_disable_certificate_authority_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -2607,7 +2530,6 @@ async def test_disable_certificate_authority_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -2642,13 +2564,11 @@ def test_enable_certificate_authority(
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = operations_pb2.Operation(name="operations/spam")
-
         response = client.enable_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.EnableCertificateAuthorityRequest()
 
     # Establish that the response is the type that we expect.
@@ -2673,7 +2593,6 @@ def test_enable_certificate_authority_empty_call():
         client.enable_certificate_authority()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.EnableCertificateAuthorityRequest()
 
 
@@ -2698,13 +2617,11 @@ async def test_enable_certificate_authority_async(
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/spam")
         )
-
         response = await client.enable_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.EnableCertificateAuthorityRequest()
 
     # Establish that the response is the type that we expect.
@@ -2724,6 +2641,7 @@ def test_enable_certificate_authority_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.EnableCertificateAuthorityRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -2731,7 +2649,6 @@ def test_enable_certificate_authority_field_headers():
         type(client.transport.enable_certificate_authority), "__call__"
     ) as call:
         call.return_value = operations_pb2.Operation(name="operations/op")
-
         client.enable_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -2753,6 +2670,7 @@ async def test_enable_certificate_authority_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.EnableCertificateAuthorityRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -2762,7 +2680,6 @@ async def test_enable_certificate_authority_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/op")
         )
-
         await client.enable_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -2786,7 +2703,6 @@ def test_enable_certificate_authority_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = operations_pb2.Operation(name="operations/op")
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.enable_certificate_authority(name="name_value",)
@@ -2795,7 +2711,6 @@ def test_enable_certificate_authority_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -2836,7 +2751,6 @@ async def test_enable_certificate_authority_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -2873,19 +2787,15 @@ def test_fetch_certificate_authority_csr(
         call.return_value = service.FetchCertificateAuthorityCsrResponse(
             pem_csr="pem_csr_value",
         )
-
         response = client.fetch_certificate_authority_csr(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.FetchCertificateAuthorityCsrRequest()
 
     # Establish that the response is the type that we expect.
-
     assert isinstance(response, service.FetchCertificateAuthorityCsrResponse)
-
     assert response.pem_csr == "pem_csr_value"
 
 
@@ -2907,7 +2817,6 @@ def test_fetch_certificate_authority_csr_empty_call():
         client.fetch_certificate_authority_csr()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.FetchCertificateAuthorityCsrRequest()
 
 
@@ -2932,18 +2841,15 @@ async def test_fetch_certificate_authority_csr_async(
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             service.FetchCertificateAuthorityCsrResponse(pem_csr="pem_csr_value",)
         )
-
         response = await client.fetch_certificate_authority_csr(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.FetchCertificateAuthorityCsrRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, service.FetchCertificateAuthorityCsrResponse)
-
     assert response.pem_csr == "pem_csr_value"
 
 
@@ -2960,6 +2866,7 @@ def test_fetch_certificate_authority_csr_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.FetchCertificateAuthorityCsrRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -2967,7 +2874,6 @@ def test_fetch_certificate_authority_csr_field_headers():
         type(client.transport.fetch_certificate_authority_csr), "__call__"
     ) as call:
         call.return_value = service.FetchCertificateAuthorityCsrResponse()
-
         client.fetch_certificate_authority_csr(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -2989,6 +2895,7 @@ async def test_fetch_certificate_authority_csr_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.FetchCertificateAuthorityCsrRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -2998,7 +2905,6 @@ async def test_fetch_certificate_authority_csr_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             service.FetchCertificateAuthorityCsrResponse()
         )
-
         await client.fetch_certificate_authority_csr(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -3022,7 +2928,6 @@ def test_fetch_certificate_authority_csr_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = service.FetchCertificateAuthorityCsrResponse()
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.fetch_certificate_authority_csr(name="name_value",)
@@ -3031,7 +2936,6 @@ def test_fetch_certificate_authority_csr_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -3072,7 +2976,6 @@ async def test_fetch_certificate_authority_csr_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -3114,29 +3017,20 @@ def test_get_certificate_authority(
             pem_ca_certificates=["pem_ca_certificates_value"],
             gcs_bucket="gcs_bucket_value",
         )
-
         response = client.get_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.GetCertificateAuthorityRequest()
 
     # Establish that the response is the type that we expect.
-
     assert isinstance(response, resources.CertificateAuthority)
-
     assert response.name == "name_value"
-
     assert response.type_ == resources.CertificateAuthority.Type.SELF_SIGNED
-
     assert response.tier == resources.CertificateAuthority.Tier.ENTERPRISE
-
     assert response.state == resources.CertificateAuthority.State.ENABLED
-
     assert response.pem_ca_certificates == ["pem_ca_certificates_value"]
-
     assert response.gcs_bucket == "gcs_bucket_value"
 
 
@@ -3158,7 +3052,6 @@ def test_get_certificate_authority_empty_call():
         client.get_certificate_authority()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.GetCertificateAuthorityRequest()
 
 
@@ -3189,28 +3082,20 @@ async def test_get_certificate_authority_async(
                 gcs_bucket="gcs_bucket_value",
             )
         )
-
         response = await client.get_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.GetCertificateAuthorityRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, resources.CertificateAuthority)
-
     assert response.name == "name_value"
-
     assert response.type_ == resources.CertificateAuthority.Type.SELF_SIGNED
-
     assert response.tier == resources.CertificateAuthority.Tier.ENTERPRISE
-
     assert response.state == resources.CertificateAuthority.State.ENABLED
-
     assert response.pem_ca_certificates == ["pem_ca_certificates_value"]
-
     assert response.gcs_bucket == "gcs_bucket_value"
 
 
@@ -3227,6 +3112,7 @@ def test_get_certificate_authority_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.GetCertificateAuthorityRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -3234,7 +3120,6 @@ def test_get_certificate_authority_field_headers():
         type(client.transport.get_certificate_authority), "__call__"
     ) as call:
         call.return_value = resources.CertificateAuthority()
-
         client.get_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -3256,6 +3141,7 @@ async def test_get_certificate_authority_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.GetCertificateAuthorityRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -3265,7 +3151,6 @@ async def test_get_certificate_authority_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             resources.CertificateAuthority()
         )
-
         await client.get_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -3289,7 +3174,6 @@ def test_get_certificate_authority_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = resources.CertificateAuthority()
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.get_certificate_authority(name="name_value",)
@@ -3298,7 +3182,6 @@ def test_get_certificate_authority_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -3339,7 +3222,6 @@ async def test_get_certificate_authority_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -3376,21 +3258,16 @@ def test_list_certificate_authorities(
         call.return_value = service.ListCertificateAuthoritiesResponse(
             next_page_token="next_page_token_value", unreachable=["unreachable_value"],
         )
-
         response = client.list_certificate_authorities(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ListCertificateAuthoritiesRequest()
 
     # Establish that the response is the type that we expect.
-
     assert isinstance(response, pagers.ListCertificateAuthoritiesPager)
-
     assert response.next_page_token == "next_page_token_value"
-
     assert response.unreachable == ["unreachable_value"]
 
 
@@ -3412,7 +3289,6 @@ def test_list_certificate_authorities_empty_call():
         client.list_certificate_authorities()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ListCertificateAuthoritiesRequest()
 
 
@@ -3440,20 +3316,16 @@ async def test_list_certificate_authorities_async(
                 unreachable=["unreachable_value"],
             )
         )
-
         response = await client.list_certificate_authorities(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ListCertificateAuthoritiesRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, pagers.ListCertificateAuthoritiesAsyncPager)
-
     assert response.next_page_token == "next_page_token_value"
-
     assert response.unreachable == ["unreachable_value"]
 
 
@@ -3470,6 +3342,7 @@ def test_list_certificate_authorities_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.ListCertificateAuthoritiesRequest()
+
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -3477,7 +3350,6 @@ def test_list_certificate_authorities_field_headers():
         type(client.transport.list_certificate_authorities), "__call__"
     ) as call:
         call.return_value = service.ListCertificateAuthoritiesResponse()
-
         client.list_certificate_authorities(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -3499,6 +3371,7 @@ async def test_list_certificate_authorities_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.ListCertificateAuthoritiesRequest()
+
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -3508,7 +3381,6 @@ async def test_list_certificate_authorities_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             service.ListCertificateAuthoritiesResponse()
         )
-
         await client.list_certificate_authorities(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -3532,7 +3404,6 @@ def test_list_certificate_authorities_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = service.ListCertificateAuthoritiesResponse()
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.list_certificate_authorities(parent="parent_value",)
@@ -3541,7 +3412,6 @@ def test_list_certificate_authorities_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].parent == "parent_value"
 
 
@@ -3582,7 +3452,6 @@ async def test_list_certificate_authorities_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].parent == "parent_value"
 
 
@@ -3797,13 +3666,11 @@ def test_restore_certificate_authority(
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = operations_pb2.Operation(name="operations/spam")
-
         response = client.restore_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.RestoreCertificateAuthorityRequest()
 
     # Establish that the response is the type that we expect.
@@ -3828,7 +3695,6 @@ def test_restore_certificate_authority_empty_call():
         client.restore_certificate_authority()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.RestoreCertificateAuthorityRequest()
 
 
@@ -3853,13 +3719,11 @@ async def test_restore_certificate_authority_async(
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/spam")
         )
-
         response = await client.restore_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.RestoreCertificateAuthorityRequest()
 
     # Establish that the response is the type that we expect.
@@ -3879,6 +3743,7 @@ def test_restore_certificate_authority_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.RestoreCertificateAuthorityRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -3886,7 +3751,6 @@ def test_restore_certificate_authority_field_headers():
         type(client.transport.restore_certificate_authority), "__call__"
     ) as call:
         call.return_value = operations_pb2.Operation(name="operations/op")
-
         client.restore_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -3908,6 +3772,7 @@ async def test_restore_certificate_authority_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.RestoreCertificateAuthorityRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -3917,7 +3782,6 @@ async def test_restore_certificate_authority_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/op")
         )
-
         await client.restore_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -3941,7 +3805,6 @@ def test_restore_certificate_authority_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = operations_pb2.Operation(name="operations/op")
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.restore_certificate_authority(name="name_value",)
@@ -3950,7 +3813,6 @@ def test_restore_certificate_authority_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -3991,7 +3853,6 @@ async def test_restore_certificate_authority_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -4027,13 +3888,11 @@ def test_schedule_delete_certificate_authority(
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = operations_pb2.Operation(name="operations/spam")
-
         response = client.schedule_delete_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ScheduleDeleteCertificateAuthorityRequest()
 
     # Establish that the response is the type that we expect.
@@ -4058,7 +3917,6 @@ def test_schedule_delete_certificate_authority_empty_call():
         client.schedule_delete_certificate_authority()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ScheduleDeleteCertificateAuthorityRequest()
 
 
@@ -4083,13 +3941,11 @@ async def test_schedule_delete_certificate_authority_async(
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/spam")
         )
-
         response = await client.schedule_delete_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ScheduleDeleteCertificateAuthorityRequest()
 
     # Establish that the response is the type that we expect.
@@ -4109,6 +3965,7 @@ def test_schedule_delete_certificate_authority_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.ScheduleDeleteCertificateAuthorityRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -4116,7 +3973,6 @@ def test_schedule_delete_certificate_authority_field_headers():
         type(client.transport.schedule_delete_certificate_authority), "__call__"
     ) as call:
         call.return_value = operations_pb2.Operation(name="operations/op")
-
         client.schedule_delete_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -4138,6 +3994,7 @@ async def test_schedule_delete_certificate_authority_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.ScheduleDeleteCertificateAuthorityRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -4147,7 +4004,6 @@ async def test_schedule_delete_certificate_authority_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/op")
         )
-
         await client.schedule_delete_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -4171,7 +4027,6 @@ def test_schedule_delete_certificate_authority_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = operations_pb2.Operation(name="operations/op")
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.schedule_delete_certificate_authority(name="name_value",)
@@ -4180,7 +4035,6 @@ def test_schedule_delete_certificate_authority_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -4223,7 +4077,6 @@ async def test_schedule_delete_certificate_authority_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -4258,13 +4111,11 @@ def test_update_certificate_authority(
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = operations_pb2.Operation(name="operations/spam")
-
         response = client.update_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.UpdateCertificateAuthorityRequest()
 
     # Establish that the response is the type that we expect.
@@ -4289,7 +4140,6 @@ def test_update_certificate_authority_empty_call():
         client.update_certificate_authority()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.UpdateCertificateAuthorityRequest()
 
 
@@ -4314,13 +4164,11 @@ async def test_update_certificate_authority_async(
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/spam")
         )
-
         response = await client.update_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.UpdateCertificateAuthorityRequest()
 
     # Establish that the response is the type that we expect.
@@ -4340,6 +4188,7 @@ def test_update_certificate_authority_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.UpdateCertificateAuthorityRequest()
+
     request.certificate_authority.name = "certificate_authority.name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -4347,7 +4196,6 @@ def test_update_certificate_authority_field_headers():
         type(client.transport.update_certificate_authority), "__call__"
     ) as call:
         call.return_value = operations_pb2.Operation(name="operations/op")
-
         client.update_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -4372,6 +4220,7 @@ async def test_update_certificate_authority_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.UpdateCertificateAuthorityRequest()
+
     request.certificate_authority.name = "certificate_authority.name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -4381,7 +4230,6 @@ async def test_update_certificate_authority_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/op")
         )
-
         await client.update_certificate_authority(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -4408,7 +4256,6 @@ def test_update_certificate_authority_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = operations_pb2.Operation(name="operations/op")
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.update_certificate_authority(
@@ -4420,11 +4267,9 @@ def test_update_certificate_authority_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].certificate_authority == resources.CertificateAuthority(
             name="name_value"
         )
-
         assert args[0].update_mask == field_mask.FieldMask(paths=["paths_value"])
 
 
@@ -4470,11 +4315,9 @@ async def test_update_certificate_authority_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].certificate_authority == resources.CertificateAuthority(
             name="name_value"
         )
-
         assert args[0].update_mask == field_mask.FieldMask(paths=["paths_value"])
 
 
@@ -4517,27 +4360,19 @@ def test_get_certificate_revocation_list(
             access_url="access_url_value",
             state=resources.CertificateRevocationList.State.ACTIVE,
         )
-
         response = client.get_certificate_revocation_list(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.GetCertificateRevocationListRequest()
 
     # Establish that the response is the type that we expect.
-
     assert isinstance(response, resources.CertificateRevocationList)
-
     assert response.name == "name_value"
-
     assert response.sequence_number == 1601
-
     assert response.pem_crl == "pem_crl_value"
-
     assert response.access_url == "access_url_value"
-
     assert response.state == resources.CertificateRevocationList.State.ACTIVE
 
 
@@ -4559,7 +4394,6 @@ def test_get_certificate_revocation_list_empty_call():
         client.get_certificate_revocation_list()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.GetCertificateRevocationListRequest()
 
 
@@ -4590,26 +4424,19 @@ async def test_get_certificate_revocation_list_async(
                 state=resources.CertificateRevocationList.State.ACTIVE,
             )
         )
-
         response = await client.get_certificate_revocation_list(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.GetCertificateRevocationListRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, resources.CertificateRevocationList)
-
     assert response.name == "name_value"
-
     assert response.sequence_number == 1601
-
     assert response.pem_crl == "pem_crl_value"
-
     assert response.access_url == "access_url_value"
-
     assert response.state == resources.CertificateRevocationList.State.ACTIVE
 
 
@@ -4626,6 +4453,7 @@ def test_get_certificate_revocation_list_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.GetCertificateRevocationListRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -4633,7 +4461,6 @@ def test_get_certificate_revocation_list_field_headers():
         type(client.transport.get_certificate_revocation_list), "__call__"
     ) as call:
         call.return_value = resources.CertificateRevocationList()
-
         client.get_certificate_revocation_list(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -4655,6 +4482,7 @@ async def test_get_certificate_revocation_list_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.GetCertificateRevocationListRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -4664,7 +4492,6 @@ async def test_get_certificate_revocation_list_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             resources.CertificateRevocationList()
         )
-
         await client.get_certificate_revocation_list(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -4688,7 +4515,6 @@ def test_get_certificate_revocation_list_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = resources.CertificateRevocationList()
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.get_certificate_revocation_list(name="name_value",)
@@ -4697,7 +4523,6 @@ def test_get_certificate_revocation_list_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -4738,7 +4563,6 @@ async def test_get_certificate_revocation_list_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -4775,21 +4599,16 @@ def test_list_certificate_revocation_lists(
         call.return_value = service.ListCertificateRevocationListsResponse(
             next_page_token="next_page_token_value", unreachable=["unreachable_value"],
         )
-
         response = client.list_certificate_revocation_lists(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ListCertificateRevocationListsRequest()
 
     # Establish that the response is the type that we expect.
-
     assert isinstance(response, pagers.ListCertificateRevocationListsPager)
-
     assert response.next_page_token == "next_page_token_value"
-
     assert response.unreachable == ["unreachable_value"]
 
 
@@ -4811,7 +4630,6 @@ def test_list_certificate_revocation_lists_empty_call():
         client.list_certificate_revocation_lists()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ListCertificateRevocationListsRequest()
 
 
@@ -4839,20 +4657,16 @@ async def test_list_certificate_revocation_lists_async(
                 unreachable=["unreachable_value"],
             )
         )
-
         response = await client.list_certificate_revocation_lists(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ListCertificateRevocationListsRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, pagers.ListCertificateRevocationListsAsyncPager)
-
     assert response.next_page_token == "next_page_token_value"
-
     assert response.unreachable == ["unreachable_value"]
 
 
@@ -4869,6 +4683,7 @@ def test_list_certificate_revocation_lists_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.ListCertificateRevocationListsRequest()
+
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -4876,7 +4691,6 @@ def test_list_certificate_revocation_lists_field_headers():
         type(client.transport.list_certificate_revocation_lists), "__call__"
     ) as call:
         call.return_value = service.ListCertificateRevocationListsResponse()
-
         client.list_certificate_revocation_lists(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -4898,6 +4712,7 @@ async def test_list_certificate_revocation_lists_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.ListCertificateRevocationListsRequest()
+
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -4907,7 +4722,6 @@ async def test_list_certificate_revocation_lists_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             service.ListCertificateRevocationListsResponse()
         )
-
         await client.list_certificate_revocation_lists(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -4931,7 +4745,6 @@ def test_list_certificate_revocation_lists_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = service.ListCertificateRevocationListsResponse()
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.list_certificate_revocation_lists(parent="parent_value",)
@@ -4940,7 +4753,6 @@ def test_list_certificate_revocation_lists_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].parent == "parent_value"
 
 
@@ -4983,7 +4795,6 @@ async def test_list_certificate_revocation_lists_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].parent == "parent_value"
 
 
@@ -5200,13 +5011,11 @@ def test_update_certificate_revocation_list(
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = operations_pb2.Operation(name="operations/spam")
-
         response = client.update_certificate_revocation_list(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.UpdateCertificateRevocationListRequest()
 
     # Establish that the response is the type that we expect.
@@ -5231,7 +5040,6 @@ def test_update_certificate_revocation_list_empty_call():
         client.update_certificate_revocation_list()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.UpdateCertificateRevocationListRequest()
 
 
@@ -5256,13 +5064,11 @@ async def test_update_certificate_revocation_list_async(
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/spam")
         )
-
         response = await client.update_certificate_revocation_list(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.UpdateCertificateRevocationListRequest()
 
     # Establish that the response is the type that we expect.
@@ -5282,6 +5088,7 @@ def test_update_certificate_revocation_list_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.UpdateCertificateRevocationListRequest()
+
     request.certificate_revocation_list.name = "certificate_revocation_list.name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -5289,7 +5096,6 @@ def test_update_certificate_revocation_list_field_headers():
         type(client.transport.update_certificate_revocation_list), "__call__"
     ) as call:
         call.return_value = operations_pb2.Operation(name="operations/op")
-
         client.update_certificate_revocation_list(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -5314,6 +5120,7 @@ async def test_update_certificate_revocation_list_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.UpdateCertificateRevocationListRequest()
+
     request.certificate_revocation_list.name = "certificate_revocation_list.name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -5323,7 +5130,6 @@ async def test_update_certificate_revocation_list_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/op")
         )
-
         await client.update_certificate_revocation_list(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -5350,7 +5156,6 @@ def test_update_certificate_revocation_list_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = operations_pb2.Operation(name="operations/op")
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.update_certificate_revocation_list(
@@ -5364,13 +5169,11 @@ def test_update_certificate_revocation_list_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[
             0
         ].certificate_revocation_list == resources.CertificateRevocationList(
             name="name_value"
         )
-
         assert args[0].update_mask == field_mask.FieldMask(paths=["paths_value"])
 
 
@@ -5420,13 +5223,11 @@ async def test_update_certificate_revocation_list_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[
             0
         ].certificate_revocation_list == resources.CertificateRevocationList(
             name="name_value"
         )
-
         assert args[0].update_mask == field_mask.FieldMask(paths=["paths_value"])
 
 
@@ -5467,21 +5268,16 @@ def test_get_reusable_config(
         call.return_value = resources.ReusableConfig(
             name="name_value", description="description_value",
         )
-
         response = client.get_reusable_config(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.GetReusableConfigRequest()
 
     # Establish that the response is the type that we expect.
-
     assert isinstance(response, resources.ReusableConfig)
-
     assert response.name == "name_value"
-
     assert response.description == "description_value"
 
 
@@ -5503,7 +5299,6 @@ def test_get_reusable_config_empty_call():
         client.get_reusable_config()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.GetReusableConfigRequest()
 
 
@@ -5529,20 +5324,16 @@ async def test_get_reusable_config_async(
                 name="name_value", description="description_value",
             )
         )
-
         response = await client.get_reusable_config(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.GetReusableConfigRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, resources.ReusableConfig)
-
     assert response.name == "name_value"
-
     assert response.description == "description_value"
 
 
@@ -5559,6 +5350,7 @@ def test_get_reusable_config_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.GetReusableConfigRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -5566,7 +5358,6 @@ def test_get_reusable_config_field_headers():
         type(client.transport.get_reusable_config), "__call__"
     ) as call:
         call.return_value = resources.ReusableConfig()
-
         client.get_reusable_config(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -5588,6 +5379,7 @@ async def test_get_reusable_config_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.GetReusableConfigRequest()
+
     request.name = "name/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -5597,7 +5389,6 @@ async def test_get_reusable_config_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             resources.ReusableConfig()
         )
-
         await client.get_reusable_config(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -5621,7 +5412,6 @@ def test_get_reusable_config_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = resources.ReusableConfig()
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.get_reusable_config(name="name_value",)
@@ -5630,7 +5420,6 @@ def test_get_reusable_config_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -5671,7 +5460,6 @@ async def test_get_reusable_config_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].name == "name_value"
 
 
@@ -5708,21 +5496,16 @@ def test_list_reusable_configs(
         call.return_value = service.ListReusableConfigsResponse(
             next_page_token="next_page_token_value", unreachable=["unreachable_value"],
         )
-
         response = client.list_reusable_configs(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ListReusableConfigsRequest()
 
     # Establish that the response is the type that we expect.
-
     assert isinstance(response, pagers.ListReusableConfigsPager)
-
     assert response.next_page_token == "next_page_token_value"
-
     assert response.unreachable == ["unreachable_value"]
 
 
@@ -5744,7 +5527,6 @@ def test_list_reusable_configs_empty_call():
         client.list_reusable_configs()
         call.assert_called()
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ListReusableConfigsRequest()
 
 
@@ -5771,20 +5553,16 @@ async def test_list_reusable_configs_async(
                 unreachable=["unreachable_value"],
             )
         )
-
         response = await client.list_reusable_configs(request)
 
         # Establish that the underlying gRPC stub method was called.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0] == service.ListReusableConfigsRequest()
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, pagers.ListReusableConfigsAsyncPager)
-
     assert response.next_page_token == "next_page_token_value"
-
     assert response.unreachable == ["unreachable_value"]
 
 
@@ -5801,6 +5579,7 @@ def test_list_reusable_configs_field_headers():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.ListReusableConfigsRequest()
+
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -5808,7 +5587,6 @@ def test_list_reusable_configs_field_headers():
         type(client.transport.list_reusable_configs), "__call__"
     ) as call:
         call.return_value = service.ListReusableConfigsResponse()
-
         client.list_reusable_configs(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -5830,6 +5608,7 @@ async def test_list_reusable_configs_field_headers_async():
     # Any value that is part of the HTTP/1.1 URI should be sent as
     # a field header. Set these to a non-empty value.
     request = service.ListReusableConfigsRequest()
+
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
@@ -5839,7 +5618,6 @@ async def test_list_reusable_configs_field_headers_async():
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             service.ListReusableConfigsResponse()
         )
-
         await client.list_reusable_configs(request)
 
         # Establish that the underlying gRPC stub method was called.
@@ -5863,7 +5641,6 @@ def test_list_reusable_configs_flattened():
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = service.ListReusableConfigsResponse()
-
         # Call the method with a truthy value for each flattened field,
         # using the keyword arguments to the method.
         client.list_reusable_configs(parent="parent_value",)
@@ -5872,7 +5649,6 @@ def test_list_reusable_configs_flattened():
         # request object values.
         assert len(call.mock_calls) == 1
         _, args, _ = call.mock_calls[0]
-
         assert args[0].parent == "parent_value"
 
 
@@ -5913,7 +5689,6 @@ async def test_list_reusable_configs_flattened_async():
         # request object values.
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
-
         assert args[0].parent == "parent_value"
 
 
@@ -6237,10 +6012,32 @@ def test_certificate_authority_service_base_transport():
         transport.operations_client
 
 
+@requires_google_auth_gte_1_25_0
 def test_certificate_authority_service_base_transport_with_credentials_file():
     # Instantiate the base transport with a credentials file
     with mock.patch.object(
-        auth, "load_credentials_from_file"
+        auth, "load_credentials_from_file", autospec=True
+    ) as load_creds, mock.patch(
+        "google.cloud.security.privateca_v1beta1.services.certificate_authority_service.transports.CertificateAuthorityServiceTransport._prep_wrapped_messages"
+    ) as Transport:
+        Transport.return_value = None
+        load_creds.return_value = (credentials.AnonymousCredentials(), None)
+        transport = transports.CertificateAuthorityServiceTransport(
+            credentials_file="credentials.json", quota_project_id="octopus",
+        )
+        load_creds.assert_called_once_with(
+            "credentials.json",
+            scopes=None,
+            default_scopes=("https://www.googleapis.com/auth/cloud-platform",),
+            quota_project_id="octopus",
+        )
+
+
+@requires_google_auth_lt_1_25_0
+def test_certificate_authority_service_base_transport_with_credentials_file_old_google_auth():
+    # Instantiate the base transport with a credentials file
+    with mock.patch.object(
+        auth, "load_credentials_from_file", autospec=True
     ) as load_creds, mock.patch(
         "google.cloud.security.privateca_v1beta1.services.certificate_authority_service.transports.CertificateAuthorityServiceTransport._prep_wrapped_messages"
     ) as Transport:
@@ -6258,7 +6055,7 @@ def test_certificate_authority_service_base_transport_with_credentials_file():
 
 def test_certificate_authority_service_base_transport_with_adc():
     # Test the default credentials are used if credentials and credentials_file are None.
-    with mock.patch.object(auth, "default") as adc, mock.patch(
+    with mock.patch.object(auth, "default", autospec=True) as adc, mock.patch(
         "google.cloud.security.privateca_v1beta1.services.certificate_authority_service.transports.CertificateAuthorityServiceTransport._prep_wrapped_messages"
     ) as Transport:
         Transport.return_value = None
@@ -6267,9 +6064,23 @@ def test_certificate_authority_service_base_transport_with_adc():
         adc.assert_called_once()
 
 
+@requires_google_auth_gte_1_25_0
 def test_certificate_authority_service_auth_adc():
     # If no credentials are provided, we should use ADC credentials.
-    with mock.patch.object(auth, "default") as adc:
+    with mock.patch.object(auth, "default", autospec=True) as adc:
+        adc.return_value = (credentials.AnonymousCredentials(), None)
+        CertificateAuthorityServiceClient()
+        adc.assert_called_once_with(
+            scopes=None,
+            default_scopes=("https://www.googleapis.com/auth/cloud-platform",),
+            quota_project_id=None,
+        )
+
+
+@requires_google_auth_lt_1_25_0
+def test_certificate_authority_service_auth_adc_old_google_auth():
+    # If no credentials are provided, we should use ADC credentials.
+    with mock.patch.object(auth, "default", autospec=True) as adc:
         adc.return_value = (credentials.AnonymousCredentials(), None)
         CertificateAuthorityServiceClient()
         adc.assert_called_once_with(
@@ -6278,17 +6089,160 @@ def test_certificate_authority_service_auth_adc():
         )
 
 
-def test_certificate_authority_service_transport_auth_adc():
+@pytest.mark.parametrize(
+    "transport_class",
+    [
+        transports.CertificateAuthorityServiceGrpcTransport,
+        transports.CertificateAuthorityServiceGrpcAsyncIOTransport,
+    ],
+)
+@requires_google_auth_gte_1_25_0
+def test_certificate_authority_service_transport_auth_adc(transport_class):
     # If credentials and host are not provided, the transport class should use
     # ADC credentials.
-    with mock.patch.object(auth, "default") as adc:
+    with mock.patch.object(auth, "default", autospec=True) as adc:
         adc.return_value = (credentials.AnonymousCredentials(), None)
-        transports.CertificateAuthorityServiceGrpcTransport(
-            host="squid.clam.whelk", quota_project_id="octopus"
+        transport_class(quota_project_id="octopus", scopes=["1", "2"])
+        adc.assert_called_once_with(
+            scopes=["1", "2"],
+            default_scopes=("https://www.googleapis.com/auth/cloud-platform",),
+            quota_project_id="octopus",
         )
+
+
+@pytest.mark.parametrize(
+    "transport_class",
+    [
+        transports.CertificateAuthorityServiceGrpcTransport,
+        transports.CertificateAuthorityServiceGrpcAsyncIOTransport,
+    ],
+)
+@requires_google_auth_lt_1_25_0
+def test_certificate_authority_service_transport_auth_adc_old_google_auth(
+    transport_class,
+):
+    # If credentials and host are not provided, the transport class should use
+    # ADC credentials.
+    with mock.patch.object(auth, "default", autospec=True) as adc:
+        adc.return_value = (credentials.AnonymousCredentials(), None)
+        transport_class(quota_project_id="octopus")
         adc.assert_called_once_with(
             scopes=("https://www.googleapis.com/auth/cloud-platform",),
             quota_project_id="octopus",
+        )
+
+
+@pytest.mark.parametrize(
+    "transport_class,grpc_helpers",
+    [
+        (transports.CertificateAuthorityServiceGrpcTransport, grpc_helpers),
+        (
+            transports.CertificateAuthorityServiceGrpcAsyncIOTransport,
+            grpc_helpers_async,
+        ),
+    ],
+)
+@requires_api_core_gte_1_26_0
+def test_certificate_authority_service_transport_create_channel(
+    transport_class, grpc_helpers
+):
+    # If credentials and host are not provided, the transport class should use
+    # ADC credentials.
+    with mock.patch.object(auth, "default", autospec=True) as adc, mock.patch.object(
+        grpc_helpers, "create_channel", autospec=True
+    ) as create_channel:
+        creds = credentials.AnonymousCredentials()
+        adc.return_value = (creds, None)
+        transport_class(quota_project_id="octopus", scopes=["1", "2"])
+
+        create_channel.assert_called_with(
+            "privateca.googleapis.com:443",
+            credentials=creds,
+            credentials_file=None,
+            quota_project_id="octopus",
+            default_scopes=("https://www.googleapis.com/auth/cloud-platform",),
+            scopes=["1", "2"],
+            default_host="privateca.googleapis.com",
+            ssl_credentials=None,
+            options=[
+                ("grpc.max_send_message_length", -1),
+                ("grpc.max_receive_message_length", -1),
+            ],
+        )
+
+
+@pytest.mark.parametrize(
+    "transport_class,grpc_helpers",
+    [
+        (transports.CertificateAuthorityServiceGrpcTransport, grpc_helpers),
+        (
+            transports.CertificateAuthorityServiceGrpcAsyncIOTransport,
+            grpc_helpers_async,
+        ),
+    ],
+)
+@requires_api_core_lt_1_26_0
+def test_certificate_authority_service_transport_create_channel_old_api_core(
+    transport_class, grpc_helpers
+):
+    # If credentials and host are not provided, the transport class should use
+    # ADC credentials.
+    with mock.patch.object(auth, "default", autospec=True) as adc, mock.patch.object(
+        grpc_helpers, "create_channel", autospec=True
+    ) as create_channel:
+        creds = credentials.AnonymousCredentials()
+        adc.return_value = (creds, None)
+        transport_class(quota_project_id="octopus")
+
+        create_channel.assert_called_with(
+            "privateca.googleapis.com",
+            credentials=creds,
+            credentials_file=None,
+            quota_project_id="octopus",
+            scopes=("https://www.googleapis.com/auth/cloud-platform",),
+            ssl_credentials=None,
+            options=[
+                ("grpc.max_send_message_length", -1),
+                ("grpc.max_receive_message_length", -1),
+            ],
+        )
+
+
+@pytest.mark.parametrize(
+    "transport_class,grpc_helpers",
+    [
+        (transports.CertificateAuthorityServiceGrpcTransport, grpc_helpers),
+        (
+            transports.CertificateAuthorityServiceGrpcAsyncIOTransport,
+            grpc_helpers_async,
+        ),
+    ],
+)
+@requires_api_core_lt_1_26_0
+def test_certificate_authority_service_transport_create_channel_user_scopes(
+    transport_class, grpc_helpers
+):
+    # If credentials and host are not provided, the transport class should use
+    # ADC credentials.
+    with mock.patch.object(auth, "default", autospec=True) as adc, mock.patch.object(
+        grpc_helpers, "create_channel", autospec=True
+    ) as create_channel:
+        creds = credentials.AnonymousCredentials()
+        adc.return_value = (creds, None)
+
+        transport_class(quota_project_id="octopus", scopes=["1", "2"])
+
+        create_channel.assert_called_with(
+            "privateca.googleapis.com",
+            credentials=creds,
+            credentials_file=None,
+            quota_project_id="octopus",
+            scopes=["1", "2"],
+            ssl_credentials=None,
+            options=[
+                ("grpc.max_send_message_length", -1),
+                ("grpc.max_receive_message_length", -1),
+            ],
         )
 
 
@@ -6514,7 +6468,6 @@ def test_certificate_path():
     location = "clam"
     certificate_authority = "whelk"
     certificate = "octopus"
-
     expected = "projects/{project}/locations/{location}/certificateAuthorities/{certificate_authority}/certificates/{certificate}".format(
         project=project,
         location=location,
@@ -6545,7 +6498,6 @@ def test_certificate_authority_path():
     project = "winkle"
     location = "nautilus"
     certificate_authority = "scallop"
-
     expected = "projects/{project}/locations/{location}/certificateAuthorities/{certificate_authority}".format(
         project=project, location=location, certificate_authority=certificate_authority,
     )
@@ -6573,7 +6525,6 @@ def test_certificate_revocation_list_path():
     location = "octopus"
     certificate_authority = "oyster"
     certificate_revocation_list = "nudibranch"
-
     expected = "projects/{project}/locations/{location}/certificateAuthorities/{certificate_authority}/certificateRevocationLists/{certificate_revocation_list}".format(
         project=project,
         location=location,
@@ -6608,7 +6559,6 @@ def test_reusable_config_path():
     project = "scallop"
     location = "abalone"
     reusable_config = "squid"
-
     expected = "projects/{project}/locations/{location}/reusableConfigs/{reusable_config}".format(
         project=project, location=location, reusable_config=reusable_config,
     )
@@ -6633,7 +6583,6 @@ def test_parse_reusable_config_path():
 
 def test_common_billing_account_path():
     billing_account = "oyster"
-
     expected = "billingAccounts/{billing_account}".format(
         billing_account=billing_account,
     )
@@ -6656,7 +6605,6 @@ def test_parse_common_billing_account_path():
 
 def test_common_folder_path():
     folder = "cuttlefish"
-
     expected = "folders/{folder}".format(folder=folder,)
     actual = CertificateAuthorityServiceClient.common_folder_path(folder)
     assert expected == actual
@@ -6675,7 +6623,6 @@ def test_parse_common_folder_path():
 
 def test_common_organization_path():
     organization = "winkle"
-
     expected = "organizations/{organization}".format(organization=organization,)
     actual = CertificateAuthorityServiceClient.common_organization_path(organization)
     assert expected == actual
@@ -6694,7 +6641,6 @@ def test_parse_common_organization_path():
 
 def test_common_project_path():
     project = "scallop"
-
     expected = "projects/{project}".format(project=project,)
     actual = CertificateAuthorityServiceClient.common_project_path(project)
     assert expected == actual
@@ -6714,7 +6660,6 @@ def test_parse_common_project_path():
 def test_common_location_path():
     project = "squid"
     location = "clam"
-
     expected = "projects/{project}/locations/{location}".format(
         project=project, location=location,
     )
