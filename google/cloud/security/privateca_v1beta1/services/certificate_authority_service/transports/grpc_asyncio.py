@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,9 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 import warnings
-from typing import Awaitable, Callable, Dict, Optional, Sequence, Tuple
+from typing import Awaitable, Callable, Dict, Optional, Sequence, Tuple, Union
 
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import grpc_helpers_async  # type: ignore
@@ -24,6 +22,7 @@ from google.api_core import operations_v1  # type: ignore
 from google import auth  # type: ignore
 from google.auth import credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
+import packaging.version
 
 import grpc  # type: ignore
 from grpc.experimental import aio  # type: ignore
@@ -31,7 +30,6 @@ from grpc.experimental import aio  # type: ignore
 from google.cloud.security.privateca_v1beta1.types import resources
 from google.cloud.security.privateca_v1beta1.types import service
 from google.longrunning import operations_pb2 as operations  # type: ignore
-
 from .base import CertificateAuthorityServiceTransport, DEFAULT_CLIENT_INFO
 from .grpc import CertificateAuthorityServiceGrpcTransport
 
@@ -87,13 +85,15 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
         Returns:
             aio.Channel: A gRPC AsyncIO channel object.
         """
-        scopes = scopes or cls.AUTH_SCOPES
+
+        self_signed_jwt_kwargs = cls._get_self_signed_jwt_kwargs(host, scopes)
+
         return grpc_helpers_async.create_channel(
             host,
             credentials=credentials,
             credentials_file=credentials_file,
-            scopes=scopes,
             quota_project_id=quota_project_id,
+            **self_signed_jwt_kwargs,
             **kwargs,
         )
 
@@ -115,7 +115,8 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
         """Instantiate the transport.
 
         Args:
-            host (Optional[str]): The hostname to connect to.
+            host (Optional[str]):
+                 The hostname to connect to.
             credentials (Optional[google.auth.credentials.Credentials]): The
                 authorization credentials to attach to requests. These
                 credentials identify the application to the service; if none
@@ -174,7 +175,6 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
             # If a channel was explicitly provided, set it.
             self._grpc_channel = channel
             self._ssl_channel_credentials = None
-
         else:
             if api_mtls_endpoint:
                 host = api_mtls_endpoint
@@ -253,7 +253,9 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
     def create_certificate(
         self,
     ) -> Callable[[service.CreateCertificateRequest], Awaitable[resources.Certificate]]:
-        r"""Return a callable for the create certificate method over gRPC.
+        r"""Return a callable for the
+        create certificate
+          method over gRPC.
 
         Create a new
         [Certificate][google.cloud.security.privateca.v1beta1.Certificate]
@@ -282,7 +284,9 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
     def get_certificate(
         self,
     ) -> Callable[[service.GetCertificateRequest], Awaitable[resources.Certificate]]:
-        r"""Return a callable for the get certificate method over gRPC.
+        r"""Return a callable for the
+        get certificate
+          method over gRPC.
 
         Returns a
         [Certificate][google.cloud.security.privateca.v1beta1.Certificate].
@@ -311,7 +315,9 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
     ) -> Callable[
         [service.ListCertificatesRequest], Awaitable[service.ListCertificatesResponse]
     ]:
-        r"""Return a callable for the list certificates method over gRPC.
+        r"""Return a callable for the
+        list certificates
+          method over gRPC.
 
         Lists
         [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
@@ -338,7 +344,9 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
     def revoke_certificate(
         self,
     ) -> Callable[[service.RevokeCertificateRequest], Awaitable[resources.Certificate]]:
-        r"""Return a callable for the revoke certificate method over gRPC.
+        r"""Return a callable for the
+        revoke certificate
+          method over gRPC.
 
         Revoke a
         [Certificate][google.cloud.security.privateca.v1beta1.Certificate].
@@ -365,7 +373,9 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
     def update_certificate(
         self,
     ) -> Callable[[service.UpdateCertificateRequest], Awaitable[resources.Certificate]]:
-        r"""Return a callable for the update certificate method over gRPC.
+        r"""Return a callable for the
+        update certificate
+          method over gRPC.
 
         Update a
         [Certificate][google.cloud.security.privateca.v1beta1.Certificate].
@@ -397,7 +407,9 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
     ) -> Callable[
         [service.ActivateCertificateAuthorityRequest], Awaitable[operations.Operation]
     ]:
-        r"""Return a callable for the activate certificate authority method over gRPC.
+        r"""Return a callable for the
+        activate certificate authority
+          method over gRPC.
 
         Activate a
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
@@ -436,7 +448,9 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
     ) -> Callable[
         [service.CreateCertificateAuthorityRequest], Awaitable[operations.Operation]
     ]:
-        r"""Return a callable for the create certificate authority method over gRPC.
+        r"""Return a callable for the
+        create certificate authority
+          method over gRPC.
 
         Create a new
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
@@ -466,7 +480,9 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
     ) -> Callable[
         [service.DisableCertificateAuthorityRequest], Awaitable[operations.Operation]
     ]:
-        r"""Return a callable for the disable certificate authority method over gRPC.
+        r"""Return a callable for the
+        disable certificate authority
+          method over gRPC.
 
         Disable a
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
@@ -497,7 +513,9 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
     ) -> Callable[
         [service.EnableCertificateAuthorityRequest], Awaitable[operations.Operation]
     ]:
-        r"""Return a callable for the enable certificate authority method over gRPC.
+        r"""Return a callable for the
+        enable certificate authority
+          method over gRPC.
 
         Enable a
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
@@ -527,8 +545,10 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
         [service.FetchCertificateAuthorityCsrRequest],
         Awaitable[service.FetchCertificateAuthorityCsrResponse],
     ]:
-        r"""Return a callable for the fetch certificate authority
-        csr method over gRPC.
+        r"""Return a callable for the
+        fetch certificate authority
+        csr
+          method over gRPC.
 
         Fetch a certificate signing request (CSR) from a
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
@@ -569,7 +589,9 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
         [service.GetCertificateAuthorityRequest],
         Awaitable[resources.CertificateAuthority],
     ]:
-        r"""Return a callable for the get certificate authority method over gRPC.
+        r"""Return a callable for the
+        get certificate authority
+          method over gRPC.
 
         Returns a
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
@@ -599,7 +621,9 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
         [service.ListCertificateAuthoritiesRequest],
         Awaitable[service.ListCertificateAuthoritiesResponse],
     ]:
-        r"""Return a callable for the list certificate authorities method over gRPC.
+        r"""Return a callable for the
+        list certificate authorities
+          method over gRPC.
 
         Lists
         [CertificateAuthorities][google.cloud.security.privateca.v1beta1.CertificateAuthority].
@@ -628,7 +652,9 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
     ) -> Callable[
         [service.RestoreCertificateAuthorityRequest], Awaitable[operations.Operation]
     ]:
-        r"""Return a callable for the restore certificate authority method over gRPC.
+        r"""Return a callable for the
+        restore certificate authority
+          method over gRPC.
 
         Restore a
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
@@ -661,8 +687,10 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
         [service.ScheduleDeleteCertificateAuthorityRequest],
         Awaitable[operations.Operation],
     ]:
-        r"""Return a callable for the schedule delete certificate
-        authority method over gRPC.
+        r"""Return a callable for the
+        schedule delete certificate
+        authority
+          method over gRPC.
 
         Schedule a
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority]
@@ -694,7 +722,9 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
     ) -> Callable[
         [service.UpdateCertificateAuthorityRequest], Awaitable[operations.Operation]
     ]:
-        r"""Return a callable for the update certificate authority method over gRPC.
+        r"""Return a callable for the
+        update certificate authority
+          method over gRPC.
 
         Update a
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
@@ -724,8 +754,10 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
         [service.GetCertificateRevocationListRequest],
         Awaitable[resources.CertificateRevocationList],
     ]:
-        r"""Return a callable for the get certificate revocation
-        list method over gRPC.
+        r"""Return a callable for the
+        get certificate revocation
+        list
+          method over gRPC.
 
         Returns a
         [CertificateRevocationList][google.cloud.security.privateca.v1beta1.CertificateRevocationList].
@@ -757,8 +789,10 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
         [service.ListCertificateRevocationListsRequest],
         Awaitable[service.ListCertificateRevocationListsResponse],
     ]:
-        r"""Return a callable for the list certificate revocation
-        lists method over gRPC.
+        r"""Return a callable for the
+        list certificate revocation
+        lists
+          method over gRPC.
 
         Lists
         [CertificateRevocationLists][google.cloud.security.privateca.v1beta1.CertificateRevocationList].
@@ -790,8 +824,10 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
         [service.UpdateCertificateRevocationListRequest],
         Awaitable[operations.Operation],
     ]:
-        r"""Return a callable for the update certificate revocation
-        list method over gRPC.
+        r"""Return a callable for the
+        update certificate revocation
+        list
+          method over gRPC.
 
         Update a
         [CertificateRevocationList][google.cloud.security.privateca.v1beta1.CertificateRevocationList].
@@ -822,7 +858,9 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
     ) -> Callable[
         [service.GetReusableConfigRequest], Awaitable[resources.ReusableConfig]
     ]:
-        r"""Return a callable for the get reusable config method over gRPC.
+        r"""Return a callable for the
+        get reusable config
+          method over gRPC.
 
         Returns a
         [ReusableConfig][google.cloud.security.privateca.v1beta1.ReusableConfig].
@@ -852,7 +890,9 @@ class CertificateAuthorityServiceGrpcAsyncIOTransport(
         [service.ListReusableConfigsRequest],
         Awaitable[service.ListReusableConfigsResponse],
     ]:
-        r"""Return a callable for the list reusable configs method over gRPC.
+        r"""Return a callable for the
+        list reusable configs
+          method over gRPC.
 
         Lists
         [ReusableConfigs][google.cloud.security.privateca.v1beta1.ReusableConfig].
