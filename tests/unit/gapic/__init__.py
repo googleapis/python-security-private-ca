@@ -13,10 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from .client import CertificateAuthorityServiceClient
-from .async_client import CertificateAuthorityServiceAsyncClient
-
-__all__ = (
-    'CertificateAuthorityServiceClient',
-    'CertificateAuthorityServiceAsyncClient',
-)
