@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.3.1](https://www.github.com/googleapis/python-security-private-ca/compare/v0.3.0...v0.3.1) (2021-06-19)
+
+
+### Documentation
+
+* omit mention of Python 2.7 in 'CONTRIBUTING.rst' ([#1127](https://www.github.com/googleapis/python-security-private-ca/issues/1127)) ([#65](https://www.github.com/googleapis/python-security-private-ca/issues/65)) ([a82b1ab](https://www.github.com/googleapis/python-security-private-ca/commit/a82b1abdaf8d55f6b6cbf71d6fb7a416e3307888)), closes [#1126](https://www.github.com/googleapis/python-security-private-ca/issues/1126)
+
 ## [0.3.0](https://www.github.com/googleapis/python-security-private-ca/compare/v0.2.0...v0.3.0) (2021-05-17)
 
 
