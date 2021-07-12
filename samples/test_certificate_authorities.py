@@ -53,8 +53,8 @@ def test_create_certificate(capsys: typing.Any) -> None:
         out,
     )
 
-    delete_ca_pool(PROJECT, LOCATION, CA_POOL_NAME)
     delete_certificate_authority(PROJECT, LOCATION, CA_POOL_NAME, CA_NAME)
+    delete_ca_pool(PROJECT, LOCATION, CA_POOL_NAME)
 
 
 def test_enable_and_disable_certificate_authority(capsys: typing.Any) -> None:
@@ -79,8 +79,8 @@ def test_enable_and_disable_certificate_authority(capsys: typing.Any) -> None:
         out,
     )
 
-    delete_ca_pool(PROJECT, LOCATION, CA_POOL_NAME)
     delete_certificate_authority(PROJECT, LOCATION, CA_POOL_NAME, CA_NAME)
+    delete_ca_pool(PROJECT, LOCATION, CA_POOL_NAME)
 
 
 def test_delete_certificate_authority(capsys: typing.Any) -> None:
