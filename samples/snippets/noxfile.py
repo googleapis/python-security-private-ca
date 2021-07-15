@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -46,8 +46,8 @@ TEST_CONFIG = {
     # to 'BUILD_SPECIFIC_GCLOUD_PROJECT' if you want to opt in using a
     # build specific Cloud project. You can also use your own string
     # to use your own Cloud project.
-    # 'gcloud_project_env': 'GOOGLE_CLOUD_PROJECT',
-    "gcloud_project_env": "BUILD_SPECIFIC_GCLOUD_PROJECT",
+    "gcloud_project_env": "GOOGLE_CLOUD_PROJECT",
+    # 'gcloud_project_env': 'BUILD_SPECIFIC_GCLOUD_PROJECT',
     # If you need to use a specific version of pip,
     # change pip_version_override to the string representation
     # of the version number, for example, "20.2.4"
@@ -78,6 +78,7 @@ def get_pytest_env_vars() -> Dict[str, str]:
     env_key = TEST_CONFIG["gcloud_project_env"]
     # This should error out if not set.
     ret["GOOGLE_CLOUD_PROJECT"] = os.environ[env_key]
+    ret["GCLOUD_PROJECT"] = os.environ[env_key]  # deprecated
 
     # Apply user supplied envs.
     ret.update(TEST_CONFIG["envs"])
@@ -226,17 +227,13 @@ def py(session: nox.sessions.Session) -> None:
 
 def _get_repo_root() -> Optional[str]:
     """Returns the root folder of the project."""
-    # Get root of this repository. Assume we don't have directories nested deeper than 10 items.
+    # Get root of this repository.
+    # Assume we don't have directories nested deeper than 10 items.
     p = Path(os.getcwd())
     for i in range(10):
         if p is None:
             break
         if Path(p / ".git").exists():
-            return str(p)
-        # .git is not available in repos cloned via Cloud Build
-        # setup.py is always in the library's root, so use that instead
-        # https://github.com/googleapis/synthtool/issues/792
-        if Path(p / "setup.py").exists():
             return str(p)
         p = p.parent
     raise Exception("Unable to detect repository root.")
