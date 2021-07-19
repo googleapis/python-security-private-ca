@@ -47,8 +47,3 @@ def list_ca_pools(project_id: str, location: str) -> None:
 
 # [END privateca_list_ca_pool]
 
-if __name__ == "__main__":
-    list_ca_pools(
-        project_id=sys.argv[1],
-        location=sys.argv[2],
-    )

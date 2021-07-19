@@ -42,10 +42,3 @@ def list_certificate_authorities(
 
 
 # [END privateca_list_ca]
-
-if __name__ == "__main__":
-    list_certificate_authorities(
-        project_id=sys.argv[1],
-        location=sys.argv[2],
-        ca_pool_name=sys.argv[3],
-    )

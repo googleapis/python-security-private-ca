@@ -97,14 +97,3 @@ def create_certificate_authority(
 
 
 # [END privateca_create_ca]
-
-if __name__ == "__main__":
-    create_certificate_authority(
-        project_id=sys.argv[1],
-        location=sys.argv[2],
-        ca_pool_name=sys.argv[3],
-        ca_name=sys.argv[4],
-        common_name=sys.argv[5],
-        organization=sys.argv[6],
-        ca_duration=int(sys.argv[7]),
-    )

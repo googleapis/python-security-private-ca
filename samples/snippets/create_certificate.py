@@ -116,18 +116,3 @@ def create_certificate(
 
 # [END privateca_create_certificate]
 
-if __name__ == "__main__":
-    create_certificate(
-        project_id=sys.argv[1],
-        location=sys.argv[2],
-        ca_pool_name=sys.argv[3],
-        ca_name=sys.argv[4],
-        certificate_name=sys.argv[5],
-        kms_location=sys.argv[6],
-        key_ring_id=sys.argv[7],
-        key_id=sys.argv[8],
-        key_version_id=sys.argv[9],
-        common_name=sys.argv[10],
-        domain_name=sys.argv[11],
-        certificate_lifetime=int(sys.argv[12]),
-    )

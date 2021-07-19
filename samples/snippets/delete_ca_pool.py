@@ -45,11 +45,3 @@ def delete_ca_pool(project_id: str, location: str, ca_pool_name: str) -> None:
 
 
 # [END privateca_delete_ca_pool]
-
-
-if __name__ == "__main__":
-    delete_ca_pool(
-        project_id=sys.argv[1],
-        location=sys.argv[2],
-        ca_pool_name=sys.argv[3],
-    )

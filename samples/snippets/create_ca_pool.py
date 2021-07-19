@@ -53,10 +53,3 @@ def create_ca_pool(project_id: str, location: str, ca_pool_name: str) -> None:
 
 
 # [END privateca_create_ca_pool]
-
-if __name__ == "__main__":
-    create_ca_pool(
-        project_id=sys.argv[1],
-        location=sys.argv[2],
-        ca_pool_name=sys.argv[3],
-    )
