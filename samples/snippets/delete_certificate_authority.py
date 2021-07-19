@@ -49,7 +49,7 @@ def delete_certificate_authority(
         )
 
     # Create the DeleteCertificateAuthorityRequest.
-    # Setting the ignore_active_certificates to True, will delete the CA
+    # Setting the ignore_active_certificates to True will delete the CA
     # even if it contains active certificates. Care should be taken to re-anchor
     # the certificates to new CA before deleting.
     request = privateca_v1.DeleteCertificateAuthorityRequest(

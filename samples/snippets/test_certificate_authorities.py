@@ -57,14 +57,11 @@ def test_create_certificate(capsys: typing.Any) -> None:
     delete_ca_pool(PROJECT, LOCATION, CA_POOL_NAME)
 
 
-def test_enable_and_disable_certificate_authority(capsys: typing.Any) -> None:
-    CA_POOL_NAME = generate_name()
-    CA_NAME = generate_name()
+def test_enable_and_disable_certificate_authority(
+    certificate_authority, capsys: typing.Any
+) -> None:
+    CA_POOL_NAME, CA_NAME = certificate_authority
 
-    create_ca_pool(PROJECT, LOCATION, CA_POOL_NAME)
-    create_certificate_authority(
-        PROJECT, LOCATION, CA_POOL_NAME, CA_NAME, COMMON_NAME, ORGANIZATION, CA_DURATION
-    )
     enable_certificate_authority(PROJECT, LOCATION, CA_POOL_NAME, CA_NAME)
     disable_certificate_authority(PROJECT, LOCATION, CA_POOL_NAME, CA_NAME)
 
@@ -78,9 +75,6 @@ def test_enable_and_disable_certificate_authority(capsys: typing.Any) -> None:
         f"Disabled Certificate Authority: {CA_NAME}",
         out,
     )
-
-    delete_certificate_authority(PROJECT, LOCATION, CA_POOL_NAME, CA_NAME)
-    delete_ca_pool(PROJECT, LOCATION, CA_POOL_NAME)
 
 
 def test_delete_certificate_authority(capsys: typing.Any) -> None:

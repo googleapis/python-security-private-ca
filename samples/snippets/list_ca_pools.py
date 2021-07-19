@@ -42,7 +42,7 @@ def list_ca_pools(project_id: str, location: str) -> None:
         # ca_pool.name represents the full resource name of the
         # format 'projects/{project-id}/locations/{location}/ca-pools/{ca-pool-name}'.
         # Hence stripping it down to just pool name.
-        print(ca_pool_name[ca_pool_name.rindex("/") + 1 :])
+        print(caServiceClient.parse_ca_pool_path(ca_pool_name)["ca_pool"])
 
 
 # [END privateca_list_ca_pool]

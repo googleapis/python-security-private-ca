@@ -27,10 +27,10 @@ LOCATION = "europe-west1"
 
 
 def generate_name() -> str:
-    return "i" + uuid.uuid4().hex[:10]
+    return "test-" + uuid.uuid4().hex[:10]
 
 
-def test_create_ca_pool(capsys: typing.Any) -> None:
+def test_create_ca_pool(ca_pool, capsys: typing.Any) -> None:
     CA_POOL_NAME = generate_name()
 
     create_ca_pool(PROJECT, LOCATION, CA_POOL_NAME)
