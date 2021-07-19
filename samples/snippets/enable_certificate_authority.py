@@ -14,8 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
-
 # [START privateca_enable_ca]
 import google.cloud.security.privateca_v1 as privateca_v1
 

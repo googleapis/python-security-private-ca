@@ -14,8 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
-
 # [START privateca_disable_ca]
 import google.cloud.security.privateca_v1 as privateca_v1
 
@@ -58,4 +56,3 @@ def disable_certificate_authority(
 
 
 # [END privateca_disable_ca]
-
