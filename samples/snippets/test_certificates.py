@@ -83,7 +83,7 @@ def test_create_and_revoke_certificate_authority(
     )
 
     # Wait while crypto key is generating
-    time.sleep(15)
+    time.sleep(30)
 
     create_certificate(
         PROJECT,
