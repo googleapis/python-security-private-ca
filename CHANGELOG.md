@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/python-security-private-ca/compare/v1.0.2...v1.1.0) (2021-07-29)
+
+
+### Features
+
+* add Samples section to CONTRIBUTING.rst ([#84](https://www.github.com/googleapis/python-security-private-ca/issues/84)) ([305dc83](https://www.github.com/googleapis/python-security-private-ca/commit/305dc83eec5215fd84a63e5786d8c93b03c468b8))
+* **samples:** private CA python samples ([d753667](https://www.github.com/googleapis/python-security-private-ca/commit/d753667bc3a193931893260cec33d0c68ab621d5))
+
+
+### Bug Fixes
+
+* enable self signed jwt for grpc ([#91](https://www.github.com/googleapis/python-security-private-ca/issues/91)) ([674dd85](https://www.github.com/googleapis/python-security-private-ca/commit/674dd8595b9165fec92097d5bb168357ac7ab1ee))
+
 ### [1.0.2](https://www.github.com/googleapis/python-security-private-ca/compare/v1.0.1...v1.0.2) (2021-07-20)
 
 
