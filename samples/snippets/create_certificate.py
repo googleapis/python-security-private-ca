@@ -49,7 +49,7 @@ def create_certificate(
     caServiceClient = privateca_v1.CertificateAuthorityServiceClient()
 
     # The public key used to sign the certificate can be generated using any crypto library/framework.
-    # Also you can use Cloud KMS to retrieve an already created public key. 
+    # Also you can use Cloud KMS to retrieve an already created public key.
     # For more info, see: https://cloud.google.com/kms/docs/retrieve-public-key.
 
     # Set the Public Key and its format.
