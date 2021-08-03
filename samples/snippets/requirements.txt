@@ -1,3 +1,2 @@
 google-cloud-private-ca==1.0.3
 google-cloud-kms==2.4.3
-cryptography==3.4.7
