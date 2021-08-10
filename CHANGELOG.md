@@ -3,7 +3,7 @@
 ### [1.0.4](https://www.github.com/googleapis/python-security-private-ca/compare/v1.0.3...v1.0.4) (2021-08-10)
 
 
-### Features
+### Documentation
 
 * **samples:** add local generation for crypto keys ([#98](https://www.github.com/googleapis/python-security-private-ca/issues/98)) ([0668ffd](https://www.github.com/googleapis/python-security-private-ca/commit/0668ffde892bec99a4cd574bbc257fcc2de6c1c7))
 
