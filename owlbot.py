@@ -44,4 +44,10 @@ s.move(templated_files, excludes=[".coveragerc"]) # the microgenerator has a goo
 
 python.py_samples(skip_readmes=True)
 
+# Ignore warnings
+s.replace(
+    "noxfile.py",
+    """["']-W["'],  # warnings as errors""",
+    ""
+)
 s.shell.run(["nox", "-s", "blacken"], hide_output=False)
