@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/python-security-private-ca/compare/v1.0.6...v1.1.0) (2021-10-08)
+
+
+### Features
+
+* add context manager support in client ([#131](https://www.github.com/googleapis/python-security-private-ca/issues/131)) ([eb9fc8b](https://www.github.com/googleapis/python-security-private-ca/commit/eb9fc8b1a324505418ece9636e91d844e11845de))
+
+### [1.0.6](https://www.github.com/googleapis/python-security-private-ca/compare/v1.0.5...v1.0.6) (2021-09-30)
+
+
+### Bug Fixes
+
+* improper types in pagers generation ([f86ec89](https://www.github.com/googleapis/python-security-private-ca/commit/f86ec89f3c4537556188064606be005ee7feb056))
+
+### [1.0.5](https://www.github.com/googleapis/python-security-private-ca/compare/v1.0.4...v1.0.5) (2021-09-24)
+
+
+### Bug Fixes
+
+* add 'dict' annotation type to 'request' ([49b5c9a](https://www.github.com/googleapis/python-security-private-ca/commit/49b5c9ae54c594abf1a8158506e2a1ddb6dce67d))
+
 ### [1.0.4](https://www.github.com/googleapis/python-security-private-ca/compare/v1.0.3...v1.0.4) (2021-08-10)
 
 
