@@ -17,6 +17,7 @@ import re
 import typing
 import uuid
 
+import google.auth
 import google.cloud.security.privateca_v1 as privateca_v1
 
 from activate_subordinate_ca import activate_subordinate_ca
@@ -24,7 +25,7 @@ from create_certificate_csr import create_certificate_csr
 from create_subordinate_ca import create_subordinate_ca
 from revoke_certificate import revoke_certificate
 
-PROJECT = "diregapic-samples"
+PROJECT = google.auth.default()[1]
 LOCATION = "europe-west1"
 COMMON_NAME = "COMMON_NAME"
 ORGANIZATION = "ORGANIZATION"
