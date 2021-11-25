@@ -15,8 +15,6 @@
 # limitations under the License.
 
 # [START privateca_activate_subordinateca]
-import time
-
 import google.cloud.security.privateca_v1 as privateca_v1
 
 
@@ -29,8 +27,8 @@ def activate_subordinate_ca(
     ca_name: str,
 ) -> None:
     """
-    Activate a subordinate Certificate Authority.
-    *Prerequisite*: Get the CSR of the subordinate CA signed by another CA. Pass in the signed
+    Activate a subordinate Certificate Authority (CA).
+    *Prerequisite*: Get the Certificate Signing Resource (CSR) of the subordinate CA signed by another CA. Pass in the signed
     certificate and (issuer CA's name or the issuer CA's Certificate chain).
     *Post*: After activating the subordinate CA, it should be enabled before issuing certificates.
     Args:
@@ -44,13 +42,25 @@ def activate_subordinate_ca(
             then use the CA's issuerCertificateChain.
     """
 
-    caServiceClient = privateca_v1.CertificateAuthorityServiceClient()
+    ca_service_client = privateca_v1.CertificateAuthorityServiceClient()
 
-    subordinate_ca_path = caServiceClient.certificate_authority_path(
+    subordinate_ca_path = ca_service_client.certificate_authority_path(
         project_id, location, ca_pool_name, subordinate_ca_name
     )
-    ca_path = caServiceClient.certificate_authority_path(
+    ca_path = ca_service_client.certificate_authority_path(
         project_id, location, ca_pool_name, ca_name
+    )
+
+    # Set CA subordinate config.
+    subordinate_config = privateca_v1.SubordinateConfig(
+        # Follow one of the below methods:
+        # Method 1: If issuer CA is in Google Cloud, set the Certificate Authority Name.
+        certificate_authority=ca_path,
+        # Method 2: If issuer CA is external to Google Cloud, set the issuer's certificate chain.
+        # The certificate chain of the CA (which signed the CSR) from leaf to root.
+        # pem_issuer_chain=privateca_v1.SubordinateConfig.SubordinateConfigChain(
+        #     pem_certificates=issuer_certificate_chain,
+        # )
     )
 
     # Construct the "Activate CA Request".
@@ -58,29 +68,19 @@ def activate_subordinate_ca(
         name=subordinate_ca_path,
         # The signed certificate.
         pem_ca_certificate=pem_ca_certificate,
-        subordinate_config=privateca_v1.SubordinateConfig(
-            # Follow one of the below methods:
-            # Method 1: If issuer CA is in Google Cloud, set the Certificate Authority Name.
-            certificate_authority=ca_path,
-            # Method 2: If issuer CA is external to Google Cloud, set the issuer's certificate chain.
-            # The certificate chain of the CA (which signed the CSR) from leaf to root.
-            # pem_issuer_chain=privateca_v1.SubordinateConfig.SubordinateConfigChain(
-            #     pem_certificates=issuer_certificate_chain,
-            # )
-        ),
+        subordinate_config=subordinate_config,
     )
 
     # Activate the CA
-    operation = caServiceClient.activate_certificate_authority(request=request)
+    operation = ca_service_client.activate_certificate_authority(request=request)
     result = operation.result()
 
-    time.sleep(3)
     print("Operation result:", result)
 
     # The current state will be STAGED.
     # The Subordinate CA has to be ENABLED before issuing certificates.
     print(
-        f"Current state: {caServiceClient.get_certificate_authority(name=subordinate_ca_path).state}"
+        f"Current state: {ca_service_client.get_certificate_authority(name=subordinate_ca_path).state}"
     )
 
 

@@ -29,8 +29,8 @@ def create_certificate_csr(
     pem_csr: str,
 ) -> None:
     """
-    Create a Certificate which is issued by the specified Certificate Authority.
-    The certificate details and the public key is provided as a CSR (Certificate Signing Request).
+    Create a Certificate which is issued by the specified Certificate Authority (CA).
+    The certificate details and the public key is provided as a Certificate Signing Request (CSR).
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
         location: location you want to use. For a list of locations, see: https://cloud.google.com/certificate-authority-service/docs/locations.
@@ -41,7 +41,7 @@ def create_certificate_csr(
         pem_csr: set the Certificate Issuing Request in the pem encoded format.
     """
 
-    caServiceClient = privateca_v1.CertificateAuthorityServiceClient()
+    ca_service_client = privateca_v1.CertificateAuthorityServiceClient()
 
     # The public key used to sign the certificate can be generated using any crypto library/framework.
     # Also you can use Cloud KMS to retrieve an already created public key.
@@ -49,21 +49,21 @@ def create_certificate_csr(
 
     # Create certificate with CSR.
     # The pem_csr contains the public key and the domain details required.
-    certificate = certificate = privateca_v1.Certificate(
+    certificate = privateca_v1.Certificate(
         pem_csr=pem_csr, lifetime=duration_pb2.Duration(seconds=certificate_lifetime),
     )
 
     # Create the Certificate Request.
     # Set the CA which is responsible for creating the certificate with the provided CSR.
     request = privateca_v1.CreateCertificateRequest(
-        parent=caServiceClient.ca_pool_path(project_id, location, ca_pool_name),
+        parent=ca_service_client.ca_pool_path(project_id, location, ca_pool_name),
         certificate_id=certificate_name,
         certificate=certificate,
         issuing_certificate_authority_id=ca_name,
     )
-    response = caServiceClient.create_certificate(request=request)
+    response = ca_service_client.create_certificate(request=request)
 
-    print("Certificate created successfully: " + response.name)
+    print(f"Certificate created successfully: {response.name}")
 
     # Get the signed certificate and the issuer chain list.
     print(f"Signed certificate: {response.pem_certificate}")

@@ -30,7 +30,7 @@ def create_subordinate_ca(
     ca_duration: int,
 ) -> None:
     """
-    Create Certificate Authority which is the subordinate CA in the given CA Pool.
+    Create Certificate Authority (CA) which is the subordinate CA in the given CA Pool.
     Args:
         project_id: project ID or project number of the Cloud project you want to use.
         location: location you want to use. For a list of locations, see: https://cloud.google.com/certificate-authority-service/docs/locations.
@@ -42,7 +42,7 @@ def create_subordinate_ca(
         ca_duration: the validity of the certificate authority in seconds.
     """
 
-    caServiceClient = privateca_v1.CertificateAuthorityServiceClient()
+    ca_service_client = privateca_v1.CertificateAuthorityServiceClient()
 
     # Set the type of Algorithm
     key_version_spec = privateca_v1.CertificateAuthority.KeyVersionSpec(
@@ -79,7 +79,7 @@ def create_subordinate_ca(
         lifetime=duration_pb2.Duration(seconds=ca_duration),
     )
 
-    ca_pool_path = caServiceClient.ca_pool_path(project_id, location, ca_pool_name)
+    ca_pool_path = ca_service_client.ca_pool_path(project_id, location, ca_pool_name)
 
     # Create the CertificateAuthorityRequest.
     request = privateca_v1.CreateCertificateAuthorityRequest(
@@ -88,10 +88,10 @@ def create_subordinate_ca(
         certificate_authority=certificate_authority,
     )
 
-    operation = caServiceClient.create_certificate_authority(request=request)
+    operation = ca_service_client.create_certificate_authority(request=request)
     result = operation.result()
 
-    print("Operation result:", result)
+    print(f"Operation result: {result}")
 
 
 # [END privateca_create_subordinateca]
