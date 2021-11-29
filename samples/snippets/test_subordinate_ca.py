@@ -58,12 +58,12 @@ def test_subordinate_certificate_authority(
     )
 
     # 2. Fetch CSR of the given CA.
-    caServiceClient = privateca_v1.CertificateAuthorityServiceClient()
+    ca_service_client = privateca_v1.CertificateAuthorityServiceClient()
 
-    ca_path = caServiceClient.certificate_authority_path(
+    ca_path = ca_service_client.certificate_authority_path(
         PROJECT, LOCATION, CA_POOL_NAME, SUBORDINATE_CA_NAME
     )
-    response = caServiceClient.fetch_certificate_authority_csr(name=ca_path)
+    response = ca_service_client.fetch_certificate_authority_csr(name=ca_path)
     pem_csr = response.pem_csr
 
     # 3. Sign the CSR and create a certificate.
@@ -78,10 +78,10 @@ def test_subordinate_certificate_authority(
     )
 
     # 4. Get certificate PEM format
-    certificate_name = caServiceClient.certificate_path(
+    certificate_name = ca_service_client.certificate_path(
         PROJECT, LOCATION, CA_POOL_NAME, CSR_CERT_NAME
     )
-    pem_certificate = caServiceClient.get_certificate(
+    pem_certificate = ca_service_client.get_certificate(
         name=certificate_name
     ).pem_certificate
 
