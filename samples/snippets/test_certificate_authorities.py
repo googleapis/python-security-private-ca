@@ -24,6 +24,7 @@ from delete_ca_pool import delete_ca_pool
 from delete_certificate_authority import delete_certificate_authority
 from disable_certificate_authority import disable_certificate_authority
 from enable_certificate_authority import enable_certificate_authority
+from undelete_certificate_authority import undelete_certificate_authority
 
 
 PROJECT = google.auth.default()[1]
@@ -71,7 +72,7 @@ def test_enable_and_disable_certificate_authority(
     assert re.search(f"Disabled Certificate Authority: {CA_NAME}", out,)
 
 
-def test_delete_certificate_authority(capsys: typing.Any) -> None:
+def test_delete_undelete_certificate_authority(capsys: typing.Any) -> None:
     CA_POOL_NAME = generate_name()
     CA_NAME = generate_name()
 
@@ -80,8 +81,10 @@ def test_delete_certificate_authority(capsys: typing.Any) -> None:
         PROJECT, LOCATION, CA_POOL_NAME, CA_NAME, COMMON_NAME, ORGANIZATION, CA_DURATION
     )
     delete_certificate_authority(PROJECT, LOCATION, CA_POOL_NAME, CA_NAME)
+    undelete_certificate_authority(PROJECT, LOCATION, CA_POOL_NAME, CA_NAME)
+    delete_certificate_authority(PROJECT, LOCATION, CA_POOL_NAME, CA_NAME)
     delete_ca_pool(PROJECT, LOCATION, CA_POOL_NAME)
 
     out, _ = capsys.readouterr()
-
+    assert re.search(f"Successfully undeleted Certificate Authority: {CA_NAME}", out,)
     assert re.search(f"Successfully deleted Certificate Authority: {CA_NAME}", out,)
