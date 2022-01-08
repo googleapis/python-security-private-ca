@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/python-security-private-ca/compare/v1.2.1...v1.3.0) (2022-01-08)
+
+
+### Features
+
+* **samples:** add subordinate CA samples ([94b6801](https://www.github.com/googleapis/python-security-private-ca/commit/94b68019a4d9a83dcada4a01fb33599e3f71a283))
+
 ### [1.2.1](https://www.github.com/googleapis/python-security-private-ca/compare/v1.2.0...v1.2.1) (2021-11-02)
 
 
