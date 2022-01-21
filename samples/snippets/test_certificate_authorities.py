@@ -72,15 +72,11 @@ def test_enable_and_disable_certificate_authority(
     assert re.search(f"Disabled Certificate Authority: {CA_NAME}", out,)
 
 
-def test_delete_undelete_certificate_authority(capsys: typing.Any) -> None:
-    CA_POOL_NAME = generate_name()
-    CA_NAME = generate_name()
+def test_undelete_certificate_authority(
+    deleted_certificate_authority, capsys: typing.Any
+) -> None:
+    CA_POOL_NAME, CA_NAME = deleted_certificate_authority
 
-    create_ca_pool(PROJECT, LOCATION, CA_POOL_NAME)
-    create_certificate_authority(
-        PROJECT, LOCATION, CA_POOL_NAME, CA_NAME, COMMON_NAME, ORGANIZATION, CA_DURATION
-    )
-    delete_certificate_authority(PROJECT, LOCATION, CA_POOL_NAME, CA_NAME)
     undelete_certificate_authority(PROJECT, LOCATION, CA_POOL_NAME, CA_NAME)
     delete_certificate_authority(PROJECT, LOCATION, CA_POOL_NAME, CA_NAME)
     delete_ca_pool(PROJECT, LOCATION, CA_POOL_NAME)
