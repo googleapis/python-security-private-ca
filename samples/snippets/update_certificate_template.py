@@ -72,10 +72,10 @@ def update_certificate_template(
         not cert_identity_constraints.allow_subject_passthrough
         and cert_identity_constraints.allow_subject_alt_names_passthrough
     ):
-        print("Successfully updated the certificate template !")
+        print("Successfully updated the certificate template!")
         return
 
-    print("Error in updating certificate template !")
+    print("Error in updating certificate template!")
 
 
 # [END privateca_update_certificate_template]

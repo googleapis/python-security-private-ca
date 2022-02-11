@@ -62,7 +62,7 @@ def create_certificate_template(
         ),
     )
 
-    # Create Template Request.
+    # Request to create a certificate template.
     request = privateca_v1.CreateCertificateTemplateRequest(
         parent=caServiceClient.common_location_path(project_id, location),
         certificate_template=certificate_template,

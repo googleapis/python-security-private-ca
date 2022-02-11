@@ -32,7 +32,7 @@ def delete_certificate_template(
 
     caServiceClient = privateca_v1.CertificateAuthorityServiceClient()
 
-    # Delete Template Request.
+    # Request to delete a certificate template.
     request = privateca_v1.DeleteCertificateTemplateRequest(
         name=caServiceClient.certificate_template_path(
             project_id, location, certificate_template_id,

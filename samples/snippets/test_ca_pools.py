@@ -82,4 +82,4 @@ def test_update_ca_pool_issuance_policy(ca_pool, capsys: typing.Any) -> None:
 
     out, _ = capsys.readouterr()
 
-    assert "CA Pool Issuance policy has been updated successfully !" in out
+    assert "CA Pool Issuance policy has been updated successfully!" in out

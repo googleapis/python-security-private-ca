@@ -69,4 +69,4 @@ def test_update_certificate_template(certificate_template, capsys: typing.Any) -
 
     out, _ = capsys.readouterr()
 
-    assert "Successfully updated the certificate template !" in out
+    assert "Successfully updated the certificate template!" in out

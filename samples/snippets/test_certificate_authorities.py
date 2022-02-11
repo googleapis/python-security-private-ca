@@ -105,4 +105,4 @@ def test_create_monitor_ca_policy(capsys: typing.Any) -> None:
 
     out, _ = capsys.readouterr()
 
-    assert "Monitoring policy successfully created !" in out
+    assert "Monitoring policy successfully created!" in out

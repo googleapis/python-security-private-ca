@@ -24,7 +24,7 @@ def update_ca_pool_issuance_policy(
     project_id: str, location: str, ca_pool_name: str,
 ) -> None:
     """
-    Update the Issuance policy for a CA Pool. All certificates issued from this CA Pool should
+    Update the issuance policy for a CA Pool. All certificates issued from this CA Pool should
     meet the issuance policy
 
     Args:
@@ -83,10 +83,10 @@ def update_ca_pool_issuance_policy(
         issuance_policy.identity_constraints.allow_subject_passthrough
         and issuance_policy.identity_constraints.allow_subject_alt_names_passthrough
     ):
-        print("CA Pool Issuance policy has been updated successfully !")
+        print("CA Pool Issuance policy has been updated successfully!")
         return
 
-    print("Error in updating CA Pool Issuance policy ! Please try again !")
+    print("Error in updating CA Pool Issuance policy! Please try again!")
 
 
 # [END privateca_set_issuance_policy]

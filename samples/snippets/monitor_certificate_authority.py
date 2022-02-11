@@ -31,7 +31,7 @@ def create_ca_monitor_policy(project_id: str) -> None:
 
     # Query which indicates the resource to monitor and the constraints.
     # Here, the alert policy notifies you 30 days before a managed CA expires.
-    # For more info on creating queries, see: https://cloud.google.com/monitoring/mql/alerts
+    # For more information on creating queries, see: https://cloud.google.com/monitoring/mql/alerts
     query = (
         "fetch privateca.googleapis.com/CertificateAuthority"
         "| metric 'privateca.googleapis.com/ca/cert_chain_expiration'"
@@ -71,7 +71,7 @@ def create_ca_monitor_policy(project_id: str) -> None:
         alert_policy=alert_policy,
     )
 
-    print("Monitoring policy successfully created !", policy.name)
+    print("Monitoring policy successfully created!", policy.name)
 
 
 # [END privateca_monitor_ca_expiry]
