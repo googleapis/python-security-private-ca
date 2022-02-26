@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -257,7 +257,7 @@ class CertificateAuthorityServiceAsyncClient:
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -381,7 +381,7 @@ class CertificateAuthorityServiceAsyncClient:
         [Certificate][google.cloud.security.privateca.v1beta1.Certificate].
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -476,7 +476,7 @@ class CertificateAuthorityServiceAsyncClient:
         [Certificates][google.cloud.security.privateca.v1beta1.Certificate].
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -581,7 +581,7 @@ class CertificateAuthorityServiceAsyncClient:
         [Certificate][google.cloud.security.privateca.v1beta1.Certificate].
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -680,7 +680,7 @@ class CertificateAuthorityServiceAsyncClient:
         field.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -795,7 +795,7 @@ class CertificateAuthorityServiceAsyncClient:
         this method can complete the activation process.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -914,7 +914,7 @@ class CertificateAuthorityServiceAsyncClient:
         in a given Project and Location.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -1054,7 +1054,7 @@ class CertificateAuthorityServiceAsyncClient:
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -1165,7 +1165,7 @@ class CertificateAuthorityServiceAsyncClient:
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -1285,7 +1285,7 @@ class CertificateAuthorityServiceAsyncClient:
         [ActivateCertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthorityService.ActivateCertificateAuthority].
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -1379,7 +1379,7 @@ class CertificateAuthorityServiceAsyncClient:
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -1477,7 +1477,7 @@ class CertificateAuthorityServiceAsyncClient:
         [CertificateAuthorities][google.cloud.security.privateca.v1beta1.CertificateAuthority].
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -1582,7 +1582,7 @@ class CertificateAuthorityServiceAsyncClient:
         that is scheduled for deletion.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -1694,7 +1694,7 @@ class CertificateAuthorityServiceAsyncClient:
         for deletion.
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -1806,7 +1806,7 @@ class CertificateAuthorityServiceAsyncClient:
         [CertificateAuthority][google.cloud.security.privateca.v1beta1.CertificateAuthority].
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -1933,7 +1933,7 @@ class CertificateAuthorityServiceAsyncClient:
         [CertificateRevocationList][google.cloud.security.privateca.v1beta1.CertificateRevocationList].
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -2030,7 +2030,7 @@ class CertificateAuthorityServiceAsyncClient:
         [CertificateRevocationLists][google.cloud.security.privateca.v1beta1.CertificateRevocationList].
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -2136,7 +2136,7 @@ class CertificateAuthorityServiceAsyncClient:
         [CertificateRevocationList][google.cloud.security.privateca.v1beta1.CertificateRevocationList].
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -2260,7 +2260,7 @@ class CertificateAuthorityServiceAsyncClient:
         [ReusableConfig][google.cloud.security.privateca.v1beta1.ReusableConfig].
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
@@ -2355,7 +2355,7 @@ class CertificateAuthorityServiceAsyncClient:
         [ReusableConfigs][google.cloud.security.privateca.v1beta1.ReusableConfig].
 
 
-        .. code-block::
+        .. code-block:: python
 
             from google.cloud.security import privateca_v1beta1
 
