@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -530,7 +530,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_create_certificate():
                 # Create a client
@@ -659,7 +659,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_get_certificate():
                 # Create a client
@@ -759,7 +759,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_list_certificates():
                 # Create a client
@@ -872,7 +872,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_revoke_certificate():
                 # Create a client
@@ -976,7 +976,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_update_certificate():
                 # Create a client
@@ -1096,7 +1096,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_activate_certificate_authority():
                 # Create a client
@@ -1222,7 +1222,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_create_certificate_authority():
                 # Create a client
@@ -1369,7 +1369,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_disable_certificate_authority():
                 # Create a client
@@ -1487,7 +1487,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_enable_certificate_authority():
                 # Create a client
@@ -1614,7 +1614,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_fetch_certificate_authority_csr():
                 # Create a client
@@ -1715,7 +1715,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_get_certificate_authority():
                 # Create a client
@@ -1820,7 +1820,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_list_certificate_authorities():
                 # Create a client
@@ -1935,7 +1935,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_restore_certificate_authority():
                 # Create a client
@@ -2054,7 +2054,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_schedule_delete_certificate_authority():
                 # Create a client
@@ -2173,7 +2173,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_update_certificate_authority():
                 # Create a client
@@ -2307,7 +2307,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_get_certificate_revocation_list():
                 # Create a client
@@ -2411,7 +2411,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_list_certificate_revocation_lists():
                 # Create a client
@@ -2527,7 +2527,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_update_certificate_revocation_list():
                 # Create a client
@@ -2658,7 +2658,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_get_reusable_config():
                 # Create a client
@@ -2758,7 +2758,7 @@ class CertificateAuthorityServiceClient(
 
         .. code-block:: python
 
-            from google.cloud.security import privateca_v1beta1
+                    from google.cloud.security import privateca_v1beta1
 
             def sample_list_reusable_configs():
                 # Create a client
