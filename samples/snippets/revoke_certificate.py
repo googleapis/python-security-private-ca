@@ -16,9 +16,9 @@
 
 import sys
 
-# [START privateca_revoke_certificate]
-
 import google.cloud.security.privateca_v1 as privateca_v1
+
+# [START privateca_revoke_certificate]
 
 
 def revoke_certificate(
