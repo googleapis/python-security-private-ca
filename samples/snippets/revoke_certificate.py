@@ -16,9 +16,10 @@
 
 import sys
 
-import google.cloud.security.privateca_v1 as privateca_v1
-
+# isort: split
 # [START privateca_revoke_certificate]
+
+import google.cloud.security.privateca_v1 as privateca_v1
 
 
 def revoke_certificate(
