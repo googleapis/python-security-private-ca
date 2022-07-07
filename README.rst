@@ -3,7 +3,7 @@ Python Client for Private Certificate Authority API
 
 |stable| |pypi| |versions|
 
-`Private Certificate Authority API`_: 
+`Private Certificate Authority API`_: simplifies the deployment and management of private CAs without managing infrastructure.
 
 - `Client Library Documentation`_
 - `Product Documentation`_
