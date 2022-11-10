@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -68,7 +79,7 @@ class CertificateAuthorityServiceClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[CertificateAuthorityServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -418,7 +429,7 @@ class CertificateAuthorityServiceClient(
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, CertificateAuthorityServiceTransport, None] = None,
+        transport: Optional[Union[str, CertificateAuthorityServiceTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -516,13 +527,13 @@ class CertificateAuthorityServiceClient(
 
     def create_certificate(
         self,
-        request: Union[service.CreateCertificateRequest, dict] = None,
+        request: Optional[Union[service.CreateCertificateRequest, dict]] = None,
         *,
-        parent: str = None,
-        certificate: resources.Certificate = None,
-        certificate_id: str = None,
+        parent: Optional[str] = None,
+        certificate: Optional[resources.Certificate] = None,
+        certificate_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> resources.Certificate:
         r"""Create a new
@@ -655,11 +666,11 @@ class CertificateAuthorityServiceClient(
 
     def get_certificate(
         self,
-        request: Union[service.GetCertificateRequest, dict] = None,
+        request: Optional[Union[service.GetCertificateRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> resources.Certificate:
         r"""Returns a
@@ -761,11 +772,11 @@ class CertificateAuthorityServiceClient(
 
     def list_certificates(
         self,
-        request: Union[service.ListCertificatesRequest, dict] = None,
+        request: Optional[Union[service.ListCertificatesRequest, dict]] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListCertificatesPager:
         r"""Lists
@@ -880,11 +891,11 @@ class CertificateAuthorityServiceClient(
 
     def revoke_certificate(
         self,
-        request: Union[service.RevokeCertificateRequest, dict] = None,
+        request: Optional[Union[service.RevokeCertificateRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> resources.Certificate:
         r"""Revoke a
@@ -986,12 +997,12 @@ class CertificateAuthorityServiceClient(
 
     def update_certificate(
         self,
-        request: Union[service.UpdateCertificateRequest, dict] = None,
+        request: Optional[Union[service.UpdateCertificateRequest, dict]] = None,
         *,
-        certificate: resources.Certificate = None,
-        update_mask: field_mask_pb2.FieldMask = None,
+        certificate: Optional[resources.Certificate] = None,
+        update_mask: Optional[field_mask_pb2.FieldMask] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> resources.Certificate:
         r"""Update a
@@ -1108,11 +1119,13 @@ class CertificateAuthorityServiceClient(
 
     def activate_certificate_authority(
         self,
-        request: Union[service.ActivateCertificateAuthorityRequest, dict] = None,
+        request: Optional[
+            Union[service.ActivateCertificateAuthorityRequest, dict]
+        ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Activate a
@@ -1245,13 +1258,15 @@ class CertificateAuthorityServiceClient(
 
     def create_certificate_authority(
         self,
-        request: Union[service.CreateCertificateAuthorityRequest, dict] = None,
+        request: Optional[
+            Union[service.CreateCertificateAuthorityRequest, dict]
+        ] = None,
         *,
-        parent: str = None,
-        certificate_authority: resources.CertificateAuthority = None,
-        certificate_authority_id: str = None,
+        parent: Optional[str] = None,
+        certificate_authority: Optional[resources.CertificateAuthority] = None,
+        certificate_authority_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Create a new
@@ -1401,11 +1416,13 @@ class CertificateAuthorityServiceClient(
 
     def disable_certificate_authority(
         self,
-        request: Union[service.DisableCertificateAuthorityRequest, dict] = None,
+        request: Optional[
+            Union[service.DisableCertificateAuthorityRequest, dict]
+        ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Disable a
@@ -1525,11 +1542,13 @@ class CertificateAuthorityServiceClient(
 
     def enable_certificate_authority(
         self,
-        request: Union[service.EnableCertificateAuthorityRequest, dict] = None,
+        request: Optional[
+            Union[service.EnableCertificateAuthorityRequest, dict]
+        ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Enable a
@@ -1649,11 +1668,13 @@ class CertificateAuthorityServiceClient(
 
     def fetch_certificate_authority_csr(
         self,
-        request: Union[service.FetchCertificateAuthorityCsrRequest, dict] = None,
+        request: Optional[
+            Union[service.FetchCertificateAuthorityCsrRequest, dict]
+        ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> service.FetchCertificateAuthorityCsrResponse:
         r"""Fetch a certificate signing request (CSR) from a
@@ -1765,11 +1786,11 @@ class CertificateAuthorityServiceClient(
 
     def get_certificate_authority(
         self,
-        request: Union[service.GetCertificateAuthorityRequest, dict] = None,
+        request: Optional[Union[service.GetCertificateAuthorityRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> resources.CertificateAuthority:
         r"""Returns a
@@ -1876,11 +1897,13 @@ class CertificateAuthorityServiceClient(
 
     def list_certificate_authorities(
         self,
-        request: Union[service.ListCertificateAuthoritiesRequest, dict] = None,
+        request: Optional[
+            Union[service.ListCertificateAuthoritiesRequest, dict]
+        ] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListCertificateAuthoritiesPager:
         r"""Lists
@@ -1996,11 +2019,13 @@ class CertificateAuthorityServiceClient(
 
     def restore_certificate_authority(
         self,
-        request: Union[service.RestoreCertificateAuthorityRequest, dict] = None,
+        request: Optional[
+            Union[service.RestoreCertificateAuthorityRequest, dict]
+        ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Restore a
@@ -2121,11 +2146,13 @@ class CertificateAuthorityServiceClient(
 
     def schedule_delete_certificate_authority(
         self,
-        request: Union[service.ScheduleDeleteCertificateAuthorityRequest, dict] = None,
+        request: Optional[
+            Union[service.ScheduleDeleteCertificateAuthorityRequest, dict]
+        ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Schedule a
@@ -2246,12 +2273,14 @@ class CertificateAuthorityServiceClient(
 
     def update_certificate_authority(
         self,
-        request: Union[service.UpdateCertificateAuthorityRequest, dict] = None,
+        request: Optional[
+            Union[service.UpdateCertificateAuthorityRequest, dict]
+        ] = None,
         *,
-        certificate_authority: resources.CertificateAuthority = None,
-        update_mask: field_mask_pb2.FieldMask = None,
+        certificate_authority: Optional[resources.CertificateAuthority] = None,
+        update_mask: Optional[field_mask_pb2.FieldMask] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Update a
@@ -2387,11 +2416,13 @@ class CertificateAuthorityServiceClient(
 
     def get_certificate_revocation_list(
         self,
-        request: Union[service.GetCertificateRevocationListRequest, dict] = None,
+        request: Optional[
+            Union[service.GetCertificateRevocationListRequest, dict]
+        ] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> resources.CertificateRevocationList:
         r"""Returns a
@@ -2497,11 +2528,13 @@ class CertificateAuthorityServiceClient(
 
     def list_certificate_revocation_lists(
         self,
-        request: Union[service.ListCertificateRevocationListsRequest, dict] = None,
+        request: Optional[
+            Union[service.ListCertificateRevocationListsRequest, dict]
+        ] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListCertificateRevocationListsPager:
         r"""Lists
@@ -2618,12 +2651,16 @@ class CertificateAuthorityServiceClient(
 
     def update_certificate_revocation_list(
         self,
-        request: Union[service.UpdateCertificateRevocationListRequest, dict] = None,
+        request: Optional[
+            Union[service.UpdateCertificateRevocationListRequest, dict]
+        ] = None,
         *,
-        certificate_revocation_list: resources.CertificateRevocationList = None,
-        update_mask: field_mask_pb2.FieldMask = None,
+        certificate_revocation_list: Optional[
+            resources.CertificateRevocationList
+        ] = None,
+        update_mask: Optional[field_mask_pb2.FieldMask] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Update a
@@ -2756,11 +2793,11 @@ class CertificateAuthorityServiceClient(
 
     def get_reusable_config(
         self,
-        request: Union[service.GetReusableConfigRequest, dict] = None,
+        request: Optional[Union[service.GetReusableConfigRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> resources.ReusableConfig:
         r"""Returns a
@@ -2862,11 +2899,11 @@ class CertificateAuthorityServiceClient(
 
     def list_reusable_configs(
         self,
-        request: Union[service.ListReusableConfigsRequest, dict] = None,
+        request: Optional[Union[service.ListReusableConfigsRequest, dict]] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListReusableConfigsPager:
         r"""Lists
