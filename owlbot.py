@@ -36,6 +36,13 @@ for library in s.get_staging_dirs(default_version):
         shutil.rmtree("samples/generated_samples", ignore_errors=True)
         clean_up_generated_samples = False
     s.move([library], excludes=["**/gapic_version.py"])
+
+    # Remove replacement once this repository has migrated to google-cloud-python
+    s.replace(
+        "setup.py",
+        """url = \"https://github.com/googleapis/python-private-ca\"""",
+        """url = \"https://github.com/googleapis/python-security-private-ca\"""",
+    )
 s.remove_staging_dirs()
 
 # ----------------------------------------------------------------------------
