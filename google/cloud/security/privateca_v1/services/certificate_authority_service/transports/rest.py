@@ -14,29 +14,31 @@
 # limitations under the License.
 #
 
-from google.auth.transport.requests import AuthorizedSession  # type: ignore
-import json  # type: ignore
-import grpc  # type: ignore
-from google.auth.transport.grpc import SslCredentials  # type: ignore
-from google.auth import credentials as ga_credentials  # type: ignore
-from google.api_core import exceptions as core_exceptions
-from google.api_core import retry as retries
-from google.api_core import rest_helpers
-from google.api_core import rest_streaming
-from google.api_core import path_template
-from google.api_core import gapic_v1
-
-from google.protobuf import json_format
-from google.api_core import operations_v1
-from google.iam.v1 import iam_policy_pb2  # type: ignore
-from google.iam.v1 import policy_pb2  # type: ignore
-from google.cloud.location import locations_pb2 # type: ignore
-from google.longrunning import operations_pb2
-from requests import __version__ as requests_version
 import dataclasses
+import json  # type: ignore
 import re
 from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Union
 import warnings
+
+from google.api_core import (
+    gapic_v1,
+    operations_v1,
+    path_template,
+    rest_helpers,
+    rest_streaming,
+)
+from google.api_core import exceptions as core_exceptions
+from google.api_core import retry as retries
+from google.auth import credentials as ga_credentials  # type: ignore
+from google.auth.transport.grpc import SslCredentials  # type: ignore
+from google.auth.transport.requests import AuthorizedSession  # type: ignore
+from google.cloud.location import locations_pb2  # type: ignore
+from google.iam.v1 import iam_policy_pb2  # type: ignore
+from google.iam.v1 import policy_pb2  # type: ignore
+from google.longrunning import operations_pb2
+from google.protobuf import json_format
+import grpc  # type: ignore
+from requests import __version__ as requests_version
 
 try:
     OptionalRetry = Union[retries.Retry, gapic_v1.method._MethodDefault]
@@ -44,12 +46,12 @@ except AttributeError:  # pragma: NO COVER
     OptionalRetry = Union[retries.Retry, object]  # type: ignore
 
 
-from google.cloud.security.privateca_v1.types import resources
-from google.cloud.security.privateca_v1.types import service
 from google.longrunning import operations_pb2  # type: ignore
 
-from .base import CertificateAuthorityServiceTransport, DEFAULT_CLIENT_INFO as BASE_DEFAULT_CLIENT_INFO
+from google.cloud.security.privateca_v1.types import resources, service
 
+from .base import CertificateAuthorityServiceTransport
+from .base import DEFAULT_CLIENT_INFO as BASE_DEFAULT_CLIENT_INFO
 
 DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
     gapic_version=BASE_DEFAULT_CLIENT_INFO.gapic_version,
@@ -310,7 +312,12 @@ class CertificateAuthorityServiceRestInterceptor:
 
 
     """
-    def pre_activate_certificate_authority(self, request: service.ActivateCertificateAuthorityRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.ActivateCertificateAuthorityRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_activate_certificate_authority(
+        self,
+        request: service.ActivateCertificateAuthorityRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.ActivateCertificateAuthorityRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for activate_certificate_authority
 
         Override in a subclass to manipulate the request or metadata
@@ -318,7 +325,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_activate_certificate_authority(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_activate_certificate_authority(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for activate_certificate_authority
 
         Override in a subclass to manipulate the response
@@ -326,7 +335,10 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_create_ca_pool(self, request: service.CreateCaPoolRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.CreateCaPoolRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_create_ca_pool(
+        self, request: service.CreateCaPoolRequest, metadata: Sequence[Tuple[str, str]]
+    ) -> Tuple[service.CreateCaPoolRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for create_ca_pool
 
         Override in a subclass to manipulate the request or metadata
@@ -334,7 +346,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_create_ca_pool(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_create_ca_pool(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for create_ca_pool
 
         Override in a subclass to manipulate the response
@@ -342,7 +356,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_create_certificate(self, request: service.CreateCertificateRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.CreateCertificateRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_create_certificate(
+        self,
+        request: service.CreateCertificateRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.CreateCertificateRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for create_certificate
 
         Override in a subclass to manipulate the request or metadata
@@ -350,7 +369,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_create_certificate(self, response: resources.Certificate) -> resources.Certificate:
+    def post_create_certificate(
+        self, response: resources.Certificate
+    ) -> resources.Certificate:
         """Post-rpc interceptor for create_certificate
 
         Override in a subclass to manipulate the response
@@ -358,7 +379,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_create_certificate_authority(self, request: service.CreateCertificateAuthorityRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.CreateCertificateAuthorityRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_create_certificate_authority(
+        self,
+        request: service.CreateCertificateAuthorityRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.CreateCertificateAuthorityRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for create_certificate_authority
 
         Override in a subclass to manipulate the request or metadata
@@ -366,7 +392,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_create_certificate_authority(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_create_certificate_authority(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for create_certificate_authority
 
         Override in a subclass to manipulate the response
@@ -374,7 +402,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_create_certificate_template(self, request: service.CreateCertificateTemplateRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.CreateCertificateTemplateRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_create_certificate_template(
+        self,
+        request: service.CreateCertificateTemplateRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.CreateCertificateTemplateRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for create_certificate_template
 
         Override in a subclass to manipulate the request or metadata
@@ -382,7 +415,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_create_certificate_template(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_create_certificate_template(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for create_certificate_template
 
         Override in a subclass to manipulate the response
@@ -390,7 +425,10 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_delete_ca_pool(self, request: service.DeleteCaPoolRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.DeleteCaPoolRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_delete_ca_pool(
+        self, request: service.DeleteCaPoolRequest, metadata: Sequence[Tuple[str, str]]
+    ) -> Tuple[service.DeleteCaPoolRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for delete_ca_pool
 
         Override in a subclass to manipulate the request or metadata
@@ -398,7 +436,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_delete_ca_pool(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_delete_ca_pool(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for delete_ca_pool
 
         Override in a subclass to manipulate the response
@@ -406,7 +446,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_delete_certificate_authority(self, request: service.DeleteCertificateAuthorityRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.DeleteCertificateAuthorityRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_delete_certificate_authority(
+        self,
+        request: service.DeleteCertificateAuthorityRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.DeleteCertificateAuthorityRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for delete_certificate_authority
 
         Override in a subclass to manipulate the request or metadata
@@ -414,7 +459,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_delete_certificate_authority(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_delete_certificate_authority(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for delete_certificate_authority
 
         Override in a subclass to manipulate the response
@@ -422,7 +469,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_delete_certificate_template(self, request: service.DeleteCertificateTemplateRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.DeleteCertificateTemplateRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_delete_certificate_template(
+        self,
+        request: service.DeleteCertificateTemplateRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.DeleteCertificateTemplateRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for delete_certificate_template
 
         Override in a subclass to manipulate the request or metadata
@@ -430,7 +482,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_delete_certificate_template(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_delete_certificate_template(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for delete_certificate_template
 
         Override in a subclass to manipulate the response
@@ -438,7 +492,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_disable_certificate_authority(self, request: service.DisableCertificateAuthorityRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.DisableCertificateAuthorityRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_disable_certificate_authority(
+        self,
+        request: service.DisableCertificateAuthorityRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.DisableCertificateAuthorityRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for disable_certificate_authority
 
         Override in a subclass to manipulate the request or metadata
@@ -446,7 +505,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_disable_certificate_authority(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_disable_certificate_authority(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for disable_certificate_authority
 
         Override in a subclass to manipulate the response
@@ -454,7 +515,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_enable_certificate_authority(self, request: service.EnableCertificateAuthorityRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.EnableCertificateAuthorityRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_enable_certificate_authority(
+        self,
+        request: service.EnableCertificateAuthorityRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.EnableCertificateAuthorityRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for enable_certificate_authority
 
         Override in a subclass to manipulate the request or metadata
@@ -462,7 +528,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_enable_certificate_authority(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_enable_certificate_authority(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for enable_certificate_authority
 
         Override in a subclass to manipulate the response
@@ -470,7 +538,10 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_fetch_ca_certs(self, request: service.FetchCaCertsRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.FetchCaCertsRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_fetch_ca_certs(
+        self, request: service.FetchCaCertsRequest, metadata: Sequence[Tuple[str, str]]
+    ) -> Tuple[service.FetchCaCertsRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for fetch_ca_certs
 
         Override in a subclass to manipulate the request or metadata
@@ -478,7 +549,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_fetch_ca_certs(self, response: service.FetchCaCertsResponse) -> service.FetchCaCertsResponse:
+    def post_fetch_ca_certs(
+        self, response: service.FetchCaCertsResponse
+    ) -> service.FetchCaCertsResponse:
         """Post-rpc interceptor for fetch_ca_certs
 
         Override in a subclass to manipulate the response
@@ -486,7 +559,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_fetch_certificate_authority_csr(self, request: service.FetchCertificateAuthorityCsrRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.FetchCertificateAuthorityCsrRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_fetch_certificate_authority_csr(
+        self,
+        request: service.FetchCertificateAuthorityCsrRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.FetchCertificateAuthorityCsrRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for fetch_certificate_authority_csr
 
         Override in a subclass to manipulate the request or metadata
@@ -494,7 +572,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_fetch_certificate_authority_csr(self, response: service.FetchCertificateAuthorityCsrResponse) -> service.FetchCertificateAuthorityCsrResponse:
+    def post_fetch_certificate_authority_csr(
+        self, response: service.FetchCertificateAuthorityCsrResponse
+    ) -> service.FetchCertificateAuthorityCsrResponse:
         """Post-rpc interceptor for fetch_certificate_authority_csr
 
         Override in a subclass to manipulate the response
@@ -502,7 +582,10 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_get_ca_pool(self, request: service.GetCaPoolRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.GetCaPoolRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_get_ca_pool(
+        self, request: service.GetCaPoolRequest, metadata: Sequence[Tuple[str, str]]
+    ) -> Tuple[service.GetCaPoolRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for get_ca_pool
 
         Override in a subclass to manipulate the request or metadata
@@ -518,7 +601,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_get_certificate(self, request: service.GetCertificateRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.GetCertificateRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_get_certificate(
+        self,
+        request: service.GetCertificateRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.GetCertificateRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for get_certificate
 
         Override in a subclass to manipulate the request or metadata
@@ -526,7 +614,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_get_certificate(self, response: resources.Certificate) -> resources.Certificate:
+    def post_get_certificate(
+        self, response: resources.Certificate
+    ) -> resources.Certificate:
         """Post-rpc interceptor for get_certificate
 
         Override in a subclass to manipulate the response
@@ -534,7 +624,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_get_certificate_authority(self, request: service.GetCertificateAuthorityRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.GetCertificateAuthorityRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_get_certificate_authority(
+        self,
+        request: service.GetCertificateAuthorityRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.GetCertificateAuthorityRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for get_certificate_authority
 
         Override in a subclass to manipulate the request or metadata
@@ -542,7 +637,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_get_certificate_authority(self, response: resources.CertificateAuthority) -> resources.CertificateAuthority:
+    def post_get_certificate_authority(
+        self, response: resources.CertificateAuthority
+    ) -> resources.CertificateAuthority:
         """Post-rpc interceptor for get_certificate_authority
 
         Override in a subclass to manipulate the response
@@ -550,7 +647,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_get_certificate_revocation_list(self, request: service.GetCertificateRevocationListRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.GetCertificateRevocationListRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_get_certificate_revocation_list(
+        self,
+        request: service.GetCertificateRevocationListRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.GetCertificateRevocationListRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for get_certificate_revocation_list
 
         Override in a subclass to manipulate the request or metadata
@@ -558,7 +660,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_get_certificate_revocation_list(self, response: resources.CertificateRevocationList) -> resources.CertificateRevocationList:
+    def post_get_certificate_revocation_list(
+        self, response: resources.CertificateRevocationList
+    ) -> resources.CertificateRevocationList:
         """Post-rpc interceptor for get_certificate_revocation_list
 
         Override in a subclass to manipulate the response
@@ -566,7 +670,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_get_certificate_template(self, request: service.GetCertificateTemplateRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.GetCertificateTemplateRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_get_certificate_template(
+        self,
+        request: service.GetCertificateTemplateRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.GetCertificateTemplateRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for get_certificate_template
 
         Override in a subclass to manipulate the request or metadata
@@ -574,7 +683,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_get_certificate_template(self, response: resources.CertificateTemplate) -> resources.CertificateTemplate:
+    def post_get_certificate_template(
+        self, response: resources.CertificateTemplate
+    ) -> resources.CertificateTemplate:
         """Post-rpc interceptor for get_certificate_template
 
         Override in a subclass to manipulate the response
@@ -582,7 +693,10 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_list_ca_pools(self, request: service.ListCaPoolsRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.ListCaPoolsRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_list_ca_pools(
+        self, request: service.ListCaPoolsRequest, metadata: Sequence[Tuple[str, str]]
+    ) -> Tuple[service.ListCaPoolsRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for list_ca_pools
 
         Override in a subclass to manipulate the request or metadata
@@ -590,7 +704,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_list_ca_pools(self, response: service.ListCaPoolsResponse) -> service.ListCaPoolsResponse:
+    def post_list_ca_pools(
+        self, response: service.ListCaPoolsResponse
+    ) -> service.ListCaPoolsResponse:
         """Post-rpc interceptor for list_ca_pools
 
         Override in a subclass to manipulate the response
@@ -598,7 +714,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_list_certificate_authorities(self, request: service.ListCertificateAuthoritiesRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.ListCertificateAuthoritiesRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_list_certificate_authorities(
+        self,
+        request: service.ListCertificateAuthoritiesRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.ListCertificateAuthoritiesRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for list_certificate_authorities
 
         Override in a subclass to manipulate the request or metadata
@@ -606,7 +727,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_list_certificate_authorities(self, response: service.ListCertificateAuthoritiesResponse) -> service.ListCertificateAuthoritiesResponse:
+    def post_list_certificate_authorities(
+        self, response: service.ListCertificateAuthoritiesResponse
+    ) -> service.ListCertificateAuthoritiesResponse:
         """Post-rpc interceptor for list_certificate_authorities
 
         Override in a subclass to manipulate the response
@@ -614,7 +737,14 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_list_certificate_revocation_lists(self, request: service.ListCertificateRevocationListsRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.ListCertificateRevocationListsRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_list_certificate_revocation_lists(
+        self,
+        request: service.ListCertificateRevocationListsRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        service.ListCertificateRevocationListsRequest, Sequence[Tuple[str, str]]
+    ]:
         """Pre-rpc interceptor for list_certificate_revocation_lists
 
         Override in a subclass to manipulate the request or metadata
@@ -622,7 +752,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_list_certificate_revocation_lists(self, response: service.ListCertificateRevocationListsResponse) -> service.ListCertificateRevocationListsResponse:
+    def post_list_certificate_revocation_lists(
+        self, response: service.ListCertificateRevocationListsResponse
+    ) -> service.ListCertificateRevocationListsResponse:
         """Post-rpc interceptor for list_certificate_revocation_lists
 
         Override in a subclass to manipulate the response
@@ -630,7 +762,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_list_certificates(self, request: service.ListCertificatesRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.ListCertificatesRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_list_certificates(
+        self,
+        request: service.ListCertificatesRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.ListCertificatesRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for list_certificates
 
         Override in a subclass to manipulate the request or metadata
@@ -638,7 +775,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_list_certificates(self, response: service.ListCertificatesResponse) -> service.ListCertificatesResponse:
+    def post_list_certificates(
+        self, response: service.ListCertificatesResponse
+    ) -> service.ListCertificatesResponse:
         """Post-rpc interceptor for list_certificates
 
         Override in a subclass to manipulate the response
@@ -646,7 +785,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_list_certificate_templates(self, request: service.ListCertificateTemplatesRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.ListCertificateTemplatesRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_list_certificate_templates(
+        self,
+        request: service.ListCertificateTemplatesRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.ListCertificateTemplatesRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for list_certificate_templates
 
         Override in a subclass to manipulate the request or metadata
@@ -654,7 +798,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_list_certificate_templates(self, response: service.ListCertificateTemplatesResponse) -> service.ListCertificateTemplatesResponse:
+    def post_list_certificate_templates(
+        self, response: service.ListCertificateTemplatesResponse
+    ) -> service.ListCertificateTemplatesResponse:
         """Post-rpc interceptor for list_certificate_templates
 
         Override in a subclass to manipulate the response
@@ -662,7 +808,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_revoke_certificate(self, request: service.RevokeCertificateRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.RevokeCertificateRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_revoke_certificate(
+        self,
+        request: service.RevokeCertificateRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.RevokeCertificateRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for revoke_certificate
 
         Override in a subclass to manipulate the request or metadata
@@ -670,7 +821,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_revoke_certificate(self, response: resources.Certificate) -> resources.Certificate:
+    def post_revoke_certificate(
+        self, response: resources.Certificate
+    ) -> resources.Certificate:
         """Post-rpc interceptor for revoke_certificate
 
         Override in a subclass to manipulate the response
@@ -678,7 +831,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_undelete_certificate_authority(self, request: service.UndeleteCertificateAuthorityRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.UndeleteCertificateAuthorityRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_undelete_certificate_authority(
+        self,
+        request: service.UndeleteCertificateAuthorityRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.UndeleteCertificateAuthorityRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for undelete_certificate_authority
 
         Override in a subclass to manipulate the request or metadata
@@ -686,7 +844,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_undelete_certificate_authority(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_undelete_certificate_authority(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for undelete_certificate_authority
 
         Override in a subclass to manipulate the response
@@ -694,7 +854,10 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_update_ca_pool(self, request: service.UpdateCaPoolRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.UpdateCaPoolRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_update_ca_pool(
+        self, request: service.UpdateCaPoolRequest, metadata: Sequence[Tuple[str, str]]
+    ) -> Tuple[service.UpdateCaPoolRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for update_ca_pool
 
         Override in a subclass to manipulate the request or metadata
@@ -702,7 +865,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_update_ca_pool(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_update_ca_pool(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for update_ca_pool
 
         Override in a subclass to manipulate the response
@@ -710,7 +875,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_update_certificate(self, request: service.UpdateCertificateRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.UpdateCertificateRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_update_certificate(
+        self,
+        request: service.UpdateCertificateRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.UpdateCertificateRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for update_certificate
 
         Override in a subclass to manipulate the request or metadata
@@ -718,7 +888,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_update_certificate(self, response: resources.Certificate) -> resources.Certificate:
+    def post_update_certificate(
+        self, response: resources.Certificate
+    ) -> resources.Certificate:
         """Post-rpc interceptor for update_certificate
 
         Override in a subclass to manipulate the response
@@ -726,7 +898,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_update_certificate_authority(self, request: service.UpdateCertificateAuthorityRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.UpdateCertificateAuthorityRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_update_certificate_authority(
+        self,
+        request: service.UpdateCertificateAuthorityRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.UpdateCertificateAuthorityRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for update_certificate_authority
 
         Override in a subclass to manipulate the request or metadata
@@ -734,7 +911,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_update_certificate_authority(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_update_certificate_authority(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for update_certificate_authority
 
         Override in a subclass to manipulate the response
@@ -742,7 +921,14 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_update_certificate_revocation_list(self, request: service.UpdateCertificateRevocationListRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.UpdateCertificateRevocationListRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_update_certificate_revocation_list(
+        self,
+        request: service.UpdateCertificateRevocationListRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[
+        service.UpdateCertificateRevocationListRequest, Sequence[Tuple[str, str]]
+    ]:
         """Pre-rpc interceptor for update_certificate_revocation_list
 
         Override in a subclass to manipulate the request or metadata
@@ -750,7 +936,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_update_certificate_revocation_list(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_update_certificate_revocation_list(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for update_certificate_revocation_list
 
         Override in a subclass to manipulate the response
@@ -758,7 +946,12 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
-    def pre_update_certificate_template(self, request: service.UpdateCertificateTemplateRequest, metadata: Sequence[Tuple[str, str]]) -> Tuple[service.UpdateCertificateTemplateRequest, Sequence[Tuple[str, str]]]:
+
+    def pre_update_certificate_template(
+        self,
+        request: service.UpdateCertificateTemplateRequest,
+        metadata: Sequence[Tuple[str, str]],
+    ) -> Tuple[service.UpdateCertificateTemplateRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for update_certificate_template
 
         Override in a subclass to manipulate the request or metadata
@@ -766,7 +959,9 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_update_certificate_template(self, response: operations_pb2.Operation) -> operations_pb2.Operation:
+    def post_update_certificate_template(
+        self, response: operations_pb2.Operation
+    ) -> operations_pb2.Operation:
         """Post-rpc interceptor for update_certificate_template
 
         Override in a subclass to manipulate the response
@@ -776,7 +971,9 @@ class CertificateAuthorityServiceRestInterceptor:
         return response
 
     def pre_get_location(
-        self, request: locations_pb2.GetLocationRequest, metadata: Sequence[Tuple[str, str]]
+        self,
+        request: locations_pb2.GetLocationRequest,
+        metadata: Sequence[Tuple[str, str]],
     ) -> Tuple[locations_pb2.GetLocationRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for get_location
 
@@ -795,8 +992,11 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
+
     def pre_list_locations(
-        self, request: locations_pb2.ListLocationsRequest, metadata: Sequence[Tuple[str, str]]
+        self,
+        request: locations_pb2.ListLocationsRequest,
+        metadata: Sequence[Tuple[str, str]],
     ) -> Tuple[locations_pb2.ListLocationsRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for list_locations
 
@@ -815,8 +1015,11 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
+
     def pre_get_iam_policy(
-        self, request: iam_policy_pb2.GetIamPolicyRequest, metadata: Sequence[Tuple[str, str]]
+        self,
+        request: iam_policy_pb2.GetIamPolicyRequest,
+        metadata: Sequence[Tuple[str, str]],
     ) -> Tuple[iam_policy_pb2.GetIamPolicyRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for get_iam_policy
 
@@ -825,9 +1028,7 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_get_iam_policy(
-        self, response: policy_pb2.Policy
-    ) -> policy_pb2.Policy:
+    def post_get_iam_policy(self, response: policy_pb2.Policy) -> policy_pb2.Policy:
         """Post-rpc interceptor for get_iam_policy
 
         Override in a subclass to manipulate the response
@@ -835,8 +1036,11 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
+
     def pre_set_iam_policy(
-        self, request: iam_policy_pb2.SetIamPolicyRequest, metadata: Sequence[Tuple[str, str]]
+        self,
+        request: iam_policy_pb2.SetIamPolicyRequest,
+        metadata: Sequence[Tuple[str, str]],
     ) -> Tuple[iam_policy_pb2.SetIamPolicyRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for set_iam_policy
 
@@ -845,9 +1049,7 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_set_iam_policy(
-        self, response: policy_pb2.Policy
-    ) -> policy_pb2.Policy:
+    def post_set_iam_policy(self, response: policy_pb2.Policy) -> policy_pb2.Policy:
         """Post-rpc interceptor for set_iam_policy
 
         Override in a subclass to manipulate the response
@@ -855,8 +1057,11 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
+
     def pre_test_iam_permissions(
-        self, request: iam_policy_pb2.TestIamPermissionsRequest, metadata: Sequence[Tuple[str, str]]
+        self,
+        request: iam_policy_pb2.TestIamPermissionsRequest,
+        metadata: Sequence[Tuple[str, str]],
     ) -> Tuple[iam_policy_pb2.TestIamPermissionsRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for test_iam_permissions
 
@@ -875,8 +1080,11 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
+
     def pre_cancel_operation(
-        self, request: operations_pb2.CancelOperationRequest, metadata: Sequence[Tuple[str, str]]
+        self,
+        request: operations_pb2.CancelOperationRequest,
+        metadata: Sequence[Tuple[str, str]],
     ) -> Tuple[operations_pb2.CancelOperationRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for cancel_operation
 
@@ -885,9 +1093,7 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_cancel_operation(
-        self, response: None
-    ) -> None:
+    def post_cancel_operation(self, response: None) -> None:
         """Post-rpc interceptor for cancel_operation
 
         Override in a subclass to manipulate the response
@@ -895,8 +1101,11 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
+
     def pre_delete_operation(
-        self, request: operations_pb2.DeleteOperationRequest, metadata: Sequence[Tuple[str, str]]
+        self,
+        request: operations_pb2.DeleteOperationRequest,
+        metadata: Sequence[Tuple[str, str]],
     ) -> Tuple[operations_pb2.DeleteOperationRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for delete_operation
 
@@ -905,9 +1114,7 @@ class CertificateAuthorityServiceRestInterceptor:
         """
         return request, metadata
 
-    def post_delete_operation(
-        self, response: None
-    ) -> None:
+    def post_delete_operation(self, response: None) -> None:
         """Post-rpc interceptor for delete_operation
 
         Override in a subclass to manipulate the response
@@ -915,8 +1122,11 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
+
     def pre_get_operation(
-        self, request: operations_pb2.GetOperationRequest, metadata: Sequence[Tuple[str, str]]
+        self,
+        request: operations_pb2.GetOperationRequest,
+        metadata: Sequence[Tuple[str, str]],
     ) -> Tuple[operations_pb2.GetOperationRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for get_operation
 
@@ -935,8 +1145,11 @@ class CertificateAuthorityServiceRestInterceptor:
         it is returned to user code.
         """
         return response
+
     def pre_list_operations(
-        self, request: operations_pb2.ListOperationsRequest, metadata: Sequence[Tuple[str, str]]
+        self,
+        request: operations_pb2.ListOperationsRequest,
+        metadata: Sequence[Tuple[str, str]],
     ) -> Tuple[operations_pb2.ListOperationsRequest, Sequence[Tuple[str, str]]]:
         """Pre-rpc interceptor for list_operations
 
@@ -979,20 +1192,21 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
     """
 
-    def __init__(self, *,
-            host: str = 'privateca.googleapis.com',
-            credentials: Optional[ga_credentials.Credentials] = None,
-            credentials_file: Optional[str] = None,
-            scopes: Optional[Sequence[str]] = None,
-            client_cert_source_for_mtls: Optional[Callable[[
-                ], Tuple[bytes, bytes]]] = None,
-            quota_project_id: Optional[str] = None,
-            client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
-            always_use_jwt_access: Optional[bool] = False,
-            url_scheme: str = 'https',
-            interceptor: Optional[CertificateAuthorityServiceRestInterceptor] = None,
-            api_audience: Optional[str] = None,
-            ) -> None:
+    def __init__(
+        self,
+        *,
+        host: str = "privateca.googleapis.com",
+        credentials: Optional[ga_credentials.Credentials] = None,
+        credentials_file: Optional[str] = None,
+        scopes: Optional[Sequence[str]] = None,
+        client_cert_source_for_mtls: Optional[Callable[[], Tuple[bytes, bytes]]] = None,
+        quota_project_id: Optional[str] = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+        always_use_jwt_access: Optional[bool] = False,
+        url_scheme: str = "https",
+        interceptor: Optional[CertificateAuthorityServiceRestInterceptor] = None,
+        api_audience: Optional[str] = None,
+    ) -> None:
         """Instantiate the transport.
 
         Args:
@@ -1031,7 +1245,9 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         # credentials object
         maybe_url_match = re.match("^(?P<scheme>http(?:s)?://)?(?P<host>.*)$", host)
         if maybe_url_match is None:
-            raise ValueError(f"Unexpected hostname structure: {host}")  # pragma: NO COVER
+            raise ValueError(
+                f"Unexpected hostname structure: {host}"
+            )  # pragma: NO COVER
 
         url_match_items = maybe_url_match.groupdict()
 
@@ -1042,10 +1258,11 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
             credentials=credentials,
             client_info=client_info,
             always_use_jwt_access=always_use_jwt_access,
-            api_audience=api_audience
+            api_audience=api_audience,
         )
         self._session = AuthorizedSession(
-            self._credentials, default_host=self.DEFAULT_HOST)
+            self._credentials, default_host=self.DEFAULT_HOST
+        )
         self._operations_client: Optional[operations_v1.AbstractOperationsClient] = None
         if client_cert_source_for_mtls:
             self._session.configure_mtls_channel(client_cert_source_for_mtls)
@@ -1062,42 +1279,45 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         # Only create a new client if we do not already have one.
         if self._operations_client is None:
             http_options: Dict[str, List[Dict[str, str]]] = {
-                'google.longrunning.Operations.CancelOperation': [
+                "google.longrunning.Operations.CancelOperation": [
                     {
-                        'method': 'post',
-                        'uri': '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-                        'body': '*',
+                        "method": "post",
+                        "uri": "/v1/{name=projects/*/locations/*/operations/*}:cancel",
+                        "body": "*",
                     },
                 ],
-                'google.longrunning.Operations.DeleteOperation': [
+                "google.longrunning.Operations.DeleteOperation": [
                     {
-                        'method': 'delete',
-                        'uri': '/v1/{name=projects/*/locations/*/operations/*}',
+                        "method": "delete",
+                        "uri": "/v1/{name=projects/*/locations/*/operations/*}",
                     },
                 ],
-                'google.longrunning.Operations.GetOperation': [
+                "google.longrunning.Operations.GetOperation": [
                     {
-                        'method': 'get',
-                        'uri': '/v1/{name=projects/*/locations/*/operations/*}',
+                        "method": "get",
+                        "uri": "/v1/{name=projects/*/locations/*/operations/*}",
                     },
                 ],
-                'google.longrunning.Operations.ListOperations': [
+                "google.longrunning.Operations.ListOperations": [
                     {
-                        'method': 'get',
-                        'uri': '/v1/{name=projects/*/locations/*}/operations',
+                        "method": "get",
+                        "uri": "/v1/{name=projects/*/locations/*}/operations",
                     },
                 ],
             }
 
             rest_transport = operations_v1.OperationsRestTransport(
-                    host=self._host,
-                    # use the credentials which are saved
-                    credentials=self._credentials,
-                    scopes=self._scopes,
-                    http_options=http_options,
-                    path_prefix="v1")
+                host=self._host,
+                # use the credentials which are saved
+                credentials=self._credentials,
+                scopes=self._scopes,
+                http_options=http_options,
+                path_prefix="v1",
+            )
 
-            self._operations_client = operations_v1.AbstractOperationsClient(transport=rest_transport)
+            self._operations_client = operations_v1.AbstractOperationsClient(
+                transport=rest_transport
+            )
 
         # Return the client from cache.
         return self._operations_client
@@ -1106,81 +1326,91 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("ActivateCertificateAuthority")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.ActivateCertificateAuthorityRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: service.ActivateCertificateAuthorityRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the activate certificate
-        authority method over HTTP.
+            authority method over HTTP.
 
-            Args:
-                request (~.service.ActivateCertificateAuthorityRequest):
-                    The request object. Request message for
-                [CertificateAuthorityService.ActivateCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.ActivateCertificateAuthority].
+                Args:
+                    request (~.service.ActivateCertificateAuthorityRequest):
+                        The request object. Request message for
+                    [CertificateAuthorityService.ActivateCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.ActivateCertificateAuthority].
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.operations_pb2.Operation:
-                    This resource represents a
-                long-running operation that is the
-                result of a network API call.
+                Returns:
+                    ~.operations_pb2.Operation:
+                        This resource represents a
+                    long-running operation that is the
+                    result of a network API call.
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{name=projects/*/locations/*/caPools/*/certificateAuthorities/*}:activate',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{name=projects/*/locations/*/caPools/*/certificateAuthorities/*}:activate",
+                    "body": "*",
+                },
             ]
-            request, metadata = self._interceptor.pre_activate_certificate_authority(request, metadata)
+            request, metadata = self._interceptor.pre_activate_certificate_authority(
+                request, metadata
+            )
             pb_request = service.ActivateCertificateAuthorityRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1197,19 +1427,26 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("CreateCaPool")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-            "caPoolId" : "",        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
+            "caPoolId": "",
+        }
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.CreateCaPoolRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: service.CreateCaPoolRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the create ca pool method over HTTP.
 
             Args:
@@ -1231,11 +1468,12 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{parent=projects/*/locations/*}/caPools',
-                'body': 'ca_pool',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{parent=projects/*/locations/*}/caPools",
+                    "body": "ca_pool",
+                },
             ]
             request, metadata = self._interceptor.pre_create_ca_pool(request, metadata)
             pb_request = service.CreateCaPoolRequest.pb(request)
@@ -1244,33 +1482,35 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1287,19 +1527,24 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("CreateCertificate")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.CreateCertificateRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> resources.Certificate:
+        def __call__(
+            self,
+            request: service.CreateCertificateRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> resources.Certificate:
             r"""Call the create certificate method over HTTP.
 
             Args:
@@ -1322,46 +1567,51 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{parent=projects/*/locations/*/caPools/*}/certificates',
-                'body': 'certificate',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{parent=projects/*/locations/*/caPools/*}/certificates",
+                    "body": "certificate",
+                },
             ]
-            request, metadata = self._interceptor.pre_create_certificate(request, metadata)
+            request, metadata = self._interceptor.pre_create_certificate(
+                request, metadata
+            )
             pb_request = service.CreateCertificateRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1380,81 +1630,93 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("CreateCertificateAuthority")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-            "certificateAuthorityId" : "",        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
+            "certificateAuthorityId": "",
+        }
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.CreateCertificateAuthorityRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: service.CreateCertificateAuthorityRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the create certificate
-        authority method over HTTP.
+            authority method over HTTP.
 
-            Args:
-                request (~.service.CreateCertificateAuthorityRequest):
-                    The request object. Request message for
-                [CertificateAuthorityService.CreateCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.CreateCertificateAuthority].
+                Args:
+                    request (~.service.CreateCertificateAuthorityRequest):
+                        The request object. Request message for
+                    [CertificateAuthorityService.CreateCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.CreateCertificateAuthority].
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.operations_pb2.Operation:
-                    This resource represents a
-                long-running operation that is the
-                result of a network API call.
+                Returns:
+                    ~.operations_pb2.Operation:
+                        This resource represents a
+                    long-running operation that is the
+                    result of a network API call.
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{parent=projects/*/locations/*/caPools/*}/certificateAuthorities',
-                'body': 'certificate_authority',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{parent=projects/*/locations/*/caPools/*}/certificateAuthorities",
+                    "body": "certificate_authority",
+                },
             ]
-            request, metadata = self._interceptor.pre_create_certificate_authority(request, metadata)
+            request, metadata = self._interceptor.pre_create_certificate_authority(
+                request, metadata
+            )
             pb_request = service.CreateCertificateAuthorityRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1471,81 +1733,93 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("CreateCertificateTemplate")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-            "certificateTemplateId" : "",        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
+            "certificateTemplateId": "",
+        }
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.CreateCertificateTemplateRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: service.CreateCertificateTemplateRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the create certificate
-        template method over HTTP.
+            template method over HTTP.
 
-            Args:
-                request (~.service.CreateCertificateTemplateRequest):
-                    The request object. Request message for
-                [CertificateAuthorityService.CreateCertificateTemplate][google.cloud.security.privateca.v1.CertificateAuthorityService.CreateCertificateTemplate].
+                Args:
+                    request (~.service.CreateCertificateTemplateRequest):
+                        The request object. Request message for
+                    [CertificateAuthorityService.CreateCertificateTemplate][google.cloud.security.privateca.v1.CertificateAuthorityService.CreateCertificateTemplate].
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.operations_pb2.Operation:
-                    This resource represents a
-                long-running operation that is the
-                result of a network API call.
+                Returns:
+                    ~.operations_pb2.Operation:
+                        This resource represents a
+                    long-running operation that is the
+                    result of a network API call.
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{parent=projects/*/locations/*}/certificateTemplates',
-                'body': 'certificate_template',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{parent=projects/*/locations/*}/certificateTemplates",
+                    "body": "certificate_template",
+                },
             ]
-            request, metadata = self._interceptor.pre_create_certificate_template(request, metadata)
+            request, metadata = self._interceptor.pre_create_certificate_template(
+                request, metadata
+            )
             pb_request = service.CreateCertificateTemplateRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1562,19 +1836,24 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("DeleteCaPool")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.DeleteCaPoolRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: service.DeleteCaPoolRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the delete ca pool method over HTTP.
 
             Args:
@@ -1596,37 +1875,40 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'delete',
-                'uri': '/v1/{name=projects/*/locations/*/caPools/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "delete",
+                    "uri": "/v1/{name=projects/*/locations/*/caPools/*}",
+                },
             ]
             request, metadata = self._interceptor.pre_delete_ca_pool(request, metadata)
             pb_request = service.DeleteCaPoolRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1643,72 +1925,82 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("DeleteCertificateAuthority")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.DeleteCertificateAuthorityRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: service.DeleteCertificateAuthorityRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the delete certificate
-        authority method over HTTP.
+            authority method over HTTP.
 
-            Args:
-                request (~.service.DeleteCertificateAuthorityRequest):
-                    The request object. Request message for
-                [CertificateAuthorityService.DeleteCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.DeleteCertificateAuthority].
+                Args:
+                    request (~.service.DeleteCertificateAuthorityRequest):
+                        The request object. Request message for
+                    [CertificateAuthorityService.DeleteCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.DeleteCertificateAuthority].
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.operations_pb2.Operation:
-                    This resource represents a
-                long-running operation that is the
-                result of a network API call.
+                Returns:
+                    ~.operations_pb2.Operation:
+                        This resource represents a
+                    long-running operation that is the
+                    result of a network API call.
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'delete',
-                'uri': '/v1/{name=projects/*/locations/*/caPools/*/certificateAuthorities/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "delete",
+                    "uri": "/v1/{name=projects/*/locations/*/caPools/*/certificateAuthorities/*}",
+                },
             ]
-            request, metadata = self._interceptor.pre_delete_certificate_authority(request, metadata)
+            request, metadata = self._interceptor.pre_delete_certificate_authority(
+                request, metadata
+            )
             pb_request = service.DeleteCertificateAuthorityRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1725,72 +2017,82 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("DeleteCertificateTemplate")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.DeleteCertificateTemplateRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: service.DeleteCertificateTemplateRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the delete certificate
-        template method over HTTP.
+            template method over HTTP.
 
-            Args:
-                request (~.service.DeleteCertificateTemplateRequest):
-                    The request object. Request message for
-                [CertificateAuthorityService.DeleteCertificateTemplate][google.cloud.security.privateca.v1.CertificateAuthorityService.DeleteCertificateTemplate].
+                Args:
+                    request (~.service.DeleteCertificateTemplateRequest):
+                        The request object. Request message for
+                    [CertificateAuthorityService.DeleteCertificateTemplate][google.cloud.security.privateca.v1.CertificateAuthorityService.DeleteCertificateTemplate].
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.operations_pb2.Operation:
-                    This resource represents a
-                long-running operation that is the
-                result of a network API call.
+                Returns:
+                    ~.operations_pb2.Operation:
+                        This resource represents a
+                    long-running operation that is the
+                    result of a network API call.
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'delete',
-                'uri': '/v1/{name=projects/*/locations/*/certificateTemplates/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "delete",
+                    "uri": "/v1/{name=projects/*/locations/*/certificateTemplates/*}",
+                },
             ]
-            request, metadata = self._interceptor.pre_delete_certificate_template(request, metadata)
+            request, metadata = self._interceptor.pre_delete_certificate_template(
+                request, metadata
+            )
             pb_request = service.DeleteCertificateTemplateRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1807,81 +2109,91 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("DisableCertificateAuthority")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.DisableCertificateAuthorityRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: service.DisableCertificateAuthorityRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the disable certificate
-        authority method over HTTP.
+            authority method over HTTP.
 
-            Args:
-                request (~.service.DisableCertificateAuthorityRequest):
-                    The request object. Request message for
-                [CertificateAuthorityService.DisableCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.DisableCertificateAuthority].
+                Args:
+                    request (~.service.DisableCertificateAuthorityRequest):
+                        The request object. Request message for
+                    [CertificateAuthorityService.DisableCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.DisableCertificateAuthority].
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.operations_pb2.Operation:
-                    This resource represents a
-                long-running operation that is the
-                result of a network API call.
+                Returns:
+                    ~.operations_pb2.Operation:
+                        This resource represents a
+                    long-running operation that is the
+                    result of a network API call.
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{name=projects/*/locations/*/caPools/*/certificateAuthorities/*}:disable',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{name=projects/*/locations/*/caPools/*/certificateAuthorities/*}:disable",
+                    "body": "*",
+                },
             ]
-            request, metadata = self._interceptor.pre_disable_certificate_authority(request, metadata)
+            request, metadata = self._interceptor.pre_disable_certificate_authority(
+                request, metadata
+            )
             pb_request = service.DisableCertificateAuthorityRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1898,81 +2210,91 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("EnableCertificateAuthority")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.EnableCertificateAuthorityRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: service.EnableCertificateAuthorityRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the enable certificate
-        authority method over HTTP.
+            authority method over HTTP.
 
-            Args:
-                request (~.service.EnableCertificateAuthorityRequest):
-                    The request object. Request message for
-                [CertificateAuthorityService.EnableCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.EnableCertificateAuthority].
+                Args:
+                    request (~.service.EnableCertificateAuthorityRequest):
+                        The request object. Request message for
+                    [CertificateAuthorityService.EnableCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.EnableCertificateAuthority].
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.operations_pb2.Operation:
-                    This resource represents a
-                long-running operation that is the
-                result of a network API call.
+                Returns:
+                    ~.operations_pb2.Operation:
+                        This resource represents a
+                    long-running operation that is the
+                    result of a network API call.
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{name=projects/*/locations/*/caPools/*/certificateAuthorities/*}:enable',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{name=projects/*/locations/*/caPools/*/certificateAuthorities/*}:enable",
+                    "body": "*",
+                },
             ]
-            request, metadata = self._interceptor.pre_enable_certificate_authority(request, metadata)
+            request, metadata = self._interceptor.pre_enable_certificate_authority(
+                request, metadata
+            )
             pb_request = service.EnableCertificateAuthorityRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -1989,19 +2311,24 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("FetchCaCerts")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.FetchCaCertsRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> service.FetchCaCertsResponse:
+        def __call__(
+            self,
+            request: service.FetchCaCertsRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> service.FetchCaCertsResponse:
             r"""Call the fetch ca certs method over HTTP.
 
             Args:
@@ -2022,11 +2349,12 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{ca_pool=projects/*/locations/*/caPools/*}:fetchCaCerts',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{ca_pool=projects/*/locations/*/caPools/*}:fetchCaCerts",
+                    "body": "*",
+                },
             ]
             request, metadata = self._interceptor.pre_fetch_ca_certs(request, metadata)
             pb_request = service.FetchCaCertsRequest.pb(request)
@@ -2035,33 +2363,35 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -2080,71 +2410,81 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("FetchCertificateAuthorityCsr")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.FetchCertificateAuthorityCsrRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> service.FetchCertificateAuthorityCsrResponse:
+        def __call__(
+            self,
+            request: service.FetchCertificateAuthorityCsrRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> service.FetchCertificateAuthorityCsrResponse:
             r"""Call the fetch certificate
-        authority csr method over HTTP.
+            authority csr method over HTTP.
 
-            Args:
-                request (~.service.FetchCertificateAuthorityCsrRequest):
-                    The request object. Request message for
-                [CertificateAuthorityService.FetchCertificateAuthorityCsr][google.cloud.security.privateca.v1.CertificateAuthorityService.FetchCertificateAuthorityCsr].
+                Args:
+                    request (~.service.FetchCertificateAuthorityCsrRequest):
+                        The request object. Request message for
+                    [CertificateAuthorityService.FetchCertificateAuthorityCsr][google.cloud.security.privateca.v1.CertificateAuthorityService.FetchCertificateAuthorityCsr].
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.service.FetchCertificateAuthorityCsrResponse:
-                    Response message for
-                [CertificateAuthorityService.FetchCertificateAuthorityCsr][google.cloud.security.privateca.v1.CertificateAuthorityService.FetchCertificateAuthorityCsr].
+                Returns:
+                    ~.service.FetchCertificateAuthorityCsrResponse:
+                        Response message for
+                    [CertificateAuthorityService.FetchCertificateAuthorityCsr][google.cloud.security.privateca.v1.CertificateAuthorityService.FetchCertificateAuthorityCsr].
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*/locations/*/caPools/*/certificateAuthorities/*}:fetch',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*/locations/*/caPools/*/certificateAuthorities/*}:fetch",
+                },
             ]
-            request, metadata = self._interceptor.pre_fetch_certificate_authority_csr(request, metadata)
+            request, metadata = self._interceptor.pre_fetch_certificate_authority_csr(
+                request, metadata
+            )
             pb_request = service.FetchCertificateAuthorityCsrRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -2163,19 +2503,24 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("GetCaPool")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.GetCaPoolRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> resources.CaPool:
+        def __call__(
+            self,
+            request: service.GetCaPoolRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> resources.CaPool:
             r"""Call the get ca pool method over HTTP.
 
             Args:
@@ -2203,37 +2548,40 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*/locations/*/caPools/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*/locations/*/caPools/*}",
+                },
             ]
             request, metadata = self._interceptor.pre_get_ca_pool(request, metadata)
             pb_request = service.GetCaPoolRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -2252,19 +2600,24 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("GetCertificate")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.GetCertificateRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> resources.Certificate:
+        def __call__(
+            self,
+            request: service.GetCertificateRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> resources.Certificate:
             r"""Call the get certificate method over HTTP.
 
             Args:
@@ -2287,37 +2640,40 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*/locations/*/caPools/*/certificates/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*/locations/*/caPools/*/certificates/*}",
+                },
             ]
             request, metadata = self._interceptor.pre_get_certificate(request, metadata)
             pb_request = service.GetCertificateRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -2336,19 +2692,24 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("GetCertificateAuthority")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.GetCertificateAuthorityRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> resources.CertificateAuthority:
+        def __call__(
+            self,
+            request: service.GetCertificateAuthorityRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> resources.CertificateAuthority:
             r"""Call the get certificate authority method over HTTP.
 
             Args:
@@ -2373,37 +2734,42 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*/locations/*/caPools/*/certificateAuthorities/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*/locations/*/caPools/*/certificateAuthorities/*}",
+                },
             ]
-            request, metadata = self._interceptor.pre_get_certificate_authority(request, metadata)
+            request, metadata = self._interceptor.pre_get_certificate_authority(
+                request, metadata
+            )
             pb_request = service.GetCertificateAuthorityRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -2422,74 +2788,84 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("GetCertificateRevocationList")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.GetCertificateRevocationListRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> resources.CertificateRevocationList:
+        def __call__(
+            self,
+            request: service.GetCertificateRevocationListRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> resources.CertificateRevocationList:
             r"""Call the get certificate
-        revocation list method over HTTP.
+            revocation list method over HTTP.
 
-            Args:
-                request (~.service.GetCertificateRevocationListRequest):
-                    The request object. Request message for
-                [CertificateAuthorityService.GetCertificateRevocationList][google.cloud.security.privateca.v1.CertificateAuthorityService.GetCertificateRevocationList].
+                Args:
+                    request (~.service.GetCertificateRevocationListRequest):
+                        The request object. Request message for
+                    [CertificateAuthorityService.GetCertificateRevocationList][google.cloud.security.privateca.v1.CertificateAuthorityService.GetCertificateRevocationList].
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.resources.CertificateRevocationList:
-                    A
-                [CertificateRevocationList][google.cloud.security.privateca.v1.CertificateRevocationList]
-                corresponds to a signed X.509 certificate Revocation
-                List (CRL). A CRL contains the serial numbers of
-                certificates that should no longer be trusted.
+                Returns:
+                    ~.resources.CertificateRevocationList:
+                        A
+                    [CertificateRevocationList][google.cloud.security.privateca.v1.CertificateRevocationList]
+                    corresponds to a signed X.509 certificate Revocation
+                    List (CRL). A CRL contains the serial numbers of
+                    certificates that should no longer be trusted.
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*/locations/*/caPools/*/certificateAuthorities/*/certificateRevocationLists/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*/locations/*/caPools/*/certificateAuthorities/*/certificateRevocationLists/*}",
+                },
             ]
-            request, metadata = self._interceptor.pre_get_certificate_revocation_list(request, metadata)
+            request, metadata = self._interceptor.pre_get_certificate_revocation_list(
+                request, metadata
+            )
             pb_request = service.GetCertificateRevocationListRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -2508,19 +2884,24 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("GetCertificateTemplate")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.GetCertificateTemplateRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> resources.CertificateTemplate:
+        def __call__(
+            self,
+            request: service.GetCertificateTemplateRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> resources.CertificateTemplate:
             r"""Call the get certificate template method over HTTP.
 
             Args:
@@ -2542,37 +2923,42 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*/locations/*/certificateTemplates/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*/locations/*/certificateTemplates/*}",
+                },
             ]
-            request, metadata = self._interceptor.pre_get_certificate_template(request, metadata)
+            request, metadata = self._interceptor.pre_get_certificate_template(
+                request, metadata
+            )
             pb_request = service.GetCertificateTemplateRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -2591,19 +2977,24 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("ListCaPools")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.ListCaPoolsRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> service.ListCaPoolsResponse:
+        def __call__(
+            self,
+            request: service.ListCaPoolsRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> service.ListCaPoolsResponse:
             r"""Call the list ca pools method over HTTP.
 
             Args:
@@ -2624,37 +3015,40 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{parent=projects/*/locations/*}/caPools',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{parent=projects/*/locations/*}/caPools",
+                },
             ]
             request, metadata = self._interceptor.pre_list_ca_pools(request, metadata)
             pb_request = service.ListCaPoolsRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -2673,71 +3067,81 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("ListCertificateAuthorities")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.ListCertificateAuthoritiesRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> service.ListCertificateAuthoritiesResponse:
+        def __call__(
+            self,
+            request: service.ListCertificateAuthoritiesRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> service.ListCertificateAuthoritiesResponse:
             r"""Call the list certificate
-        authorities method over HTTP.
+            authorities method over HTTP.
 
-            Args:
-                request (~.service.ListCertificateAuthoritiesRequest):
-                    The request object. Request message for
-                [CertificateAuthorityService.ListCertificateAuthorities][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateAuthorities].
+                Args:
+                    request (~.service.ListCertificateAuthoritiesRequest):
+                        The request object. Request message for
+                    [CertificateAuthorityService.ListCertificateAuthorities][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateAuthorities].
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.service.ListCertificateAuthoritiesResponse:
-                    Response message for
-                [CertificateAuthorityService.ListCertificateAuthorities][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateAuthorities].
+                Returns:
+                    ~.service.ListCertificateAuthoritiesResponse:
+                        Response message for
+                    [CertificateAuthorityService.ListCertificateAuthorities][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateAuthorities].
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{parent=projects/*/locations/*/caPools/*}/certificateAuthorities',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{parent=projects/*/locations/*/caPools/*}/certificateAuthorities",
+                },
             ]
-            request, metadata = self._interceptor.pre_list_certificate_authorities(request, metadata)
+            request, metadata = self._interceptor.pre_list_certificate_authorities(
+                request, metadata
+            )
             pb_request = service.ListCertificateAuthoritiesRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -2756,71 +3160,81 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("ListCertificateRevocationLists")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.ListCertificateRevocationListsRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> service.ListCertificateRevocationListsResponse:
+        def __call__(
+            self,
+            request: service.ListCertificateRevocationListsRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> service.ListCertificateRevocationListsResponse:
             r"""Call the list certificate
-        revocation lists method over HTTP.
+            revocation lists method over HTTP.
 
-            Args:
-                request (~.service.ListCertificateRevocationListsRequest):
-                    The request object. Request message for
-                [CertificateAuthorityService.ListCertificateRevocationLists][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateRevocationLists].
+                Args:
+                    request (~.service.ListCertificateRevocationListsRequest):
+                        The request object. Request message for
+                    [CertificateAuthorityService.ListCertificateRevocationLists][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateRevocationLists].
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.service.ListCertificateRevocationListsResponse:
-                    Response message for
-                [CertificateAuthorityService.ListCertificateRevocationLists][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateRevocationLists].
+                Returns:
+                    ~.service.ListCertificateRevocationListsResponse:
+                        Response message for
+                    [CertificateAuthorityService.ListCertificateRevocationLists][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateRevocationLists].
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{parent=projects/*/locations/*/caPools/*/certificateAuthorities/*}/certificateRevocationLists',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{parent=projects/*/locations/*/caPools/*/certificateAuthorities/*}/certificateRevocationLists",
+                },
             ]
-            request, metadata = self._interceptor.pre_list_certificate_revocation_lists(request, metadata)
+            request, metadata = self._interceptor.pre_list_certificate_revocation_lists(
+                request, metadata
+            )
             pb_request = service.ListCertificateRevocationListsRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -2839,19 +3253,24 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("ListCertificates")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.ListCertificatesRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> service.ListCertificatesResponse:
+        def __call__(
+            self,
+            request: service.ListCertificatesRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> service.ListCertificatesResponse:
             r"""Call the list certificates method over HTTP.
 
             Args:
@@ -2872,37 +3291,42 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{parent=projects/*/locations/*/caPools/*}/certificates',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{parent=projects/*/locations/*/caPools/*}/certificates",
+                },
             ]
-            request, metadata = self._interceptor.pre_list_certificates(request, metadata)
+            request, metadata = self._interceptor.pre_list_certificates(
+                request, metadata
+            )
             pb_request = service.ListCertificatesRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -2921,71 +3345,81 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("ListCertificateTemplates")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.ListCertificateTemplatesRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> service.ListCertificateTemplatesResponse:
+        def __call__(
+            self,
+            request: service.ListCertificateTemplatesRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> service.ListCertificateTemplatesResponse:
             r"""Call the list certificate
-        templates method over HTTP.
+            templates method over HTTP.
 
-            Args:
-                request (~.service.ListCertificateTemplatesRequest):
-                    The request object. Request message for
-                [CertificateAuthorityService.ListCertificateTemplates][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateTemplates].
+                Args:
+                    request (~.service.ListCertificateTemplatesRequest):
+                        The request object. Request message for
+                    [CertificateAuthorityService.ListCertificateTemplates][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateTemplates].
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.service.ListCertificateTemplatesResponse:
-                    Response message for
-                [CertificateAuthorityService.ListCertificateTemplates][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateTemplates].
+                Returns:
+                    ~.service.ListCertificateTemplatesResponse:
+                        Response message for
+                    [CertificateAuthorityService.ListCertificateTemplates][google.cloud.security.privateca.v1.CertificateAuthorityService.ListCertificateTemplates].
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{parent=projects/*/locations/*}/certificateTemplates',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{parent=projects/*/locations/*}/certificateTemplates",
+                },
             ]
-            request, metadata = self._interceptor.pre_list_certificate_templates(request, metadata)
+            request, metadata = self._interceptor.pre_list_certificate_templates(
+                request, metadata
+            )
             pb_request = service.ListCertificateTemplatesRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True,
-            ))
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -3004,19 +3438,24 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("RevokeCertificate")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.RevokeCertificateRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> resources.Certificate:
+        def __call__(
+            self,
+            request: service.RevokeCertificateRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> resources.Certificate:
             r"""Call the revoke certificate method over HTTP.
 
             Args:
@@ -3039,46 +3478,51 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{name=projects/*/locations/*/caPools/*/certificates/*}:revoke',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{name=projects/*/locations/*/caPools/*/certificates/*}:revoke",
+                    "body": "*",
+                },
             ]
-            request, metadata = self._interceptor.pre_revoke_certificate(request, metadata)
+            request, metadata = self._interceptor.pre_revoke_certificate(
+                request, metadata
+            )
             pb_request = service.RevokeCertificateRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -3097,81 +3541,91 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("UndeleteCertificateAuthority")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {}
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.UndeleteCertificateAuthorityRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: service.UndeleteCertificateAuthorityRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the undelete certificate
-        authority method over HTTP.
+            authority method over HTTP.
 
-            Args:
-                request (~.service.UndeleteCertificateAuthorityRequest):
-                    The request object. Request message for
-                [CertificateAuthorityService.UndeleteCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.UndeleteCertificateAuthority].
+                Args:
+                    request (~.service.UndeleteCertificateAuthorityRequest):
+                        The request object. Request message for
+                    [CertificateAuthorityService.UndeleteCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.UndeleteCertificateAuthority].
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.operations_pb2.Operation:
-                    This resource represents a
-                long-running operation that is the
-                result of a network API call.
+                Returns:
+                    ~.operations_pb2.Operation:
+                        This resource represents a
+                    long-running operation that is the
+                    result of a network API call.
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{name=projects/*/locations/*/caPools/*/certificateAuthorities/*}:undelete',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{name=projects/*/locations/*/caPools/*/certificateAuthorities/*}:undelete",
+                    "body": "*",
+                },
             ]
-            request, metadata = self._interceptor.pre_undelete_certificate_authority(request, metadata)
+            request, metadata = self._interceptor.pre_undelete_certificate_authority(
+                request, metadata
+            )
             pb_request = service.UndeleteCertificateAuthorityRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -3188,19 +3642,26 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("UpdateCaPool")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-            "updateMask" : {},        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
+            "updateMask": {},
+        }
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.UpdateCaPoolRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: service.UpdateCaPoolRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the update ca pool method over HTTP.
 
             Args:
@@ -3222,11 +3683,12 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'patch',
-                'uri': '/v1/{ca_pool.name=projects/*/locations/*/caPools/*}',
-                'body': 'ca_pool',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "patch",
+                    "uri": "/v1/{ca_pool.name=projects/*/locations/*/caPools/*}",
+                    "body": "ca_pool",
+                },
             ]
             request, metadata = self._interceptor.pre_update_ca_pool(request, metadata)
             pb_request = service.UpdateCaPoolRequest.pb(request)
@@ -3235,33 +3697,35 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -3278,19 +3742,26 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("UpdateCertificate")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-            "updateMask" : {},        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
+            "updateMask": {},
+        }
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.UpdateCertificateRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> resources.Certificate:
+        def __call__(
+            self,
+            request: service.UpdateCertificateRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> resources.Certificate:
             r"""Call the update certificate method over HTTP.
 
             Args:
@@ -3313,46 +3784,51 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'patch',
-                'uri': '/v1/{certificate.name=projects/*/locations/*/caPools/*/certificates/*}',
-                'body': 'certificate',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "patch",
+                    "uri": "/v1/{certificate.name=projects/*/locations/*/caPools/*/certificates/*}",
+                    "body": "certificate",
+                },
             ]
-            request, metadata = self._interceptor.pre_update_certificate(request, metadata)
+            request, metadata = self._interceptor.pre_update_certificate(
+                request, metadata
+            )
             pb_request = service.UpdateCertificateRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -3371,81 +3847,93 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("UpdateCertificateAuthority")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-            "updateMask" : {},        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
+            "updateMask": {},
+        }
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.UpdateCertificateAuthorityRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: service.UpdateCertificateAuthorityRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the update certificate
-        authority method over HTTP.
+            authority method over HTTP.
 
-            Args:
-                request (~.service.UpdateCertificateAuthorityRequest):
-                    The request object. Request message for
-                [CertificateAuthorityService.UpdateCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificateAuthority].
+                Args:
+                    request (~.service.UpdateCertificateAuthorityRequest):
+                        The request object. Request message for
+                    [CertificateAuthorityService.UpdateCertificateAuthority][google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificateAuthority].
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.operations_pb2.Operation:
-                    This resource represents a
-                long-running operation that is the
-                result of a network API call.
+                Returns:
+                    ~.operations_pb2.Operation:
+                        This resource represents a
+                    long-running operation that is the
+                    result of a network API call.
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'patch',
-                'uri': '/v1/{certificate_authority.name=projects/*/locations/*/caPools/*/certificateAuthorities/*}',
-                'body': 'certificate_authority',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "patch",
+                    "uri": "/v1/{certificate_authority.name=projects/*/locations/*/caPools/*/certificateAuthorities/*}",
+                    "body": "certificate_authority",
+                },
             ]
-            request, metadata = self._interceptor.pre_update_certificate_authority(request, metadata)
+            request, metadata = self._interceptor.pre_update_certificate_authority(
+                request, metadata
+            )
             pb_request = service.UpdateCertificateAuthorityRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -3462,81 +3950,96 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("UpdateCertificateRevocationList")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-            "updateMask" : {},        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
+            "updateMask": {},
+        }
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.UpdateCertificateRevocationListRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: service.UpdateCertificateRevocationListRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the update certificate
-        revocation list method over HTTP.
+            revocation list method over HTTP.
 
-            Args:
-                request (~.service.UpdateCertificateRevocationListRequest):
-                    The request object. Request message for
-                [CertificateAuthorityService.UpdateCertificateRevocationList][google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificateRevocationList].
+                Args:
+                    request (~.service.UpdateCertificateRevocationListRequest):
+                        The request object. Request message for
+                    [CertificateAuthorityService.UpdateCertificateRevocationList][google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificateRevocationList].
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.operations_pb2.Operation:
-                    This resource represents a
-                long-running operation that is the
-                result of a network API call.
+                Returns:
+                    ~.operations_pb2.Operation:
+                        This resource represents a
+                    long-running operation that is the
+                    result of a network API call.
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'patch',
-                'uri': '/v1/{certificate_revocation_list.name=projects/*/locations/*/caPools/*/certificateAuthorities/*/certificateRevocationLists/*}',
-                'body': 'certificate_revocation_list',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "patch",
+                    "uri": "/v1/{certificate_revocation_list.name=projects/*/locations/*/caPools/*/certificateAuthorities/*/certificateRevocationLists/*}",
+                    "body": "certificate_revocation_list",
+                },
             ]
-            request, metadata = self._interceptor.pre_update_certificate_revocation_list(request, metadata)
+            (
+                request,
+                metadata,
+            ) = self._interceptor.pre_update_certificate_revocation_list(
+                request, metadata
+            )
             pb_request = service.UpdateCertificateRevocationListRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -3553,81 +4056,93 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         def __hash__(self):
             return hash("UpdateCertificateTemplate")
 
-        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] =  {
-            "updateMask" : {},        }
+        __REQUIRED_FIELDS_DEFAULT_VALUES: Dict[str, Any] = {
+            "updateMask": {},
+        }
 
         @classmethod
         def _get_unset_required_fields(cls, message_dict):
-            return {k: v for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items() if k not in message_dict}
+            return {
+                k: v
+                for k, v in cls.__REQUIRED_FIELDS_DEFAULT_VALUES.items()
+                if k not in message_dict
+            }
 
-        def __call__(self,
-                request: service.UpdateCertificateTemplateRequest, *,
-                retry: OptionalRetry=gapic_v1.method.DEFAULT,
-                timeout: Optional[float]=None,
-                metadata: Sequence[Tuple[str, str]]=(),
-                ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: service.UpdateCertificateTemplateRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
             r"""Call the update certificate
-        template method over HTTP.
+            template method over HTTP.
 
-            Args:
-                request (~.service.UpdateCertificateTemplateRequest):
-                    The request object. Request message for
-                [CertificateAuthorityService.UpdateCertificateTemplate][google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificateTemplate].
+                Args:
+                    request (~.service.UpdateCertificateTemplateRequest):
+                        The request object. Request message for
+                    [CertificateAuthorityService.UpdateCertificateTemplate][google.cloud.security.privateca.v1.CertificateAuthorityService.UpdateCertificateTemplate].
 
-                retry (google.api_core.retry.Retry): Designation of what errors, if any,
-                    should be retried.
-                timeout (float): The timeout for this request.
-                metadata (Sequence[Tuple[str, str]]): Strings which should be
-                    sent along with the request as metadata.
+                    retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                        should be retried.
+                    timeout (float): The timeout for this request.
+                    metadata (Sequence[Tuple[str, str]]): Strings which should be
+                        sent along with the request as metadata.
 
-            Returns:
-                ~.operations_pb2.Operation:
-                    This resource represents a
-                long-running operation that is the
-                result of a network API call.
+                Returns:
+                    ~.operations_pb2.Operation:
+                        This resource represents a
+                    long-running operation that is the
+                    result of a network API call.
 
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'patch',
-                'uri': '/v1/{certificate_template.name=projects/*/locations/*/certificateTemplates/*}',
-                'body': 'certificate_template',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "patch",
+                    "uri": "/v1/{certificate_template.name=projects/*/locations/*/certificateTemplates/*}",
+                    "body": "certificate_template",
+                },
             ]
-            request, metadata = self._interceptor.pre_update_certificate_template(request, metadata)
+            request, metadata = self._interceptor.pre_update_certificate_template(
+                request, metadata
+            )
             pb_request = service.UpdateCertificateTemplateRequest.pb(request)
             transcoded_request = path_template.transcode(http_options, pb_request)
 
             # Jsonify the request body
 
             body = json_format.MessageToJson(
-                transcoded_request['body'],
-                including_default_value_fields=False,
-                use_integers_for_enums=True
-            )
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
-
-            # Jsonify the query params
-            query_params = json.loads(json_format.MessageToJson(
-                transcoded_request['query_params'],
+                transcoded_request["body"],
                 including_default_value_fields=False,
                 use_integers_for_enums=True,
-            ))
+            )
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
+
+            # Jsonify the query params
+            query_params = json.loads(
+                json_format.MessageToJson(
+                    transcoded_request["query_params"],
+                    including_default_value_fields=False,
+                    use_integers_for_enums=True,
+                )
+            )
             query_params.update(self._get_unset_required_fields(query_params))
 
             query_params["$alt"] = "json;enum-encoding=int"
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
                 timeout=timeout,
                 headers=headers,
                 params=rest_helpers.flatten_query_params(query_params, strict=True),
                 data=body,
-                )
+            )
 
             # In case of error, raise the appropriate core_exceptions.GoogleAPICallError exception
             # subclass.
@@ -3641,248 +4156,283 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
             return resp
 
     @property
-    def activate_certificate_authority(self) -> Callable[
-            [service.ActivateCertificateAuthorityRequest],
-            operations_pb2.Operation]:
+    def activate_certificate_authority(
+        self,
+    ) -> Callable[
+        [service.ActivateCertificateAuthorityRequest], operations_pb2.Operation
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._ActivateCertificateAuthority(self._session, self._host, self._interceptor) # type: ignore
+        return self._ActivateCertificateAuthority(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def create_ca_pool(self) -> Callable[
-            [service.CreateCaPoolRequest],
-            operations_pb2.Operation]:
+    def create_ca_pool(
+        self,
+    ) -> Callable[[service.CreateCaPoolRequest], operations_pb2.Operation]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._CreateCaPool(self._session, self._host, self._interceptor) # type: ignore
+        return self._CreateCaPool(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def create_certificate(self) -> Callable[
-            [service.CreateCertificateRequest],
-            resources.Certificate]:
+    def create_certificate(
+        self,
+    ) -> Callable[[service.CreateCertificateRequest], resources.Certificate]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._CreateCertificate(self._session, self._host, self._interceptor) # type: ignore
+        return self._CreateCertificate(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def create_certificate_authority(self) -> Callable[
-            [service.CreateCertificateAuthorityRequest],
-            operations_pb2.Operation]:
+    def create_certificate_authority(
+        self,
+    ) -> Callable[
+        [service.CreateCertificateAuthorityRequest], operations_pb2.Operation
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._CreateCertificateAuthority(self._session, self._host, self._interceptor) # type: ignore
+        return self._CreateCertificateAuthority(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def create_certificate_template(self) -> Callable[
-            [service.CreateCertificateTemplateRequest],
-            operations_pb2.Operation]:
+    def create_certificate_template(
+        self,
+    ) -> Callable[[service.CreateCertificateTemplateRequest], operations_pb2.Operation]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._CreateCertificateTemplate(self._session, self._host, self._interceptor) # type: ignore
+        return self._CreateCertificateTemplate(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def delete_ca_pool(self) -> Callable[
-            [service.DeleteCaPoolRequest],
-            operations_pb2.Operation]:
+    def delete_ca_pool(
+        self,
+    ) -> Callable[[service.DeleteCaPoolRequest], operations_pb2.Operation]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._DeleteCaPool(self._session, self._host, self._interceptor) # type: ignore
+        return self._DeleteCaPool(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def delete_certificate_authority(self) -> Callable[
-            [service.DeleteCertificateAuthorityRequest],
-            operations_pb2.Operation]:
+    def delete_certificate_authority(
+        self,
+    ) -> Callable[
+        [service.DeleteCertificateAuthorityRequest], operations_pb2.Operation
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._DeleteCertificateAuthority(self._session, self._host, self._interceptor) # type: ignore
+        return self._DeleteCertificateAuthority(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def delete_certificate_template(self) -> Callable[
-            [service.DeleteCertificateTemplateRequest],
-            operations_pb2.Operation]:
+    def delete_certificate_template(
+        self,
+    ) -> Callable[[service.DeleteCertificateTemplateRequest], operations_pb2.Operation]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._DeleteCertificateTemplate(self._session, self._host, self._interceptor) # type: ignore
+        return self._DeleteCertificateTemplate(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def disable_certificate_authority(self) -> Callable[
-            [service.DisableCertificateAuthorityRequest],
-            operations_pb2.Operation]:
+    def disable_certificate_authority(
+        self,
+    ) -> Callable[
+        [service.DisableCertificateAuthorityRequest], operations_pb2.Operation
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._DisableCertificateAuthority(self._session, self._host, self._interceptor) # type: ignore
+        return self._DisableCertificateAuthority(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def enable_certificate_authority(self) -> Callable[
-            [service.EnableCertificateAuthorityRequest],
-            operations_pb2.Operation]:
+    def enable_certificate_authority(
+        self,
+    ) -> Callable[
+        [service.EnableCertificateAuthorityRequest], operations_pb2.Operation
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._EnableCertificateAuthority(self._session, self._host, self._interceptor) # type: ignore
+        return self._EnableCertificateAuthority(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def fetch_ca_certs(self) -> Callable[
-            [service.FetchCaCertsRequest],
-            service.FetchCaCertsResponse]:
+    def fetch_ca_certs(
+        self,
+    ) -> Callable[[service.FetchCaCertsRequest], service.FetchCaCertsResponse]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._FetchCaCerts(self._session, self._host, self._interceptor) # type: ignore
+        return self._FetchCaCerts(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def fetch_certificate_authority_csr(self) -> Callable[
-            [service.FetchCertificateAuthorityCsrRequest],
-            service.FetchCertificateAuthorityCsrResponse]:
+    def fetch_certificate_authority_csr(
+        self,
+    ) -> Callable[
+        [service.FetchCertificateAuthorityCsrRequest],
+        service.FetchCertificateAuthorityCsrResponse,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._FetchCertificateAuthorityCsr(self._session, self._host, self._interceptor) # type: ignore
+        return self._FetchCertificateAuthorityCsr(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def get_ca_pool(self) -> Callable[
-            [service.GetCaPoolRequest],
-            resources.CaPool]:
+    def get_ca_pool(self) -> Callable[[service.GetCaPoolRequest], resources.CaPool]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._GetCaPool(self._session, self._host, self._interceptor) # type: ignore
+        return self._GetCaPool(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def get_certificate(self) -> Callable[
-            [service.GetCertificateRequest],
-            resources.Certificate]:
+    def get_certificate(
+        self,
+    ) -> Callable[[service.GetCertificateRequest], resources.Certificate]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._GetCertificate(self._session, self._host, self._interceptor) # type: ignore
+        return self._GetCertificate(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def get_certificate_authority(self) -> Callable[
-            [service.GetCertificateAuthorityRequest],
-            resources.CertificateAuthority]:
+    def get_certificate_authority(
+        self,
+    ) -> Callable[
+        [service.GetCertificateAuthorityRequest], resources.CertificateAuthority
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._GetCertificateAuthority(self._session, self._host, self._interceptor) # type: ignore
+        return self._GetCertificateAuthority(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def get_certificate_revocation_list(self) -> Callable[
-            [service.GetCertificateRevocationListRequest],
-            resources.CertificateRevocationList]:
+    def get_certificate_revocation_list(
+        self,
+    ) -> Callable[
+        [service.GetCertificateRevocationListRequest],
+        resources.CertificateRevocationList,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._GetCertificateRevocationList(self._session, self._host, self._interceptor) # type: ignore
+        return self._GetCertificateRevocationList(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def get_certificate_template(self) -> Callable[
-            [service.GetCertificateTemplateRequest],
-            resources.CertificateTemplate]:
+    def get_certificate_template(
+        self,
+    ) -> Callable[
+        [service.GetCertificateTemplateRequest], resources.CertificateTemplate
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._GetCertificateTemplate(self._session, self._host, self._interceptor) # type: ignore
+        return self._GetCertificateTemplate(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def list_ca_pools(self) -> Callable[
-            [service.ListCaPoolsRequest],
-            service.ListCaPoolsResponse]:
+    def list_ca_pools(
+        self,
+    ) -> Callable[[service.ListCaPoolsRequest], service.ListCaPoolsResponse]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._ListCaPools(self._session, self._host, self._interceptor) # type: ignore
+        return self._ListCaPools(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def list_certificate_authorities(self) -> Callable[
-            [service.ListCertificateAuthoritiesRequest],
-            service.ListCertificateAuthoritiesResponse]:
+    def list_certificate_authorities(
+        self,
+    ) -> Callable[
+        [service.ListCertificateAuthoritiesRequest],
+        service.ListCertificateAuthoritiesResponse,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._ListCertificateAuthorities(self._session, self._host, self._interceptor) # type: ignore
+        return self._ListCertificateAuthorities(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def list_certificate_revocation_lists(self) -> Callable[
-            [service.ListCertificateRevocationListsRequest],
-            service.ListCertificateRevocationListsResponse]:
+    def list_certificate_revocation_lists(
+        self,
+    ) -> Callable[
+        [service.ListCertificateRevocationListsRequest],
+        service.ListCertificateRevocationListsResponse,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._ListCertificateRevocationLists(self._session, self._host, self._interceptor) # type: ignore
+        return self._ListCertificateRevocationLists(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def list_certificates(self) -> Callable[
-            [service.ListCertificatesRequest],
-            service.ListCertificatesResponse]:
+    def list_certificates(
+        self,
+    ) -> Callable[[service.ListCertificatesRequest], service.ListCertificatesResponse]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._ListCertificates(self._session, self._host, self._interceptor) # type: ignore
+        return self._ListCertificates(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def list_certificate_templates(self) -> Callable[
-            [service.ListCertificateTemplatesRequest],
-            service.ListCertificateTemplatesResponse]:
+    def list_certificate_templates(
+        self,
+    ) -> Callable[
+        [service.ListCertificateTemplatesRequest],
+        service.ListCertificateTemplatesResponse,
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._ListCertificateTemplates(self._session, self._host, self._interceptor) # type: ignore
+        return self._ListCertificateTemplates(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def revoke_certificate(self) -> Callable[
-            [service.RevokeCertificateRequest],
-            resources.Certificate]:
+    def revoke_certificate(
+        self,
+    ) -> Callable[[service.RevokeCertificateRequest], resources.Certificate]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._RevokeCertificate(self._session, self._host, self._interceptor) # type: ignore
+        return self._RevokeCertificate(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def undelete_certificate_authority(self) -> Callable[
-            [service.UndeleteCertificateAuthorityRequest],
-            operations_pb2.Operation]:
+    def undelete_certificate_authority(
+        self,
+    ) -> Callable[
+        [service.UndeleteCertificateAuthorityRequest], operations_pb2.Operation
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._UndeleteCertificateAuthority(self._session, self._host, self._interceptor) # type: ignore
+        return self._UndeleteCertificateAuthority(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def update_ca_pool(self) -> Callable[
-            [service.UpdateCaPoolRequest],
-            operations_pb2.Operation]:
+    def update_ca_pool(
+        self,
+    ) -> Callable[[service.UpdateCaPoolRequest], operations_pb2.Operation]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._UpdateCaPool(self._session, self._host, self._interceptor) # type: ignore
+        return self._UpdateCaPool(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def update_certificate(self) -> Callable[
-            [service.UpdateCertificateRequest],
-            resources.Certificate]:
+    def update_certificate(
+        self,
+    ) -> Callable[[service.UpdateCertificateRequest], resources.Certificate]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._UpdateCertificate(self._session, self._host, self._interceptor) # type: ignore
+        return self._UpdateCertificate(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def update_certificate_authority(self) -> Callable[
-            [service.UpdateCertificateAuthorityRequest],
-            operations_pb2.Operation]:
+    def update_certificate_authority(
+        self,
+    ) -> Callable[
+        [service.UpdateCertificateAuthorityRequest], operations_pb2.Operation
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._UpdateCertificateAuthority(self._session, self._host, self._interceptor) # type: ignore
+        return self._UpdateCertificateAuthority(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def update_certificate_revocation_list(self) -> Callable[
-            [service.UpdateCertificateRevocationListRequest],
-            operations_pb2.Operation]:
+    def update_certificate_revocation_list(
+        self,
+    ) -> Callable[
+        [service.UpdateCertificateRevocationListRequest], operations_pb2.Operation
+    ]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._UpdateCertificateRevocationList(self._session, self._host, self._interceptor) # type: ignore
+        return self._UpdateCertificateRevocationList(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
-    def update_certificate_template(self) -> Callable[
-            [service.UpdateCertificateTemplateRequest],
-            operations_pb2.Operation]:
+    def update_certificate_template(
+        self,
+    ) -> Callable[[service.UpdateCertificateTemplateRequest], operations_pb2.Operation]:
         # The return type is fine, but mypy isn't sophisticated enough to determine what's going on here.
         # In C++ this would require a dynamic_cast
-        return self._UpdateCertificateTemplate(self._session, self._host, self._interceptor) # type: ignore
+        return self._UpdateCertificateTemplate(self._session, self._host, self._interceptor)  # type: ignore
 
     @property
     def get_location(self):
-        return self._GetLocation(self._session, self._host, self._interceptor) # type: ignore
+        return self._GetLocation(self._session, self._host, self._interceptor)  # type: ignore
 
     class _GetLocation(CertificateAuthorityServiceRestStub):
-        def __call__(self,
-            request: locations_pb2.GetLocationRequest, *,
-            retry: OptionalRetry=gapic_v1.method.DEFAULT,
-            timeout: Optional[float]=None,
-            metadata: Sequence[Tuple[str, str]]=(),
-            ) -> locations_pb2.Location:
+        def __call__(
+            self,
+            request: locations_pb2.GetLocationRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> locations_pb2.Location:
 
             r"""Call the get location method over HTTP.
 
@@ -3899,26 +4449,26 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
                 locations_pb2.Location: Response from GetLocation method.
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*/locations/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*/locations/*}",
+                },
             ]
 
             request, metadata = self._interceptor.pre_get_location(request, metadata)
             request_kwargs = json_format.MessageToDict(request)
-            transcoded_request = path_template.transcode(
-                http_options, **request_kwargs)
+            transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json.dumps(transcoded_request['query_params']))
+            query_params = json.loads(json.dumps(transcoded_request["query_params"]))
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
 
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
@@ -3939,15 +4489,17 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
     @property
     def list_locations(self):
-        return self._ListLocations(self._session, self._host, self._interceptor) # type: ignore
+        return self._ListLocations(self._session, self._host, self._interceptor)  # type: ignore
 
     class _ListLocations(CertificateAuthorityServiceRestStub):
-        def __call__(self,
-            request: locations_pb2.ListLocationsRequest, *,
-            retry: OptionalRetry=gapic_v1.method.DEFAULT,
-            timeout: Optional[float]=None,
-            metadata: Sequence[Tuple[str, str]]=(),
-            ) -> locations_pb2.ListLocationsResponse:
+        def __call__(
+            self,
+            request: locations_pb2.ListLocationsRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> locations_pb2.ListLocationsResponse:
 
             r"""Call the list locations method over HTTP.
 
@@ -3964,26 +4516,26 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
                 locations_pb2.ListLocationsResponse: Response from ListLocations method.
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*}/locations',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*}/locations",
+                },
             ]
 
             request, metadata = self._interceptor.pre_list_locations(request, metadata)
             request_kwargs = json_format.MessageToDict(request)
-            transcoded_request = path_template.transcode(
-                http_options, **request_kwargs)
+            transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json.dumps(transcoded_request['query_params']))
+            query_params = json.loads(json.dumps(transcoded_request["query_params"]))
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
 
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
@@ -4004,15 +4556,17 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
     @property
     def get_iam_policy(self):
-        return self._GetIamPolicy(self._session, self._host, self._interceptor) # type: ignore
+        return self._GetIamPolicy(self._session, self._host, self._interceptor)  # type: ignore
 
     class _GetIamPolicy(CertificateAuthorityServiceRestStub):
-        def __call__(self,
-            request: iam_policy_pb2.GetIamPolicyRequest, *,
-            retry: OptionalRetry=gapic_v1.method.DEFAULT,
-            timeout: Optional[float]=None,
-            metadata: Sequence[Tuple[str, str]]=(),
-            ) -> policy_pb2.Policy:
+        def __call__(
+            self,
+            request: iam_policy_pb2.GetIamPolicyRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> policy_pb2.Policy:
 
             r"""Call the get iam policy method over HTTP.
 
@@ -4029,34 +4583,34 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
                 policy_pb2.Policy: Response from GetIamPolicy method.
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{resource=projects/*/locations/*/caPools/*}:getIamPolicy',
-            },
-{
-                'method': 'get',
-                'uri': '/v1/{resource=projects/*/locations/*/certificateTemplates/*}:getIamPolicy',
-            },
-{
-                'method': 'get',
-                'uri': '/v1/{resource=projects/*/locations/*/caPools/*/certificateAuthorities/*/certificateRevocationLists/*}:getIamPolicy',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{resource=projects/*/locations/*/caPools/*}:getIamPolicy",
+                },
+                {
+                    "method": "get",
+                    "uri": "/v1/{resource=projects/*/locations/*/certificateTemplates/*}:getIamPolicy",
+                },
+                {
+                    "method": "get",
+                    "uri": "/v1/{resource=projects/*/locations/*/caPools/*/certificateAuthorities/*/certificateRevocationLists/*}:getIamPolicy",
+                },
             ]
 
             request, metadata = self._interceptor.pre_get_iam_policy(request, metadata)
             request_kwargs = json_format.MessageToDict(request)
-            transcoded_request = path_template.transcode(
-                http_options, **request_kwargs)
+            transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json.dumps(transcoded_request['query_params']))
+            query_params = json.loads(json.dumps(transcoded_request["query_params"]))
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
 
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
@@ -4077,15 +4631,17 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
     @property
     def set_iam_policy(self):
-        return self._SetIamPolicy(self._session, self._host, self._interceptor) # type: ignore
+        return self._SetIamPolicy(self._session, self._host, self._interceptor)  # type: ignore
 
     class _SetIamPolicy(CertificateAuthorityServiceRestStub):
-        def __call__(self,
-            request: iam_policy_pb2.SetIamPolicyRequest, *,
-            retry: OptionalRetry=gapic_v1.method.DEFAULT,
-            timeout: Optional[float]=None,
-            metadata: Sequence[Tuple[str, str]]=(),
-            ) -> policy_pb2.Policy:
+        def __call__(
+            self,
+            request: iam_policy_pb2.SetIamPolicyRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> policy_pb2.Policy:
 
             r"""Call the set iam policy method over HTTP.
 
@@ -4102,38 +4658,38 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
                 policy_pb2.Policy: Response from SetIamPolicy method.
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{resource=projects/*/locations/*/caPools/*}:setIamPolicy',
-                'body': '*',
-            },
-{
-                'method': 'post',
-                'uri': '/v1/{resource=projects/*/locations/*/certificateTemplates/*}:setIamPolicy',
-                'body': '*',
-            },
-{
-                'method': 'post',
-                'uri': '/v1/{resource=projects/*/locations/*/caPools/*/certificateAuthorities/*/certificateRevocationLists/*}:setIamPolicy',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{resource=projects/*/locations/*/caPools/*}:setIamPolicy",
+                    "body": "*",
+                },
+                {
+                    "method": "post",
+                    "uri": "/v1/{resource=projects/*/locations/*/certificateTemplates/*}:setIamPolicy",
+                    "body": "*",
+                },
+                {
+                    "method": "post",
+                    "uri": "/v1/{resource=projects/*/locations/*/caPools/*/certificateAuthorities/*/certificateRevocationLists/*}:setIamPolicy",
+                    "body": "*",
+                },
             ]
 
             request, metadata = self._interceptor.pre_set_iam_policy(request, metadata)
             request_kwargs = json_format.MessageToDict(request)
-            transcoded_request = path_template.transcode(
-                http_options, **request_kwargs)
+            transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
-            body = json.loads(json.dumps(transcoded_request['body']))
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            body = json.loads(json.dumps(transcoded_request["body"]))
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json.dumps(transcoded_request['query_params']))
+            query_params = json.loads(json.dumps(transcoded_request["query_params"]))
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
 
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
@@ -4155,15 +4711,17 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
     @property
     def test_iam_permissions(self):
-        return self._TestIamPermissions(self._session, self._host, self._interceptor) # type: ignore
+        return self._TestIamPermissions(self._session, self._host, self._interceptor)  # type: ignore
 
     class _TestIamPermissions(CertificateAuthorityServiceRestStub):
-        def __call__(self,
-            request: iam_policy_pb2.TestIamPermissionsRequest, *,
-            retry: OptionalRetry=gapic_v1.method.DEFAULT,
-            timeout: Optional[float]=None,
-            metadata: Sequence[Tuple[str, str]]=(),
-            ) -> iam_policy_pb2.TestIamPermissionsResponse:
+        def __call__(
+            self,
+            request: iam_policy_pb2.TestIamPermissionsRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> iam_policy_pb2.TestIamPermissionsResponse:
 
             r"""Call the test iam permissions method over HTTP.
 
@@ -4180,38 +4738,40 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
                 iam_policy_pb2.TestIamPermissionsResponse: Response from TestIamPermissions method.
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{resource=projects/*/locations/*/caPools/*}:testIamPermissions',
-                'body': '*',
-            },
-{
-                'method': 'post',
-                'uri': '/v1/{resource=projects/*/locations/*/certificateTemplates/*}:testIamPermissions',
-                'body': '*',
-            },
-{
-                'method': 'post',
-                'uri': '/v1/{resource=projects/*/locations/*/caPools/*/certificateAuthorities/*/certificateRevocationLists/*}:testIamPermissions',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{resource=projects/*/locations/*/caPools/*}:testIamPermissions",
+                    "body": "*",
+                },
+                {
+                    "method": "post",
+                    "uri": "/v1/{resource=projects/*/locations/*/certificateTemplates/*}:testIamPermissions",
+                    "body": "*",
+                },
+                {
+                    "method": "post",
+                    "uri": "/v1/{resource=projects/*/locations/*/caPools/*/certificateAuthorities/*/certificateRevocationLists/*}:testIamPermissions",
+                    "body": "*",
+                },
             ]
 
-            request, metadata = self._interceptor.pre_test_iam_permissions(request, metadata)
+            request, metadata = self._interceptor.pre_test_iam_permissions(
+                request, metadata
+            )
             request_kwargs = json_format.MessageToDict(request)
-            transcoded_request = path_template.transcode(
-                http_options, **request_kwargs)
+            transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
-            body = json.loads(json.dumps(transcoded_request['body']))
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            body = json.loads(json.dumps(transcoded_request["body"]))
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json.dumps(transcoded_request['query_params']))
+            query_params = json.loads(json.dumps(transcoded_request["query_params"]))
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
 
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
@@ -4233,15 +4793,17 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
     @property
     def cancel_operation(self):
-        return self._CancelOperation(self._session, self._host, self._interceptor) # type: ignore
+        return self._CancelOperation(self._session, self._host, self._interceptor)  # type: ignore
 
     class _CancelOperation(CertificateAuthorityServiceRestStub):
-        def __call__(self,
-            request: operations_pb2.CancelOperationRequest, *,
-            retry: OptionalRetry=gapic_v1.method.DEFAULT,
-            timeout: Optional[float]=None,
-            metadata: Sequence[Tuple[str, str]]=(),
-            ) -> None:
+        def __call__(
+            self,
+            request: operations_pb2.CancelOperationRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> None:
 
             r"""Call the cancel operation method over HTTP.
 
@@ -4255,28 +4817,30 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
                     sent along with the request as metadata.
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'post',
-                'uri': '/v1/{name=projects/*/locations/*/operations/*}:cancel',
-                'body': '*',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "post",
+                    "uri": "/v1/{name=projects/*/locations/*/operations/*}:cancel",
+                    "body": "*",
+                },
             ]
 
-            request, metadata = self._interceptor.pre_cancel_operation(request, metadata)
+            request, metadata = self._interceptor.pre_cancel_operation(
+                request, metadata
+            )
             request_kwargs = json_format.MessageToDict(request)
-            transcoded_request = path_template.transcode(
-                http_options, **request_kwargs)
+            transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
-            body = json.loads(json.dumps(transcoded_request['body']))
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            body = json.loads(json.dumps(transcoded_request["body"]))
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json.dumps(transcoded_request['query_params']))
+            query_params = json.loads(json.dumps(transcoded_request["query_params"]))
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
 
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
@@ -4295,15 +4859,17 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
     @property
     def delete_operation(self):
-        return self._DeleteOperation(self._session, self._host, self._interceptor) # type: ignore
+        return self._DeleteOperation(self._session, self._host, self._interceptor)  # type: ignore
 
     class _DeleteOperation(CertificateAuthorityServiceRestStub):
-        def __call__(self,
-            request: operations_pb2.DeleteOperationRequest, *,
-            retry: OptionalRetry=gapic_v1.method.DEFAULT,
-            timeout: Optional[float]=None,
-            metadata: Sequence[Tuple[str, str]]=(),
-            ) -> None:
+        def __call__(
+            self,
+            request: operations_pb2.DeleteOperationRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> None:
 
             r"""Call the delete operation method over HTTP.
 
@@ -4317,26 +4883,28 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
                     sent along with the request as metadata.
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'delete',
-                'uri': '/v1/{name=projects/*/locations/*/operations/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "delete",
+                    "uri": "/v1/{name=projects/*/locations/*/operations/*}",
+                },
             ]
 
-            request, metadata = self._interceptor.pre_delete_operation(request, metadata)
+            request, metadata = self._interceptor.pre_delete_operation(
+                request, metadata
+            )
             request_kwargs = json_format.MessageToDict(request)
-            transcoded_request = path_template.transcode(
-                http_options, **request_kwargs)
+            transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json.dumps(transcoded_request['query_params']))
+            query_params = json.loads(json.dumps(transcoded_request["query_params"]))
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
 
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
@@ -4354,15 +4922,17 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
     @property
     def get_operation(self):
-        return self._GetOperation(self._session, self._host, self._interceptor) # type: ignore
+        return self._GetOperation(self._session, self._host, self._interceptor)  # type: ignore
 
     class _GetOperation(CertificateAuthorityServiceRestStub):
-        def __call__(self,
-            request: operations_pb2.GetOperationRequest, *,
-            retry: OptionalRetry=gapic_v1.method.DEFAULT,
-            timeout: Optional[float]=None,
-            metadata: Sequence[Tuple[str, str]]=(),
-            ) -> operations_pb2.Operation:
+        def __call__(
+            self,
+            request: operations_pb2.GetOperationRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.Operation:
 
             r"""Call the get operation method over HTTP.
 
@@ -4379,26 +4949,26 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
                 operations_pb2.Operation: Response from GetOperation method.
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*/locations/*/operations/*}',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*/locations/*/operations/*}",
+                },
             ]
 
             request, metadata = self._interceptor.pre_get_operation(request, metadata)
             request_kwargs = json_format.MessageToDict(request)
-            transcoded_request = path_template.transcode(
-                http_options, **request_kwargs)
+            transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json.dumps(transcoded_request['query_params']))
+            query_params = json.loads(json.dumps(transcoded_request["query_params"]))
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
 
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
@@ -4419,15 +4989,17 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
 
     @property
     def list_operations(self):
-        return self._ListOperations(self._session, self._host, self._interceptor) # type: ignore
+        return self._ListOperations(self._session, self._host, self._interceptor)  # type: ignore
 
     class _ListOperations(CertificateAuthorityServiceRestStub):
-        def __call__(self,
-            request: operations_pb2.ListOperationsRequest, *,
-            retry: OptionalRetry=gapic_v1.method.DEFAULT,
-            timeout: Optional[float]=None,
-            metadata: Sequence[Tuple[str, str]]=(),
-            ) -> operations_pb2.ListOperationsResponse:
+        def __call__(
+            self,
+            request: operations_pb2.ListOperationsRequest,
+            *,
+            retry: OptionalRetry = gapic_v1.method.DEFAULT,
+            timeout: Optional[float] = None,
+            metadata: Sequence[Tuple[str, str]] = (),
+        ) -> operations_pb2.ListOperationsResponse:
 
             r"""Call the list operations method over HTTP.
 
@@ -4444,26 +5016,26 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
                 operations_pb2.ListOperationsResponse: Response from ListOperations method.
             """
 
-            http_options: List[Dict[str, str]] = [{
-                'method': 'get',
-                'uri': '/v1/{name=projects/*/locations/*}/operations',
-            },
+            http_options: List[Dict[str, str]] = [
+                {
+                    "method": "get",
+                    "uri": "/v1/{name=projects/*/locations/*}/operations",
+                },
             ]
 
             request, metadata = self._interceptor.pre_list_operations(request, metadata)
             request_kwargs = json_format.MessageToDict(request)
-            transcoded_request = path_template.transcode(
-                http_options, **request_kwargs)
+            transcoded_request = path_template.transcode(http_options, **request_kwargs)
 
-            uri = transcoded_request['uri']
-            method = transcoded_request['method']
+            uri = transcoded_request["uri"]
+            method = transcoded_request["method"]
 
             # Jsonify the query params
-            query_params = json.loads(json.dumps(transcoded_request['query_params']))
+            query_params = json.loads(json.dumps(transcoded_request["query_params"]))
 
             # Send the request
             headers = dict(metadata)
-            headers['Content-Type'] = 'application/json'
+            headers["Content-Type"] = "application/json"
 
             response = getattr(self._session, method)(
                 "{host}{uri}".format(host=self._host, uri=uri),
@@ -4490,6 +5062,4 @@ class CertificateAuthorityServiceRestTransport(CertificateAuthorityServiceTransp
         self._session.close()
 
 
-__all__=(
-    'CertificateAuthorityServiceRestTransport',
-)
+__all__ = ("CertificateAuthorityServiceRestTransport",)
